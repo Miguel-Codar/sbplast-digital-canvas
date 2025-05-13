@@ -1,12 +1,135 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import Carousel from "../components/Carousel";
+import CategoryCard from "../components/CategoryCard";
+import BlogCard from "../components/BlogCard";
+import { Button } from "../components/ui/button";
+import { Link } from "react-router-dom";
+
+// Mock data - This would be fetched from an API in a real application
+const mockCarouselItems = [
+  {
+    id: "1",
+    imageUrl: "/lovable-uploads/ac53a868-535f-4322-8229-63734e0c5659.png",
+    title: "Conheça agora a SBPlast, referência no seguimento de embalagens plásticas para o seu negócio.",
+    link: "/about"
+  },
+  {
+    id: "2",
+    imageUrl: "/lovable-uploads/c2ed9252-9b1e-4e13-823f-02dcd9a24400.png",
+    title: "Produtos de qualidade para atender suas necessidades",
+    link: "/produtos"
+  }
+];
+
+const mockCategories = [
+  { id: "1", name: "Camisetas", iconUrl: "https://via.placeholder.com/80", slug: "camisetas" },
+  { id: "2", name: "Cadeado", iconUrl: "https://via.placeholder.com/80", slug: "cadeado" },
+  { id: "3", name: "Boca de Palhaço", iconUrl: "https://via.placeholder.com/80", slug: "boca-de-palhaco" },
+  { id: "4", name: "Alças Prensadas", iconUrl: "https://via.placeholder.com/80", slug: "alcas-prensadas" },
+  { id: "5", name: "Autocapas", iconUrl: "https://via.placeholder.com/80", slug: "autocapas" },
+  { id: "6", name: "Biodegradável", iconUrl: "https://via.placeholder.com/80", slug: "biodegradavel" }
+];
+
+const mockBlogPosts = [
+  {
+    id: "1",
+    title: "SBPlast entra no mercado de irrigação e avança no agronegócio",
+    imageUrl: "https://via.placeholder.com/400x300",
+    excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    category: "Notícias",
+    slug: "sbplast-entra-no-mercado-de-irrigacao",
+    date: "2025-05-01"
+  },
+  {
+    id: "2",
+    title: "Rainwater Brasil 2024",
+    imageUrl: "https://via.placeholder.com/400x300",
+    excerpt: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    category: "Eventos",
+    slug: "rainwater-brasil-2024",
+    date: "2025-04-15"
+  },
+  {
+    id: "3",
+    title: "Evento marca a transição oficial na gestão da Spezzio",
+    imageUrl: "https://via.placeholder.com/400x300",
+    excerpt: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    category: "Vídeos",
+    slug: "evento-marca-transicao-spezzio",
+    date: "2025-04-10"
+  }
+];
 
 const Index = () => {
+  const [carouselItems, setCarouselItems] = useState(mockCarouselItems);
+  const [categories, setCategories] = useState(mockCategories);
+  const [blogPosts, setBlogPosts] = useState(mockBlogPosts);
+
+  // In a real application, you would fetch data from your API here
+  useEffect(() => {
+    // Fetch carousel items
+    // Fetch categories
+    // Fetch blog posts
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div>
+      {/* Hero Carousel */}
+      <section className="mb-12">
+        <Carousel items={carouselItems} />
+      </section>
+
+      {/* Solutions Section */}
+      <section className="sbplast-container mb-16">
+        <h2 className="sbplast-heading text-center mb-8">Soluções SBPlast</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {categories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              id={category.id}
+              name={category.name}
+              iconUrl={category.iconUrl}
+              slug={category.slug}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Simulators Section */}
+      <section className="sbplast-container mb-16">
+        <h2 className="sbplast-heading text-center mb-4">Simuladores SBPlast</h2>
+        <p className="text-center text-gray-600 mb-8">
+          Está em dúvida de qual produto melhor atende às suas necessidades?<br />
+          Então utilize nossos simuladores e encontre o produto ideal.
+        </p>
+        <div className="flex justify-center">
+          <Link to="/simulador">
+            <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/80">
+              Preencha o formulário
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Blog/News Section */}
+      <section className="sbplast-container mb-16">
+        <h2 className="sbplast-heading text-center mb-8">Informações</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogPosts.map((post) => (
+            <BlogCard
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              imageUrl={post.imageUrl}
+              excerpt={post.excerpt}
+              category={post.category}
+              slug={post.slug}
+              date={post.date}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
