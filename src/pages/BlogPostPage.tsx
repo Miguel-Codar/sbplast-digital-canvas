@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
-import { LinkedIn, Share2 } from "lucide-react";
+import { Linkedin, Share2 } from "lucide-react";
 import { Button } from "../components/ui/button";
 
 // Mock data - This would be fetched from an API in a real application
@@ -132,7 +132,7 @@ const BlogPostPage = () => {
             <p className="font-medium text-gray-700 mr-4">Compartilhar:</p>
             <div className="flex space-x-2">
               <Button variant="outline" size="icon" onClick={shareOnLinkedIn}>
-                <LinkedIn className="h-5 w-5" />
+                <Linkedin className="h-5 w-5" />
                 <span className="sr-only">Compartilhar no LinkedIn</span>
               </Button>
               <Button variant="outline" size="icon" onClick={shareOnWhatsApp}>
