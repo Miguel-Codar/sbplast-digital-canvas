@@ -77,8 +77,13 @@ export async function getBlogCategories() {
 export async function saveBlogPost(post: Partial<BlogPost>) {
   const isNewPost = !post.id;
   
+  // Ensure slug is available for new posts
+  if (isNewPost && !post.slug) {
+    throw new Error("Slug is required for new blog posts");
+  }
+  
   const { data, error } = isNewPost
-    ? await supabase.from("blog_posts").insert(post).select()
+    ? await supabase.from("blog_posts").insert([post]).select()
     : await supabase
         .from("blog_posts")
         .update({ ...post, updated_at: new Date().toISOString() })

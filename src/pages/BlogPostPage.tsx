@@ -17,10 +17,18 @@ const BlogPostPage = () => {
     queryKey: ["blogPost", slug],
     queryFn: () => getBlogPostBySlug(slug!),
     retry: false,
-    onError: () => {
-      setNotFound(true);
-    },
+    meta: {
+      onError: () => {
+        setNotFound(true);
+      }
+    }
   });
+
+  useEffect(() => {
+    if (error) {
+      setNotFound(true);
+    }
+  }, [error]);
 
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post?.title || "")}&summary=${encodeURIComponent(post?.excerpt || "")}`;
