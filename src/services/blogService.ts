@@ -82,20 +82,49 @@ export async function saveBlogPost(post: Partial<BlogPost>) {
     throw new Error("Slug is required for new blog posts");
   }
   
-  const { data, error } = isNewPost
-    ? await supabase.from("blog_posts").insert([post]).select()
-    : await supabase
-        .from("blog_posts")
-        .update({ ...post, updated_at: new Date().toISOString() })
-        .eq("id", post.id!)
-        .select();
+  // Fix for new posts - make sure we have required fields
+  if (isNewPost) {
+    if (!post.title) {
+      throw new Error("Title is required for new blog posts");
+    }
+    
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .insert([{
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt || null,
+        content: post.content || null,
+        featured_image: post.featured_image || null,
+        category_id: post.category_id || null,
+        status: post.status || "Rascunho"
+      }])
+      .select();
+      
+    if (error) {
+      console.error("Error saving blog post:", error);
+      throw error;
+    }
 
-  if (error) {
-    console.error("Error saving blog post:", error);
-    throw error;
+    return data?.[0];
+  } else {
+    // Update existing post
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .update({ 
+        ...post, 
+        updated_at: new Date().toISOString() 
+      })
+      .eq("id", post.id!)
+      .select();
+
+    if (error) {
+      console.error("Error updating blog post:", error);
+      throw error;
+    }
+
+    return data?.[0];
   }
-
-  return data?.[0];
 }
 
 // Delete a blog post
