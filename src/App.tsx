@@ -16,6 +16,13 @@ import NotFound from "./pages/NotFound";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
+import ProductsPage as AdminProductsPage from "./pages/admin/ProductsPage";
+import ProductForm from "./pages/admin/ProductForm";
+import CategoriesPage from "./pages/admin/CategoriesPage";
+import BlogPage as AdminBlogPage from "./pages/admin/BlogPage";
+import BlogForm from "./pages/admin/BlogForm";
+import BlogCategoriesPage from "./pages/admin/BlogCategoriesPage";
+import CarouselPage from "./pages/admin/CarouselPage";
 
 const queryClient = new QueryClient();
 
@@ -88,6 +95,15 @@ const App = () => (
           {/* Admin routes - Protected with custom URL */}
           <Route path="/_painel-admin-788" element={<Dashboard />} />
           <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/products" element={<AdminProductsPage />} />
+          <Route path="/admin/products/new" element={<ProductForm />} />
+          <Route path="/admin/products/edit/:id" element={<ProductForm />} />
+          <Route path="/admin/categories" element={<CategoriesPage />} />
+          <Route path="/admin/blog" element={<AdminBlogPage />} />
+          <Route path="/admin/blog/new" element={<BlogForm />} />
+          <Route path="/admin/blog/edit/:id" element={<BlogForm />} />
+          <Route path="/admin/blog/categories" element={<BlogCategoriesPage />} />
+          <Route path="/admin/carousel" element={<CarouselPage />} />
 
           {/* 404 page */}
           <Route
