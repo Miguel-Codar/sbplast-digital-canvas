@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Carousel from "../components/Carousel";
 import CategoryCard from "../components/CategoryCard";
@@ -10,25 +9,26 @@ import { Link } from "react-router-dom";
 const mockCarouselItems = [
   {
     id: "1",
-    imageUrl: "/lovable-uploads/ac53a868-535f-4322-8229-63734e0c5659.png",
+    imageUrl: "/lovable-uploads/41731074-1f24-4281-88c1-f6ab149e9a60.png",
     title: "Conheça agora a SBPlast, referência no seguimento de embalagens plásticas para o seu negócio.",
     link: "/about"
   },
   {
     id: "2",
-    imageUrl: "/lovable-uploads/c2ed9252-9b1e-4e13-823f-02dcd9a24400.png",
+    imageUrl: "/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png",
     title: "Produtos de qualidade para atender suas necessidades",
     link: "/produtos"
   }
 ];
 
+// Updated categories with icon URLs pointing to the uploaded images
 const mockCategories = [
-  { id: "1", name: "Camisetas", iconUrl: "https://via.placeholder.com/80", slug: "camisetas" },
-  { id: "2", name: "Cadeado", iconUrl: "https://via.placeholder.com/80", slug: "cadeado" },
-  { id: "3", name: "Boca de Palhaço", iconUrl: "https://via.placeholder.com/80", slug: "boca-de-palhaco" },
-  { id: "4", name: "Alças Prensadas", iconUrl: "https://via.placeholder.com/80", slug: "alcas-prensadas" },
-  { id: "5", name: "Autocapas", iconUrl: "https://via.placeholder.com/80", slug: "autocapas" },
-  { id: "6", name: "Biodegradável", iconUrl: "https://via.placeholder.com/80", slug: "biodegradavel" }
+  { id: "1", name: "Camisetas", iconUrl: "/lovable-uploads/0ff84c18-89ac-4f41-b384-f6db164ffe99.png", slug: "camisetas" },
+  { id: "2", name: "Cadeado", iconUrl: "/lovable-uploads/e18be978-f6a6-4c66-9c8e-298c343931fa.png", slug: "cadeado" },
+  { id: "3", name: "Boca de Palhaço", iconUrl: "/lovable-uploads/29d793e3-09e9-42f3-9e87-f3e5d5ef2867.png", slug: "boca-de-palhaco" },
+  { id: "4", name: "Alças Prensadas", iconUrl: "/lovable-uploads/e6211444-3846-41fe-8844-004682018f4b.png", slug: "alcas-prensadas" },
+  { id: "5", name: "Autocapas", iconUrl: "/lovable-uploads/b27e4176-5400-4fc7-a96b-bac51cbe83d7.png", slug: "autocapas" },
+  { id: "6", name: "Biodegradável", iconUrl: "/lovable-uploads/7fbb85fc-0948-404b-8a4f-8a8e37ea8569.png", slug: "biodegradavel" }
 ];
 
 const mockBlogPosts = [
