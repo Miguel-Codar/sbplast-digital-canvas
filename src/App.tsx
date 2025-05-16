@@ -16,10 +16,10 @@ import NotFound from "./pages/NotFound";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
-import ProductsPage as AdminProductsPage from "./pages/admin/ProductsPage";
+import { default as AdminProductsPage } from "./pages/admin/ProductsPage";
 import ProductForm from "./pages/admin/ProductForm";
 import CategoriesPage from "./pages/admin/CategoriesPage";
-import BlogPage as AdminBlogPage from "./pages/admin/BlogPage";
+import { default as AdminBlogPage } from "./pages/admin/BlogPage";
 import BlogForm from "./pages/admin/BlogForm";
 import BlogCategoriesPage from "./pages/admin/BlogCategoriesPage";
 import CarouselPage from "./pages/admin/CarouselPage";
