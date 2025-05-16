@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
@@ -19,13 +20,14 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { getBlogCategories, getBlogPostBySlug, saveBlogPost, uploadBlogImage } from "@/services/blogService";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const BlogForm = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const isEditMode = !!id;
+  const { toast: hookToast } = useToast();
+  const queryClient = useQueryClient();
+  const isEditMode = !!slug;
 
   // Initialize form state
   const [formData, setFormData] = useState({
@@ -44,20 +46,22 @@ const BlogForm = () => {
   // Fetch categories
   const { data: categories = [] } = useQuery({
     queryKey: ["blogCategories"],
-    queryFn: getBlogCategories,
+    queryFn: getBlogCategories
   });
 
   // Fetch post data if in edit mode
   const { data: postData, isLoading: isLoadingPost } = useQuery({
-    queryKey: ["blogPost", id],
-    queryFn: () => getBlogPostBySlug(id!),
-    enabled: isEditMode,
+    queryKey: ["blogPost", slug],
+    queryFn: () => getBlogPostBySlug(slug!),
+    enabled: isEditMode
   });
 
   // Set form data from fetched post data
   useEffect(() => {
     if (postData) {
+      console.log("Setting form data from post data:", postData);
       setFormData({
+        id: postData.id || "",
         title: postData.title || "",
         slug: postData.slug || "",
         category_id: postData.category_id || "",
@@ -72,17 +76,42 @@ const BlogForm = () => {
   // Save post mutation
   const saveMutation = useMutation({
     mutationFn: saveBlogPost,
-    onSuccess: () => {
-      toast({
+    onSuccess: (data) => {
+      console.log("Save mutation success:", data);
+      
+      // Invalidate and refetch queries to get updated data
+      queryClient.invalidateQueries({ queryKey: ["blogPosts"] });
+      
+      if (isEditMode) {
+        queryClient.invalidateQueries({ queryKey: ["blogPost", slug] });
+      }
+      
+      // Show success toast
+      toast.success(isEditMode ? "Post atualizado" : "Post criado", {
+        description: isEditMode
+          ? "O post foi atualizado com sucesso."
+          : "O post foi criado com sucesso."
+      });
+      
+      hookToast({
         title: isEditMode ? "Post atualizado" : "Post criado",
         description: isEditMode
           ? "O post foi atualizado com sucesso."
           : "O post foi criado com sucesso.",
       });
+      
+      // Navigate back to blog list
       navigate("/admin/blog");
     },
     onError: (error) => {
-      toast({
+      console.error("Save mutation error:", error);
+      
+      // Show error toast
+      toast.error("Erro ao salvar", {
+        description: `Erro ao salvar o post: ${error.message}`
+      });
+      
+      hookToast({
         title: "Erro",
         description: `Erro ao salvar o post: ${error.message}`,
         variant: "destructive",
@@ -132,14 +161,24 @@ const BlogForm = () => {
         ...formData,
         featured_image: imageUrl,
       });
-      toast({
+      
+      toast.success("Imagem enviada", {
+        description: "A imagem de destaque foi carregada com sucesso."
+      });
+      
+      hookToast({
         title: "Imagem enviada",
         description: "A imagem de destaque foi carregada com sucesso.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error uploading image:", error);
       setUploadError("Erro ao enviar imagem. Por favor, tente novamente.");
-      toast({
+      
+      toast.error("Erro de upload", {
+        description: "Não foi possível enviar a imagem."
+      });
+      
+      hookToast({
         title: "Erro",
         description: "Não foi possível enviar a imagem.",
         variant: "destructive",
@@ -154,8 +193,12 @@ const BlogForm = () => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.title || !formData.slug || !formData.category_id) {
-      toast({
+    if (!formData.title || !formData.slug) {
+      toast.error("Campos obrigatórios", {
+        description: "Por favor, preencha todos os campos obrigatórios."
+      });
+      
+      hookToast({
         title: "Campos obrigatórios",
         description: "Por favor, preencha todos os campos obrigatórios.",
         variant: "destructive",
@@ -163,10 +206,11 @@ const BlogForm = () => {
       return;
     }
     
+    console.log("Submitting form data:", formData);
+    
     // Prepare post data
     const postToSave = {
       ...formData,
-      id: isEditMode ? id : undefined,
     };
     
     saveMutation.mutate(postToSave);

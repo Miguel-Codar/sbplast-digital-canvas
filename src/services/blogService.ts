@@ -77,66 +77,87 @@ export async function getBlogCategories() {
 export async function saveBlogPost(post: Partial<BlogPost>) {
   const isNewPost = !post.id;
   
-  // Ensure slug is available for new posts
-  if (isNewPost && !post.slug) {
-    throw new Error("Slug is required for new blog posts");
+  // Ensure required fields are present
+  if (!post.title) {
+    throw new Error("Title is required for blog posts");
   }
   
-  // Fix for new posts - make sure we have required fields
-  if (isNewPost) {
-    if (!post.title) {
-      throw new Error("Title is required for new blog posts");
-    }
+  if (!post.slug) {
+    throw new Error("Slug is required for blog posts");
+  }
+  
+  try {
+    console.log("Saving post:", post);
     
-    const { data, error } = await supabase
-      .from("blog_posts")
-      .insert([{
-        title: post.title,
-        slug: post.slug,
-        excerpt: post.excerpt || null,
-        content: post.content || null,
-        featured_image: post.featured_image || null,
-        category_id: post.category_id || null,
-        status: post.status || "Rascunho"
-      }])
-      .select();
+    if (isNewPost) {
+      // Create new post with required fields
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .insert([{
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt || null,
+          content: post.content || null,
+          featured_image: post.featured_image || null,
+          category_id: post.category_id || null,
+          status: post.status || "Rascunho"
+        }])
+        .select();
+        
+      if (error) {
+        console.error("Error creating blog post:", error);
+        throw error;
+      }
       
-    if (error) {
-      console.error("Error saving blog post:", error);
-      throw error;
+      console.log("Post created successfully:", data);
+      return data?.[0];
+    } else {
+      // Update existing post
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .update({ 
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt || null,
+          content: post.content || null,
+          featured_image: post.featured_image || null,
+          category_id: post.category_id || null,
+          status: post.status || "Rascunho",
+          updated_at: new Date().toISOString() 
+        })
+        .eq("id", post.id!)
+        .select();
+
+      if (error) {
+        console.error("Error updating blog post:", error);
+        throw error;
+      }
+      
+      console.log("Post updated successfully:", data);
+      return data?.[0];
     }
-
-    return data?.[0];
-  } else {
-    // Update existing post
-    const { data, error } = await supabase
-      .from("blog_posts")
-      .update({ 
-        ...post, 
-        updated_at: new Date().toISOString() 
-      })
-      .eq("id", post.id!)
-      .select();
-
-    if (error) {
-      console.error("Error updating blog post:", error);
-      throw error;
-    }
-
-    return data?.[0];
+  } catch (error) {
+    console.error("Error saving blog post:", error);
+    throw error;
   }
 }
 
 // Delete a blog post
 export async function deleteBlogPost(id: string) {
-  const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+  try {
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
 
-  if (error) {
+    if (error) {
+      console.error("Error deleting blog post:", error);
+      throw error;
+    }
+
+    console.log("Post deleted successfully");
+    return true;
+  } catch (error) {
     console.error("Error deleting blog post:", error);
     throw error;
   }
-
-  return true;
 }
 
 // Upload an image to Supabase Storage
@@ -146,19 +167,25 @@ export async function uploadBlogImage(file: File) {
   const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
   const filePath = `${fileName}`;
 
-  const { data, error } = await supabase.storage
-    .from("blog_images")
-    .upload(filePath, file);
+  try {
+    const { data, error } = await supabase.storage
+      .from("blog_images")
+      .upload(filePath, file);
 
-  if (error) {
+    if (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+
+    // Get the public URL for the uploaded image
+    const { data: { publicUrl } } = supabase.storage
+      .from("blog_images")
+      .getPublicUrl(filePath);
+
+    console.log("Image uploaded successfully:", publicUrl);
+    return publicUrl;
+  } catch (error) {
     console.error("Error uploading image:", error);
     throw error;
   }
-
-  // Get the public URL for the uploaded image
-  const { data: { publicUrl } } = supabase.storage
-    .from("blog_images")
-    .getPublicUrl(filePath);
-
-  return publicUrl;
 }
