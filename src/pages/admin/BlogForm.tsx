@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminLayout from "./AdminLayout";
 import { Input } from "@/components/ui/input";
@@ -18,26 +18,8 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
-
-// Mock categories data
-const mockCategories = [
-  { id: "1", name: "Notícias" },
-  { id: "2", name: "Eventos" },
-  { id: "3", name: "Vídeos" },
-  { id: "4", name: "Sustentabilidade" },
-];
-
-// Mock blog post data (used for edit mode)
-const mockPostDetails = {
-  id: "1",
-  title: "SBPlast entra no mercado de irrigação e avança no agronegócio",
-  slug: "sbplast-entra-no-mercado-de-irrigacao",
-  category: "1",
-  excerpt: "A SBPlast está expandindo sua atuação no segmento de irrigação para o agronegócio, com soluções inovadoras e sustentáveis.",
-  content: "A SBPlast, referência no mercado de embalagens plásticas, acaba de anunciar sua entrada no segmento de irrigação para o agronegócio. Com uma linha completa de produtos desenvolvidos especialmente para este setor, a empresa visa atender à crescente demanda por soluções eficientes e sustentáveis.\n\nEntre os produtos destacados estão os sistemas de gotejamento de alta precisão, mangueiras resistentes a produtos químicos e conexões de fácil instalação. A empresa também está investindo em pesquisa para desenvolver materiais biodegradáveis que possam ser utilizados em sistemas de irrigação.\n\n\"Nosso objetivo é proporcionar ao produtor rural ferramentas que otimizem o uso da água e aumentem a produtividade, sempre com foco na sustentabilidade\", afirma o diretor comercial da empresa.",
-  featuredImage: "https://via.placeholder.com/800x600",
-  status: "Publicado",
-};
+import { getBlogCategories, getBlogPostBySlug, saveBlogPost, uploadBlogImage } from "@/services/blogService";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 const BlogForm = () => {
   const { id } = useParams();
@@ -46,19 +28,67 @@ const BlogForm = () => {
   const isEditMode = !!id;
 
   // Initialize form state
-  const [formData, setFormData] = useState(
-    isEditMode ? mockPostDetails : {
-      title: "",
-      slug: "",
-      category: "",
-      excerpt: "",
-      content: "",
-      featuredImage: "",
-      status: "Rascunho",
-    }
-  );
+  const [formData, setFormData] = useState({
+    title: "",
+    slug: "",
+    category_id: "",
+    excerpt: "",
+    content: "",
+    featured_image: "",
+    status: "Rascunho",
+  });
 
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+
+  // Fetch categories
+  const { data: categories = [] } = useQuery({
+    queryKey: ["blogCategories"],
+    queryFn: getBlogCategories,
+  });
+
+  // Fetch post data if in edit mode
+  const { data: postData, isLoading: isLoadingPost } = useQuery({
+    queryKey: ["blogPost", id],
+    queryFn: () => getBlogPostBySlug(id!),
+    enabled: isEditMode,
+  });
+
+  // Set form data from fetched post data
+  useEffect(() => {
+    if (postData) {
+      setFormData({
+        title: postData.title || "",
+        slug: postData.slug || "",
+        category_id: postData.category_id || "",
+        excerpt: postData.excerpt || "",
+        content: postData.content || "",
+        featured_image: postData.featured_image || "",
+        status: postData.status || "Rascunho",
+      });
+    }
+  }, [postData]);
+
+  // Save post mutation
+  const saveMutation = useMutation({
+    mutationFn: saveBlogPost,
+    onSuccess: () => {
+      toast({
+        title: isEditMode ? "Post atualizado" : "Post criado",
+        description: isEditMode
+          ? "O post foi atualizado com sucesso."
+          : "O post foi criado com sucesso.",
+      });
+      navigate("/admin/blog");
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: `Erro ao salvar o post: ${error.message}`,
+        variant: "destructive",
+      });
+    },
+  });
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -80,7 +110,7 @@ const BlogForm = () => {
 
   // Handle category selection
   const handleCategoryChange = (value: string) => {
-    setFormData({ ...formData, category: value });
+    setFormData({ ...formData, category_id: value });
   };
 
   // Handle status selection
@@ -89,38 +119,68 @@ const BlogForm = () => {
   };
 
   // Handle image upload
-  const handleImageUpload = () => {
-    setIsUploading(true);
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
     
-    // Simulate upload delay
-    setTimeout(() => {
-      setIsUploading(false);
+    setIsUploading(true);
+    setUploadError("");
+    
+    try {
+      const imageUrl = await uploadBlogImage(file);
       setFormData({
         ...formData,
-        featuredImage: "https://via.placeholder.com/800x600",
+        featured_image: imageUrl,
       });
       toast({
         title: "Imagem enviada",
         description: "A imagem de destaque foi carregada com sucesso.",
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setUploadError("Erro ao enviar imagem. Por favor, tente novamente.");
+      toast({
+        title: "Erro",
+        description: "Não foi possível enviar a imagem.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate API call delay
-    setTimeout(() => {
+    // Basic validation
+    if (!formData.title || !formData.slug || !formData.category_id) {
       toast({
-        title: isEditMode ? "Post atualizado" : "Post criado",
-        description: isEditMode
-          ? "O post foi atualizado com sucesso."
-          : "O post foi criado com sucesso.",
+        title: "Campos obrigatórios",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive",
       });
-      navigate("/admin/blog");
-    }, 500);
+      return;
+    }
+    
+    // Prepare post data
+    const postToSave = {
+      ...formData,
+      id: isEditMode ? id : undefined,
+    };
+    
+    saveMutation.mutate(postToSave);
   };
+
+  if (isLoadingPost && isEditMode) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center h-64">
+          <p>Carregando...</p>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -204,24 +264,37 @@ const BlogForm = () => {
                 {/* Featured Image */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Imagem destacada</Label>
-                  {formData.featuredImage && (
+                  {formData.featured_image && (
                     <div className="mb-3">
                       <img
-                        src={formData.featuredImage}
+                        src={formData.featured_image}
                         alt="Preview"
                         className="w-full h-40 object-cover rounded border"
                       />
                     </div>
                   )}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleImageUpload}
-                    disabled={isUploading}
-                    className="w-full"
-                  >
-                    {isUploading ? "Enviando..." : "Enviar imagem"}
-                  </Button>
+                  <div className="flex flex-col gap-2">
+                    <input
+                      type="file"
+                      id="image-upload"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      disabled={isUploading}
+                    />
+                    <label htmlFor="image-upload">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full cursor-pointer"
+                        disabled={isUploading}
+                        onClick={() => document.getElementById("image-upload")?.click()}
+                      >
+                        {isUploading ? "Enviando..." : "Enviar imagem"}
+                      </Button>
+                    </label>
+                    {uploadError && <p className="text-red-500 text-sm">{uploadError}</p>}
+                  </div>
                   <p className="text-sm text-gray-500">
                     Formatos aceitos: JPG, PNG. Tamanho máximo: 2MB.
                   </p>
@@ -231,14 +304,14 @@ const BlogForm = () => {
                 <div className="space-y-2">
                   <Label htmlFor="category" className="text-sm font-medium">Categoria</Label>
                   <Select 
-                    value={formData.category} 
+                    value={formData.category_id} 
                     onValueChange={handleCategoryChange}
                   >
                     <SelectTrigger id="category">
                       <SelectValue placeholder="Selecione uma categoria" />
                     </SelectTrigger>
                     <SelectContent>
-                      {mockCategories.map((category) => (
+                      {categories.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
                           {category.name}
                         </SelectItem>
@@ -268,14 +341,23 @@ const BlogForm = () => {
 
             {/* Form actions */}
             <div className="flex flex-col gap-3">
-              <Button type="submit" className="w-full">
-                {isEditMode ? "Atualizar post" : "Publicar post"}
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={saveMutation.isPending || isUploading}
+              >
+                {saveMutation.isPending 
+                  ? "Salvando..." 
+                  : isEditMode 
+                    ? "Atualizar post" 
+                    : "Publicar post"}
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => navigate("/admin/blog")}
                 className="w-full"
+                disabled={saveMutation.isPending}
               >
                 Cancelar
               </Button>

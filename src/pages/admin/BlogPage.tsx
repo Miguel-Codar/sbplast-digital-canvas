@@ -22,49 +22,42 @@ import {
 import { Plus, Search, Pencil, Trash, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-
-// Mock data for blog posts
-const mockBlogPosts = [
-  {
-    id: "1",
-    title: "SBPlast entra no mercado de irrigação e avança no agronegócio",
-    category: "Notícias",
-    slug: "sbplast-entra-no-mercado-de-irrigacao",
-    status: "Publicado",
-    date: "2025-05-01",
-  },
-  {
-    id: "2",
-    title: "Rainwater Brasil 2024",
-    category: "Eventos",
-    slug: "rainwater-brasil-2024",
-    status: "Publicado",
-    date: "2025-04-15",
-  },
-  {
-    id: "3",
-    title: "Evento marca a transição oficial na gestão da Spezzio",
-    category: "Vídeos",
-    slug: "evento-marca-transicao-spezzio",
-    status: "Rascunho",
-    date: "2025-04-10",
-  },
-  {
-    id: "4",
-    title: "Os benefícios das embalagens biodegradáveis",
-    category: "Sustentabilidade",
-    slug: "beneficios-embalagens-biodegradaveis",
-    status: "Rascunho",
-    date: "2025-04-05",
-  },
-];
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getBlogPosts, deleteBlogPost } from "@/services/blogService";
+import { format } from "date-fns";
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState(mockBlogPosts);
   const [searchQuery, setSearchQuery] = useState("");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  // Fetch blog posts
+  const { data: posts = [], isLoading } = useQuery({
+    queryKey: ["blogPosts"],
+    queryFn: getBlogPosts,
+  });
+
+  // Delete mutation
+  const deleteMutation = useMutation({
+    mutationFn: deleteBlogPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["blogPosts"] });
+      toast({
+        title: "Post excluído",
+        description: "O post foi excluído com sucesso.",
+      });
+      setIsDeleteDialogOpen(false);
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: `Erro ao excluir o post: ${error.message}`,
+        variant: "destructive",
+      });
+    },
+  });
 
   // Filter posts based on search query
   const filteredPosts = posts.filter((post) =>
@@ -72,7 +65,8 @@ const BlogPage = () => {
   );
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("pt-BR");
+    if (!dateString) return "";
+    return format(new Date(dateString), "dd/MM/yyyy");
   };
 
   const handleDelete = (id: string) => {
@@ -82,13 +76,7 @@ const BlogPage = () => {
 
   const confirmDelete = () => {
     if (postToDelete) {
-      setPosts(posts.filter((post) => post.id !== postToDelete));
-      setIsDeleteDialogOpen(false);
-      setPostToDelete(null);
-      toast({
-        title: "Post excluído",
-        description: "O post foi excluído com sucesso.",
-      });
+      deleteMutation.mutate(postToDelete);
     }
   };
 
@@ -135,12 +123,18 @@ const BlogPage = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredPosts.length > 0 ? (
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-8">
+                    Carregando...
+                  </TableCell>
+                </TableRow>
+              ) : filteredPosts.length > 0 ? (
                 filteredPosts.map((post) => (
                   <TableRow key={post.id}>
                     <TableCell className="font-medium">{post.title}</TableCell>
-                    <TableCell>{post.category}</TableCell>
-                    <TableCell>{formatDate(post.date)}</TableCell>
+                    <TableCell>{post.blog_categories?.name || "Sem categoria"}</TableCell>
+                    <TableCell>{formatDate(post.created_at)}</TableCell>
                     <TableCell>
                       <span
                         className={`px-2 py-1 rounded text-xs font-semibold ${getStatusBadgeClass(
@@ -168,7 +162,7 @@ const BlogPage = () => {
                         asChild
                         className="h-8 w-8 p-0"
                       >
-                        <Link to={`/admin/blog/edit/${post.id}`}>
+                        <Link to={`/admin/blog/edit/${post.slug}`}>
                           <Pencil className="h-4 w-4" />
                           <span className="sr-only">Editar</span>
                         </Link>
@@ -178,6 +172,7 @@ const BlogPage = () => {
                         variant="outline"
                         onClick={() => handleDelete(post.id)}
                         className="h-8 w-8 p-0"
+                        disabled={deleteMutation.isPending}
                       >
                         <Trash className="h-4 w-4 text-red-500" />
                         <span className="sr-only">Excluir</span>
@@ -210,8 +205,12 @@ const BlogPage = () => {
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
               Cancelar
             </Button>
-            <Button variant="destructive" onClick={confirmDelete}>
-              Excluir
+            <Button 
+              variant="destructive" 
+              onClick={confirmDelete}
+              disabled={deleteMutation.isPending}
+            >
+              {deleteMutation.isPending ? "Excluindo..." : "Excluir"}
             </Button>
           </DialogFooter>
         </DialogContent>

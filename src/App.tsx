@@ -101,7 +101,7 @@ const App = () => (
           <Route path="/admin/categories" element={<CategoriesPage />} />
           <Route path="/admin/blog" element={<AdminBlogPage />} />
           <Route path="/admin/blog/new" element={<BlogForm />} />
-          <Route path="/admin/blog/edit/:id" element={<BlogForm />} />
+          <Route path="/admin/blog/edit/:slug" element={<BlogForm />} />
           <Route path="/admin/blog/categories" element={<BlogCategoriesPage />} />
           <Route path="/admin/carousel" element={<CarouselPage />} />
 
