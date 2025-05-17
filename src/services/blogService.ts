@@ -73,10 +73,8 @@ export async function getBlogCategories() {
   return data;
 }
 
-// Create or update a blog post
-export async function saveBlogPost(post: Partial<BlogPost>) {
-  const isNewPost = !post.id;
-  
+// Create a new blog post
+export async function createBlogPost(post: Partial<BlogPost>) {
   // Ensure required fields are present
   if (!post.title) {
     throw new Error("Title is required for blog posts");
@@ -87,58 +85,78 @@ export async function saveBlogPost(post: Partial<BlogPost>) {
   }
   
   try {
-    console.log("Saving post:", post);
+    console.log("Creating new post:", post);
     
-    if (isNewPost) {
-      // Create new post with required fields
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .insert([{
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt || null,
-          content: post.content || null,
-          featured_image: post.featured_image || null,
-          category_id: post.category_id || null,
-          status: post.status || "Rascunho"
-        }])
-        .select();
-        
-      if (error) {
-        console.error("Error creating blog post:", error);
-        throw error;
-      }
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .insert({
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt || null,
+        content: post.content || null,
+        featured_image: post.featured_image || null,
+        category_id: post.category_id || null,
+        status: post.status || "Rascunho"
+      })
+      .select();
       
-      console.log("Post created successfully:", data);
-      return data?.[0];
-    } else {
-      // Update existing post
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .update({ 
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt || null,
-          content: post.content || null,
-          featured_image: post.featured_image || null,
-          category_id: post.category_id || null,
-          status: post.status || "Rascunho",
-          updated_at: new Date().toISOString() 
-        })
-        .eq("id", post.id!)
-        .select();
-
-      if (error) {
-        console.error("Error updating blog post:", error);
-        throw error;
-      }
-      
-      console.log("Post updated successfully:", data);
-      return data?.[0];
+    if (error) {
+      console.error("Error creating blog post:", error);
+      throw error;
     }
+    
+    console.log("Post created successfully:", data);
+    return data?.[0];
   } catch (error) {
     console.error("Error saving blog post:", error);
     throw error;
+  }
+}
+
+// Update an existing blog post
+export async function updateBlogPost(post: Partial<BlogPost> & { id: string }) {
+  // Ensure required fields are present
+  if (!post.id) {
+    throw new Error("Post ID is required for updating blog posts");
+  }
+  
+  try {
+    console.log("Updating post:", post);
+    
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .update({ 
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt || null,
+        content: post.content || null,
+        featured_image: post.featured_image || null,
+        category_id: post.category_id || null,
+        status: post.status || "Rascunho",
+        updated_at: new Date().toISOString() 
+      })
+      .eq("id", post.id)
+      .select();
+
+    if (error) {
+      console.error("Error updating blog post:", error);
+      throw error;
+    }
+    
+    console.log("Post updated successfully:", data);
+    return data?.[0];
+  } catch (error) {
+    console.error("Error updating blog post:", error);
+    throw error;
+  }
+}
+
+// Save blog post (create or update)
+export async function saveBlogPost(post: Partial<BlogPost>) {
+  if (post.id) {
+    return updateBlogPost(post as Partial<BlogPost> & { id: string });
+  } else {
+    return createBlogPost(post);
   }
 }
 

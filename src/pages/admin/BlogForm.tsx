@@ -19,7 +19,13 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
-import { getBlogCategories, getBlogPostBySlug, saveBlogPost, uploadBlogImage } from "@/services/blogService";
+import { 
+  getBlogCategories, 
+  getBlogPostBySlug, 
+  saveBlogPost, 
+  uploadBlogImage,
+  BlogPost 
+} from "@/services/blogService";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const BlogForm = () => {
@@ -42,6 +48,7 @@ const BlogForm = () => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
+  const [postId, setPostId] = useState<string | undefined>(undefined);
 
   // Fetch categories
   const { data: categories = [] } = useQuery({
@@ -61,7 +68,6 @@ const BlogForm = () => {
     if (postData) {
       console.log("Setting form data from post data:", postData);
       setFormData({
-        id: postData.id || "",
         title: postData.title || "",
         slug: postData.slug || "",
         category_id: postData.category_id || "",
@@ -70,6 +76,7 @@ const BlogForm = () => {
         featured_image: postData.featured_image || "",
         status: postData.status || "Rascunho",
       });
+      setPostId(postData.id);
     }
   }, [postData]);
 
@@ -206,13 +213,18 @@ const BlogForm = () => {
       return;
     }
     
-    console.log("Submitting form data:", formData);
+    console.log("Submitting form data:", formData, "Post ID:", postId);
     
-    // Prepare post data
-    const postToSave = {
+    // Prepare post data with ID if in edit mode
+    const postToSave: Partial<BlogPost> = {
       ...formData,
     };
     
+    if (postId) {
+      postToSave.id = postId;
+    }
+    
+    console.log("Final post data to save:", postToSave);
     saveMutation.mutate(postToSave);
   };
 
