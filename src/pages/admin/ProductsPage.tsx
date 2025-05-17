@@ -18,54 +18,47 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus, Search, Pencil, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-
-// Mock data for products
-const mockProducts = [
-  {
-    id: "1",
-    name: "Tanque de Polietileno 5.000L",
-    category: "Tanques",
-    slug: "tanque-de-polietileno-5000l",
-    imageUrl: "https://via.placeholder.com/100x100",
-    date: "2025-05-01",
-  },
-  {
-    id: "2",
-    name: "Pasta Lubrificante",
-    category: "Acessórios",
-    slug: "pasta-lubrificante",
-    imageUrl: "https://via.placeholder.com/100x100",
-    date: "2025-04-28",
-  },
-  {
-    id: "3",
-    name: "Fita Isolante",
-    category: "Acessórios",
-    slug: "fita-isolante",
-    imageUrl: "https://via.placeholder.com/100x100",
-    date: "2025-04-25",
-  },
-  {
-    id: "4",
-    name: "Sacola Boca de Palhaço",
-    category: "Embalagens",
-    slug: "sacola-boca-de-palhaco",
-    imageUrl: "https://via.placeholder.com/100x100",
-    date: "2025-04-20",
-  },
-];
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getProducts, deleteProduct } from "@/services/productService";
+import { format } from "date-fns";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState(mockProducts);
   const [searchQuery, setSearchQuery] = useState("");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  // Fetch products
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  // Delete mutation
+  const deleteMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast({
+        title: "Produto excluído",
+        description: "O produto foi excluído com sucesso.",
+      });
+      setIsDeleteDialogOpen(false);
+      setProductToDelete(null);
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: `Erro ao excluir o produto: ${error.message}`,
+        variant: "destructive",
+      });
+    },
+  });
 
   // Filter products based on search query
   const filteredProducts = products.filter((product) =>
@@ -73,7 +66,8 @@ const ProductsPage = () => {
   );
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("pt-BR");
+    if (!dateString) return "";
+    return format(new Date(dateString), "dd/MM/yyyy");
   };
 
   const handleDelete = (id: string) => {
@@ -83,13 +77,7 @@ const ProductsPage = () => {
 
   const confirmDelete = () => {
     if (productToDelete) {
-      setProducts(products.filter((product) => product.id !== productToDelete));
-      setIsDeleteDialogOpen(false);
-      setProductToDelete(null);
-      toast({
-        title: "Produto excluído",
-        description: "O produto foi excluído com sucesso.",
-      });
+      deleteMutation.mutate(productToDelete);
     }
   };
 
@@ -130,19 +118,25 @@ const ProductsPage = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredProducts.length > 0 ? (
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-8">
+                    Carregando...
+                  </TableCell>
+                </TableRow>
+              ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
                   <TableRow key={product.id}>
                     <TableCell>
                       <img
-                        src={product.imageUrl}
+                        src={product.image_url || "https://via.placeholder.com/100x100"}
                         alt={product.name}
                         className="w-12 h-12 object-cover rounded"
                       />
                     </TableCell>
                     <TableCell className="font-medium">{product.name}</TableCell>
-                    <TableCell>{product.category}</TableCell>
-                    <TableCell>{formatDate(product.date)}</TableCell>
+                    <TableCell>{product.product_categories?.name || "Sem categoria"}</TableCell>
+                    <TableCell>{formatDate(product.created_at)}</TableCell>
                     <TableCell className="text-right space-x-2">
                       <Link to={`/admin/products/edit/${product.id}`}>
                         <Button size="sm" variant="outline">
@@ -154,6 +148,7 @@ const ProductsPage = () => {
                         size="sm"
                         variant="outline"
                         onClick={() => handleDelete(product.id)}
+                        disabled={deleteMutation.isPending}
                       >
                         <Trash className="h-4 w-4 text-red-500" />
                         <span className="sr-only">Excluir</span>
@@ -186,8 +181,12 @@ const ProductsPage = () => {
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
               Cancelar
             </Button>
-            <Button variant="destructive" onClick={confirmDelete}>
-              Excluir
+            <Button 
+              variant="destructive" 
+              onClick={confirmDelete}
+              disabled={deleteMutation.isPending}
+            >
+              {deleteMutation.isPending ? "Excluindo..." : "Excluir"}
             </Button>
           </DialogFooter>
         </DialogContent>
