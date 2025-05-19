@@ -4,12 +4,25 @@ import { useQuery } from "@tanstack/react-query";
 import { getCarouselSlides } from "@/services/carouselService";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import HomeCarousel from "@/components/HomeCarousel";
+import { getProducts, getProductCategories } from "@/services/productService";
+import ProductCard from "@/components/ProductCard";
+import { Link } from "react-router-dom";
 
 const Index = () => {
+  // Fetch real carousel slides
   const { data: slides = [], isLoading: slidesLoading } = useQuery({
     queryKey: ["carouselSlides"],
     queryFn: getCarouselSlides,
   });
+
+  // Fetch real featured products from the database
+  const { data: products = [], isLoading: productsLoading } = useQuery({
+    queryKey: ["featuredProducts"],
+    queryFn: getProducts
+  });
+
+  // Get only the first 3 products for the featured section
+  const featuredProducts = products.slice(0, 3);
 
   // Transform slides data to match Carousel component props
   const carouselItems = slides.map((slide) => ({
@@ -57,43 +70,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      {/* Featured Products Section - Using real data from the database */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Produtos em Destaque</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Sample product cards - these would be replaced with real data */}
-          {Array(3)
-            .fill(0)
-            .map((_, idx) => (
-              <div
-                key={idx}
-                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="h-48 bg-gray-200"></div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2">
-                    Produto exemplo {idx + 1}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Descrição breve do produto exemplo com detalhes relevantes.
-                  </p>
-                  <a
-                    href={`/produto/exemplo-${idx + 1}`}
-                    className="text-sbplast-cyan hover:text-sbplast-cyan-dark font-medium text-sm"
-                  >
-                    Ver detalhes →
-                  </a>
-                </div>
-              </div>
-            ))}
+          {productsLoading ? (
+            // Loading state
+            Array(3).fill(0).map((_, idx) => (
+              <div key={idx} className="border rounded-lg overflow-hidden shadow-sm h-48 bg-gray-200 animate-pulse"></div>
+            ))
+          ) : featuredProducts.length > 0 ? (
+            // Show real products from the database
+            featuredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                imageUrl={product.image_url || "https://via.placeholder.com/300"}
+                slug={product.slug}
+                shortDescription={product.short_description || undefined}
+              />
+            ))
+          ) : (
+            // No products found message
+            <div className="col-span-3 text-center py-8 text-gray-500">
+              Nenhum produto encontrado. Adicione produtos no painel administrativo.
+            </div>
+          )}
         </div>
         <div className="text-center mt-6">
-          <a
-            href="/produtos"
+          <Link
+            to="/produtos"
             className="inline-block bg-sbplast-cyan hover:bg-sbplast-cyan-dark text-white py-2 px-6 rounded-md transition-colors"
           >
             Ver todos os produtos
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -131,12 +142,12 @@ const Index = () => {
             </div>
           </ScrollArea>
           <div className="text-center mt-6">
-            <a
-              href="/sobre"
+            <Link
+              to="/sobre"
               className="inline-block border border-sbplast-cyan text-sbplast-cyan hover:bg-sbplast-cyan hover:text-white py-2 px-6 rounded-md transition-colors"
             >
               Conheça nossa história
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -149,12 +160,12 @@ const Index = () => {
             Estamos à disposição para atender às suas necessidades e esclarecer
             suas dúvidas.
           </p>
-          <a
-            href="/contato"
+          <Link
+            to="/contato"
             className="inline-block bg-white text-sbplast-cyan hover:bg-gray-100 py-2 px-6 rounded-md transition-colors"
           >
             Entre em contato
-          </a>
+          </Link>
         </div>
       </section>
     </div>

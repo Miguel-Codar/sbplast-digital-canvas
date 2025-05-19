@@ -3,64 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
 import ProductCard from "../components/ProductCard";
-
-// Mock data - This would be fetched from an API in a real application
-const mockCategories = {
-  "camisetas": {
-    id: "1",
-    name: "Camisetas",
-    slug: "camisetas",
-    description: "Sacolas plásticas tipo camiseta, ideais para supermercados e lojas."
-  },
-  "boca-de-palhaco": {
-    id: "2",
-    name: "Boca de Palhaço",
-    slug: "boca-de-palhaco",
-    description: "Sacolas tipo boca de palhaço, ótimas para farmácias e pequenas lojas."
-  }
-};
-
-const mockProducts = {
-  "camisetas": [
-    {
-      id: "1",
-      name: "Camiseta 30x40 Branca",
-      imageUrl: "https://via.placeholder.com/300",
-      slug: "camiseta-30x40-branca",
-      shortDescription: "Sacola plástica branca no tamanho 30x40cm"
-    },
-    {
-      id: "2",
-      name: "Camiseta 40x50 Branca",
-      imageUrl: "https://via.placeholder.com/300",
-      slug: "camiseta-40x50-branca",
-      shortDescription: "Sacola plástica branca no tamanho 40x50cm"
-    },
-    {
-      id: "3",
-      name: "Camiseta Personalizada",
-      imageUrl: "https://via.placeholder.com/300",
-      slug: "camiseta-personalizada",
-      shortDescription: "Sacola plástica personalizada com a sua marca"
-    }
-  ],
-  "boca-de-palhaco": [
-    {
-      id: "4",
-      name: "Boca de Palhaço 20x30",
-      imageUrl: "https://via.placeholder.com/300",
-      slug: "boca-de-palhaco-20x30",
-      shortDescription: "Sacola plástica tipo boca de palhaço no tamanho 20x30cm"
-    },
-    {
-      id: "5",
-      name: "Boca de Palhaço 30x40",
-      imageUrl: "https://via.placeholder.com/300",
-      slug: "boca-de-palhaco-30x40",
-      shortDescription: "Sacola plástica tipo boca de palhaço no tamanho 30x40cm"
-    }
-  ]
-};
+import { useQuery } from "@tanstack/react-query";
+import { getProducts, getProductCategories } from "@/services/productService";
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -68,20 +12,39 @@ const CategoryPage = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // In a real application, you would fetch data from your API here
+  // Fetch all categories and products
+  const { data: categories = [], isLoading: isLoadingCategories } = useQuery({
+    queryKey: ["productCategories"],
+    queryFn: getProductCategories
+  });
+
+  const { data: allProducts = [], isLoading: isLoadingProducts } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts
+  });
+
+  // Filter products and find selected category based on slug
   useEffect(() => {
-    if (slug) {
-      // Simulate API call
-      const categoryData = mockCategories[slug as keyof typeof mockCategories];
-      const productData = mockProducts[slug as keyof typeof mockProducts] || [];
+    if (!isLoadingCategories && !isLoadingProducts && slug) {
+      // Find the category by slug
+      const selectedCategory = categories.find(cat => cat.slug === slug);
+      setCategory(selectedCategory || null);
       
-      setCategory(categoryData);
-      setProducts(productData);
+      if (selectedCategory) {
+        // Filter products belonging to this category
+        const categoryProducts = allProducts.filter(
+          product => product.category_id === selectedCategory.id
+        );
+        setProducts(categoryProducts);
+      } else {
+        setProducts([]);
+      }
+      
       setLoading(false);
     }
-  }, [slug]);
+  }, [slug, categories, allProducts, isLoadingCategories, isLoadingProducts]);
 
-  if (loading) {
+  if (isLoadingCategories || isLoadingProducts) {
     return (
       <div className="sbplast-container py-16 text-center">
         <p>Carregando...</p>
@@ -122,7 +85,10 @@ const CategoryPage = () => {
       />
 
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <p className="text-lg text-gray-700">{category.description}</p>
+        <p className="text-lg text-gray-700">
+          {/* Display category description if available */}
+          {category.description || `Produtos na categoria ${category.name}`}
+        </p>
       </div>
 
       <h2 className="sbplast-subheading mb-6">Produtos nesta categoria</h2>
@@ -134,9 +100,9 @@ const CategoryPage = () => {
               key={product.id}
               id={product.id}
               name={product.name}
-              imageUrl={product.imageUrl}
+              imageUrl={product.image_url || "https://via.placeholder.com/300"}
               slug={product.slug}
-              shortDescription={product.shortDescription}
+              shortDescription={product.short_description || undefined}
             />
           ))}
         </div>
