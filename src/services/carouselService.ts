@@ -172,27 +172,15 @@ export async function uploadCarouselImage(file: File): Promise<string> {
   const filePath = `${fileName}`;
 
   try {
-    // First, check if the bucket exists, if not create it
-    const { data: buckets } = await supabase.storage.listBuckets();
-    const bucketExists = buckets?.some(bucket => bucket.name === "carousel_images");
-
-    if (!bucketExists) {
-      console.log("Creating bucket 'carousel_images'");
-      const { data, error } = await supabase.storage.createBucket("carousel_images", {
-        public: true
-      });
-      
-      if (error) {
-        console.error("Error creating bucket:", error);
-        throw error;
-      }
-      console.log("Bucket created successfully:", data);
-    }
-
-    // Now upload the file
+    // Upload directly to the public bucket
+    // Instead of creating a bucket programmatically, we'll use an existing public one
+    // or the default "public" bucket which is more likely to have the proper permissions
     const { data, error } = await supabase.storage
-      .from("carousel_images")
-      .upload(filePath, file);
+      .from("public")
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
 
     if (error) {
       console.error("Error uploading image:", error);
@@ -201,7 +189,7 @@ export async function uploadCarouselImage(file: File): Promise<string> {
 
     // Get the public URL for the uploaded image
     const { data: { publicUrl } } = supabase.storage
-      .from("carousel_images")
+      .from("public")
       .getPublicUrl(filePath);
 
     console.log("Image uploaded successfully:", publicUrl);
