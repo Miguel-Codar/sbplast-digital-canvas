@@ -2,6 +2,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCarouselSlides } from "@/services/carouselService";
+import { getBlogPosts } from "@/services/blogService";
 import HomeCarousel from "@/components/HomeCarousel";
 import SolutionsSection from "@/components/SolutionsSection";
 import SimulatorsSection from "@/components/SimulatorsSection";
@@ -16,6 +17,12 @@ const Index = () => {
     queryFn: getCarouselSlides,
   });
 
+  // Fetch real blog posts
+  const { data: blogPostsData = [], isLoading: blogLoading } = useQuery({
+    queryKey: ["blogPosts"],
+    queryFn: getBlogPosts,
+  });
+
   // Transform slides data to match Carousel component props
   const carouselItems = slides.map((slide) => ({
     id: slide.id,
@@ -24,32 +31,11 @@ const Index = () => {
     link: slide.link || undefined,
   }));
 
-  // Mock blog posts data (to be replaced with real data in the future)
+  // Group blog posts by category for display in different sections
   const blogPosts = {
-    news: [
-      {
-        id: "1",
-        title: "SBPlast entra no mercado de irrigação e avança no agronegócio",
-        excerpt: "A SBPlast expande sua atuação com novas soluções para o agronegócio, oferecendo produtos inovadores para irrigação.",
-        link: "#"
-      }
-    ],
-    events: [
-      {
-        id: "1",
-        title: "Retailshow Brasil 2024",
-        excerpt: "A SBPlast estará presente no Retailshow Brasil 2024, apresentando suas soluções inovadoras para o mercado.",
-        link: "#"
-      }
-    ],
-    videos: [
-      {
-        id: "1",
-        title: "Evento marca a transição oficial na gestão da SBPlast",
-        excerpt: "Cerimônia aconteceu na sede da empresa, em Santo Teresinha.",
-        link: "#"
-      }
-    ]
+    news: blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [],
+    events: blogPostsData.filter(post => post.blog_categories?.name === "Eventos") || [],
+    videos: blogPostsData.filter(post => post.blog_categories?.name === "Videos" || post.blog_categories?.name === "Vídeos") || [],
   };
 
   return (
@@ -61,21 +47,6 @@ const Index = () => {
         ) : (
           <div className="h-full">
             <HomeCarousel items={carouselItems} />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center px-4">
-              <h1 className="text-white font-semibold text-3xl md:text-5xl mb-4 font-poppins max-w-4xl">
-                SBPlast - Referência no segmento de embalagens plásticas
-              </h1>
-              <p className="text-white text-base md:text-xl mb-8 max-w-2xl">
-                Soluções inovadoras e sustentáveis para diversos setores industriais
-              </p>
-              <Button 
-                size="lg"
-                className="bg-[#0e2e61] hover:bg-[#0e2e61]/90 text-white rounded-lg hover:scale-105 transition-transform shadow-md text-lg px-6 py-3"
-                asChild
-              >
-                <Link to="/orcamento">Solicitar Orçamento</Link>
-              </Button>
-            </div>
           </div>
         )}
       </section>
@@ -96,15 +67,19 @@ const Index = () => {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold mb-4">Notícias</h3>
               <div className="space-y-4">
-                {blogPosts.news.map(post => (
-                  <div key={post.id} className="mb-4">
-                    <h4 className="font-medium text-lg">{post.title}</h4>
-                    <p className="text-gray-600 mt-1">{post.excerpt}</p>
-                    <Link to={post.link} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
-                      Ver mais <ArrowRight className="h-4 w-4 ml-1" />
-                    </Link>
-                  </div>
-                ))}
+                {blogPosts.news.length > 0 ? (
+                  blogPosts.news.slice(0, 3).map(post => (
+                    <div key={post.id} className="mb-4">
+                      <h4 className="font-medium text-lg">{post.title}</h4>
+                      <p className="text-gray-600 mt-1">{post.excerpt || post.title}</p>
+                      <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
+                        Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">Nenhuma notícia disponível no momento.</p>
+                )}
               </div>
             </div>
 
@@ -112,15 +87,19 @@ const Index = () => {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold mb-4">Eventos</h3>
               <div className="space-y-4">
-                {blogPosts.events.map(post => (
-                  <div key={post.id} className="mb-4">
-                    <h4 className="font-medium text-lg">{post.title}</h4>
-                    <p className="text-gray-600 mt-1">{post.excerpt}</p>
-                    <Link to={post.link} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
-                      Ver mais <ArrowRight className="h-4 w-4 ml-1" />
-                    </Link>
-                  </div>
-                ))}
+                {blogPosts.events.length > 0 ? (
+                  blogPosts.events.slice(0, 3).map(post => (
+                    <div key={post.id} className="mb-4">
+                      <h4 className="font-medium text-lg">{post.title}</h4>
+                      <p className="text-gray-600 mt-1">{post.excerpt || post.title}</p>
+                      <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
+                        Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">Nenhum evento disponível no momento.</p>
+                )}
               </div>
             </div>
 
@@ -128,15 +107,19 @@ const Index = () => {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold mb-4">Vídeos</h3>
               <div className="space-y-4">
-                {blogPosts.videos.map(post => (
-                  <div key={post.id} className="mb-4">
-                    <h4 className="font-medium text-lg">{post.title}</h4>
-                    <p className="text-gray-600 mt-1">{post.excerpt}</p>
-                    <Link to={post.link} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
-                      Ver mais <ArrowRight className="h-4 w-4 ml-1" />
-                    </Link>
-                  </div>
-                ))}
+                {blogPosts.videos.length > 0 ? (
+                  blogPosts.videos.slice(0, 3).map(post => (
+                    <div key={post.id} className="mb-4">
+                      <h4 className="font-medium text-lg">{post.title}</h4>
+                      <p className="text-gray-600 mt-1">{post.excerpt || post.title}</p>
+                      <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center mt-2 hover:underline">
+                        Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">Nenhum vídeo disponível no momento.</p>
+                )}
               </div>
             </div>
           </div>
