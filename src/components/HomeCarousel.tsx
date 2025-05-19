@@ -47,46 +47,30 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
   }
 
   return (
-    <div className="relative overflow-hidden w-full rounded-lg shadow-md">
+    <div className="relative overflow-hidden w-full h-full rounded-none">
       <div
-        className="transition-transform duration-500 flex"
+        className="transition-transform duration-500 flex h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {items.map((item) => (
           <div
             key={item.id}
-            className="min-w-full relative"
+            className="min-w-full h-full relative"
           >
             {item.link ? (
-              <Link to={item.link} className="block">
+              <Link to={item.link} className="block h-full">
                 <img
                   src={item.imageUrl}
                   alt={item.title || "Carousel image"}
-                  className="w-full h-64 md:h-96 object-cover"
+                  className="w-full h-full object-cover"
                 />
-                {item.title && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-black bg-opacity-40 p-4 rounded-md">
-                      <h3 className="text-xl md:text-3xl text-white font-bold">{item.title}</h3>
-                    </div>
-                  </div>
-                )}
               </Link>
             ) : (
-              <>
-                <img
-                  src={item.imageUrl}
-                  alt={item.title || "Carousel image"}
-                  className="w-full h-64 md:h-96 object-cover"
-                />
-                {item.title && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-black bg-opacity-40 p-4 rounded-md">
-                      <h3 className="text-xl md:text-3xl text-white font-bold">{item.title}</h3>
-                    </div>
-                  </div>
-                )}
-              </>
+              <img
+                src={item.imageUrl}
+                alt={item.title || "Carousel image"}
+                className="w-full h-full object-cover"
+              />
             )}
           </div>
         ))}
@@ -98,7 +82,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-10"
             onClick={handlePrevious}
             aria-label="Previous slide"
           >
@@ -108,7 +92,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 z-10"
             onClick={handleNext}
             aria-label="Next slide"
           >
@@ -119,7 +103,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
 
       {/* Dots indicators */}
       {items.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {items.map((_, index) => (
             <button
               key={index}
