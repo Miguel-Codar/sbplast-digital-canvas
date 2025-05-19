@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCarouselSlides } from "@/services/carouselService";
 import { getBlogPosts } from "@/services/blogService";
@@ -9,8 +9,12 @@ import SimulatorsSection from "@/components/SimulatorsSection";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ContactForm from "@/components/ContactForm";
 
 const Index = () => {
+  const [contactFormOpen, setContactFormOpen] = useState(false);
+  const [contactFormType, setContactFormType] = useState<"contato" | "orcamento" | "assistencia">("contato");
+
   // Fetch real carousel slides
   const { data: slides = [], isLoading: slidesLoading } = useQuery({
     queryKey: ["carouselSlides"],
@@ -36,6 +40,11 @@ const Index = () => {
     news: blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [],
     events: blogPostsData.filter(post => post.blog_categories?.name === "Eventos") || [],
     videos: blogPostsData.filter(post => post.blog_categories?.name === "Videos" || post.blog_categories?.name === "Vídeos") || [],
+  };
+
+  const openContactForm = (type: "contato" | "orcamento" | "assistencia") => {
+    setContactFormType(type);
+    setContactFormOpen(true);
   };
 
   return (
@@ -135,37 +144,56 @@ const Index = () => {
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
               <h3 className="text-lg font-semibold mb-3">Lojista</h3>
               <p className="text-gray-600 mb-4">Solicite um orçamento para sua loja</p>
-              <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto" asChild>
-                <Link to="/orcamento">Solicitar orçamento</Link>
+              <Button 
+                className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto"
+                onClick={() => openContactForm("orcamento")}
+              >
+                Solicitar orçamento
               </Button>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
               <h3 className="text-lg font-semibold mb-3">Lojista</h3>
               <p className="text-gray-600 mb-4">Cadastre-se para vender nossos produtos</p>
-              <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto" asChild>
-                <Link to="/cadastro-lojista">Cadastrar para vender</Link>
+              <Button 
+                className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto"
+                onClick={() => openContactForm("orcamento")}
+              >
+                Cadastrar para vender
               </Button>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
               <h3 className="text-lg font-semibold mb-3">Consumidor</h3>
               <p className="text-gray-600 mb-4">Precisa de suporte para algum produto?</p>
-              <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto" asChild>
-                <Link to="/assistencia">Assistência técnica</Link>
+              <Button 
+                className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto"
+                onClick={() => openContactForm("assistencia")}
+              >
+                Assistência técnica
               </Button>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
               <h3 className="text-lg font-semibold mb-3">Projetista</h3>
               <p className="text-gray-600 mb-4">Acesse arquivos CAD/BIM dos produtos</p>
-              <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto" asChild>
-                <Link to="/arquivos-projeto">Solicitar CAD/BIM</Link>
+              <Button 
+                className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/90 mt-auto"
+                onClick={() => openContactForm("contato")}
+              >
+                Solicitar CAD/BIM
               </Button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Contact Form Modal */}
+      <ContactForm 
+        open={contactFormOpen}
+        onOpenChange={setContactFormOpen}
+        type={contactFormType}
+      />
     </div>
   );
 };

@@ -4,10 +4,16 @@ import { Menu, X, ChevronDown, Search, User, List } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import ProductSearch from "./ProductSearch";
+import ProductsList from "./ProductsList";
+import ContactForm from "./ContactForm";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProductsListOpen, setIsProductsListOpen] = useState(false);
+  const [contactFormOpen, setContactFormOpen] = useState(false);
+  const [contactFormType, setContactFormType] = useState<"contato" | "orcamento" | "assistencia">("contato");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,6 +21,21 @@ const Header = () => {
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      // Fechar menu se estiver aberto
+      if (isMenuOpen) setIsMenuOpen(false);
+    }
+  };
+
+  const openContactForm = (type: "contato" | "orcamento" | "assistencia" = "contato") => {
+    setContactFormType(type);
+    setContactFormOpen(true);
+    if (isMenuOpen) setIsMenuOpen(false);
+  };
+
+  const openProductsList = () => {
+    setIsProductsListOpen(true);
+    if (isMenuOpen) setIsMenuOpen(false);
   };
 
   return (
@@ -27,23 +48,30 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
-            <Button 
-              variant="outline" 
-              className="flex items-center justify-center h-10 px-6 rounded-full border border-white text-white bg-transparent hover:bg-transparent hover:text-[#18ffff] hover:border-[#18ffff] transition-colors"
-            >
-              <span className="font-normal text-base">Produtos</span>
-              <Search className="h-5 w-5 ml-2 text-[#00eaff]" />
-            </Button>
+            <div className="relative">
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-center h-10 px-6 rounded-full border border-white text-white bg-transparent hover:bg-transparent hover:text-[#18ffff] hover:border-[#18ffff] transition-colors"
+                onClick={toggleSearch}
+              >
+                <span className="font-normal text-base">Produtos</span>
+                <Search className="h-5 w-5 ml-2 text-[#00eaff]" />
+              </Button>
+              <ProductSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+            </div>
             
             <div className="flex items-center space-x-10">
               <Link to="/produtos" className="text-base hover:text-[#18ffff] transition-colors">
                 Todos Produtos
               </Link>
-              <Link to="/atendimento" className="text-base hover:text-[#18ffff] transition-colors">
+              <button 
+                className="text-base hover:text-[#18ffff] transition-colors"
+                onClick={() => openContactForm("contato")}
+              >
                 Atendimento
-              </Link>
-              <Link to="/fortlev" className="text-base hover:text-[#18ffff] transition-colors">
-                A Fortlev
+              </button>
+              <Link to="/a-sbplast" className="text-base hover:text-[#18ffff] transition-colors">
+                A SBPlast
               </Link>
             </div>
           </nav>
@@ -51,22 +79,28 @@ const Header = () => {
           {/* User Links - Desktop */}
           <div className="hidden md:flex items-center space-x-8">
             {/* Lojista Block */}
-            <div className="flex items-center">
+            <button
+              className="flex items-center hover:text-[#18ffff] transition-colors"
+              onClick={() => openContactForm("orcamento")}
+            >
               <User className="h-6 w-6 text-[#18ffff] mr-2" />
               <div className="flex flex-col">
                 <span className="font-bold text-sm leading-tight">Lojista</span>
                 <span className="text-sm leading-tight">Solicitar Orçamento</span>
               </div>
-            </div>
+            </button>
             
-            {/* Lista Fortlev Block */}
-            <div className="flex items-center">
+            {/* Lista SBPlast Block */}
+            <button
+              className="flex items-center hover:text-[#18ffff] transition-colors"
+              onClick={openProductsList}
+            >
               <List className="h-6 w-6 text-[#18ffff] mr-2" />
               <div className="flex flex-col">
                 <span className="font-bold text-sm leading-tight">Lista</span>
-                <span className="text-sm leading-tight">Fortlev</span>
+                <span className="text-sm leading-tight">SBPlast</span>
               </div>
-            </div>
+            </button>
             
             {/* Language Selector */}
             <div className="flex items-center mr-4">
@@ -93,14 +127,13 @@ const Header = () => {
           <div className="md:hidden pt-4 pb-6">
             <nav className="flex flex-col space-y-4">
               <div className="border-b border-sbplast-cyan pb-2">
-                <Link 
-                  to="/produtos" 
-                  className="flex items-center py-2 hover:text-[#18ffff]"
-                  onClick={() => setIsMenuOpen(false)}
+                <button 
+                  className="flex items-center py-2 hover:text-[#18ffff] w-full text-left"
+                  onClick={toggleSearch}
                 >
                   <span>Produtos</span>
                   <Search className="h-4 w-4 ml-2 text-[#18ffff]" />
-                </Link>
+                </button>
                 <Link 
                   to="/produtos" 
                   className="block py-2 hover:text-[#18ffff]"
@@ -108,39 +141,53 @@ const Header = () => {
                 >
                   Todos Produtos
                 </Link>
-                <Link 
-                  to="/atendimento" 
-                  className="block py-2 hover:text-[#18ffff]"
-                  onClick={() => setIsMenuOpen(false)}
+                <button 
+                  className="block py-2 hover:text-[#18ffff] w-full text-left"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    openContactForm("contato");
+                  }}
                 >
                   Atendimento
-                </Link>
+                </button>
                 <Link 
-                  to="/fortlev" 
+                  to="/a-sbplast" 
                   className="block py-2 hover:text-[#18ffff]"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  A Fortlev
+                  A SBPlast
                 </Link>
               </div>
               
               {/* Lojista Mobile */}
-              <div className="flex items-center py-2">
+              <button
+                className="flex items-center py-2 w-full text-left"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  openContactForm("orcamento");
+                }}
+              >
                 <User className="h-5 w-5 text-[#18ffff] mr-2" />
                 <div className="flex flex-col">
                   <span className="font-bold text-sm">Lojista</span>
                   <span className="text-sm">Solicitar Orçamento</span>
                 </div>
-              </div>
+              </button>
               
-              {/* Lista Fortlev Mobile */}
-              <div className="flex items-center py-2">
+              {/* Lista SBPlast Mobile */}
+              <button
+                className="flex items-center py-2 w-full text-left"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  openProductsList();
+                }}
+              >
                 <List className="h-5 w-5 text-[#18ffff] mr-2" />
                 <div className="flex flex-col">
                   <span className="font-bold text-sm">Lista</span>
-                  <span className="text-sm">Fortlev</span>
+                  <span className="text-sm">SBPlast</span>
                 </div>
-              </div>
+              </button>
               
               {/* Language Selector Mobile */}
               <div className="flex items-center py-2">
@@ -157,7 +204,27 @@ const Header = () => {
             </nav>
           </div>
         )}
+
+        {/* ProductSearch (Mobile) */}
+        {isSearchOpen && (
+          <div className="md:hidden absolute left-0 right-0 bg-white z-50 p-4 shadow-lg">
+            <ProductSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+          </div>
+        )}
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm 
+        open={contactFormOpen}
+        onOpenChange={setContactFormOpen}
+        type={contactFormType}
+      />
+
+      {/* Products List Drawer */}
+      <ProductsList 
+        open={isProductsListOpen}
+        onOpenChange={setIsProductsListOpen}
+      />
     </header>
   );
 };

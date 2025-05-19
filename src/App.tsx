@@ -13,6 +13,7 @@ import CategoryPage from "./pages/CategoryPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import NotFound from "./pages/NotFound";
+import AboutPage from "./pages/AboutPage";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
@@ -88,6 +89,14 @@ const App = () => (
             element={
               <MainLayout>
                 <BlogPostPage />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/a-sbplast"
+            element={
+              <MainLayout>
+                <AboutPage />
               </MainLayout>
             }
           />
