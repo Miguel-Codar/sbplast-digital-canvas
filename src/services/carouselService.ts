@@ -169,27 +169,50 @@ export async function uploadCarouselImage(file: File): Promise<string> {
   // Create a unique file path
   const fileExt = file.name.split(".").pop();
   const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
-  const filePath = `${fileName}`;
+  const filePath = `carousel/${fileName}`;
 
   try {
-    // Upload directly to the public bucket
-    // Instead of creating a bucket programmatically, we'll use an existing public one
-    // or the default "public" bucket which is more likely to have the proper permissions
-    const { data, error } = await supabase.storage
-      .from("public")
+    // Create bucket if it doesn't exist
+    const { data: buckets, error: listBucketsError } = await supabase.storage.listBuckets();
+    
+    if (listBucketsError) {
+      console.error("Error listing buckets:", listBucketsError);
+      throw listBucketsError;
+    }
+    
+    const bucketName = "carousel_images";
+    const bucketExists = buckets?.some(bucket => bucket.name === bucketName);
+    
+    if (!bucketExists) {
+      console.log(`Creating bucket '${bucketName}'`);
+      const { error: createBucketError } = await supabase.storage.createBucket(bucketName, {
+        public: true,
+        fileSizeLimit: 10485760, // 10MB
+      });
+      
+      if (createBucketError) {
+        console.error("Error creating bucket:", createBucketError);
+        throw createBucketError;
+      }
+      console.log(`Bucket '${bucketName}' created successfully`);
+    }
+
+    // Upload the file
+    const { data, error: uploadError } = await supabase.storage
+      .from(bucketName)
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: false
       });
 
-    if (error) {
-      console.error("Error uploading image:", error);
-      throw error;
+    if (uploadError) {
+      console.error("Error uploading image:", uploadError);
+      throw uploadError;
     }
 
     // Get the public URL for the uploaded image
     const { data: { publicUrl } } = supabase.storage
-      .from("public")
+      .from(bucketName)
       .getPublicUrl(filePath);
 
     console.log("Image uploaded successfully:", publicUrl);
