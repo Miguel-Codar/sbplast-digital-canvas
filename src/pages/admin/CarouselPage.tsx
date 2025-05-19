@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 import AdminLayout from "./AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -67,7 +66,7 @@ const CarouselPage = () => {
   // Create slide mutation
   const createMutation = useMutation({
     mutationFn: createCarouselSlide,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["carouselSlides"] });
       toast({
         title: "Slide adicionado",
@@ -87,7 +86,7 @@ const CarouselPage = () => {
   // Update slide mutation
   const updateMutation = useMutation({
     mutationFn: updateCarouselSlide,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["carouselSlides"] });
       toast({
         title: "Slide atualizado",

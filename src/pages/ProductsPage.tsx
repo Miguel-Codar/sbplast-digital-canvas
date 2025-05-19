@@ -5,85 +5,24 @@ import ProductCard from "../components/ProductCard";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Search } from "lucide-react";
-
-// Mock data - This would be fetched from an API in a real application
-const mockProducts = [
-  {
-    id: "1",
-    name: "Tanque de Polietileno 5.000L - Verde",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "tanque-de-polietileno-5000l-verde",
-    categoryId: "1",
-    categoryName: "Reservatórios",
-    shortDescription: "Tanque verde com capacidade de 5.000 litros"
-  },
-  {
-    id: "2",
-    name: "Pasta Lubrificante",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "pasta-lubrificante",
-    categoryId: "2",
-    categoryName: "Acessórios",
-    shortDescription: "Pasta para lubrificação de conexões"
-  },
-  {
-    id: "3",
-    name: "Fita Isolante",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "fita-isolante",
-    categoryId: "2",
-    categoryName: "Acessórios",
-    shortDescription: "Fita isolante para conexões"
-  },
-  {
-    id: "4",
-    name: "Tubo Esgoto Série Normal - 3 m",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "tubo-esgoto-serie-normal-3m",
-    categoryId: "3",
-    categoryName: "Esgoto",
-    shortDescription: "Tubo para esgoto com 3 metros de comprimento"
-  },
-  {
-    id: "5",
-    name: "Torneira de Tanque Fortlev",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "torneira-de-tanque-fortlev",
-    categoryId: "2",
-    categoryName: "Acessórios",
-    shortDescription: "Torneira para tanques"
-  },
-  {
-    id: "6",
-    name: "Torneira de Pia Fortlev",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "torneira-de-pia-fortlev",
-    categoryId: "2",
-    categoryName: "Acessórios",
-    shortDescription: "Torneira para pias"
-  }
-];
-
-const mockCategories = [
-  { id: "1", name: "Reservatórios", slug: "reservatorios" },
-  { id: "2", name: "Acessórios", slug: "acessorios" },
-  { id: "3", name: "Esgoto", slug: "esgoto" },
-  { id: "4", name: "Eletricidade", slug: "eletricidade" },
-  { id: "5", name: "Telhas", slug: "telhas" }
-];
+import { useQuery } from "@tanstack/react-query";
+import { getProducts, getProductCategories } from "@/services/productService";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState(mockProducts);
-  const [categories, setCategories] = useState(mockCategories);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [filteredProducts, setFilteredProducts] = useState(mockProducts);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // In a real application, you would fetch data from your API here
-  useEffect(() => {
-    // Fetch products
-    // Fetch categories
-  }, []);
+  // Fetch products and categories using React Query
+  const { data: products = [], isLoading: isLoadingProducts } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts
+  });
+
+  const { data: categories = [], isLoading: isLoadingCategories } = useQuery({
+    queryKey: ["productCategories"],
+    queryFn: getProductCategories
+  });
 
   useEffect(() => {
     // Filter products based on search term and selected category
@@ -96,7 +35,7 @@ const ProductsPage = () => {
     }
 
     if (selectedCategory) {
-      filtered = filtered.filter((product) => product.categoryId === selectedCategory);
+      filtered = filtered.filter((product) => product.category_id === selectedCategory);
     }
 
     setFilteredProducts(filtered);
@@ -152,22 +91,26 @@ const ProductsPage = () => {
             </form>
 
             <h3 className="font-semibold mb-3">Categorias</h3>
-            <ul className="space-y-2">
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <button
-                    className={`w-full text-left py-2 px-3 rounded ${
-                      selectedCategory === category.id
-                        ? "bg-sbplast-blue text-white"
-                        : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => handleCategoryClick(category.id)}
-                  >
-                    {category.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            {isLoadingCategories ? (
+              <div className="py-4 text-center">Carregando categorias...</div>
+            ) : (
+              <ul className="space-y-2">
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <button
+                      className={`w-full text-left py-2 px-3 rounded ${
+                        selectedCategory === category.id
+                          ? "bg-sbplast-blue text-white"
+                          : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => handleCategoryClick(category.id)}
+                    >
+                      {category.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
@@ -178,20 +121,28 @@ const ProductsPage = () => {
             <span className="text-sm text-gray-500">{filteredProducts.length} itens</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                imageUrl={product.imageUrl}
-                slug={product.slug}
-                shortDescription={product.shortDescription}
-              />
-            ))}
-          </div>
+          {isLoadingProducts ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <div key={item} className="bg-gray-100 h-64 rounded-lg animate-pulse"></div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  imageUrl={product.image_url || "https://via.placeholder.com/300"}
+                  slug={product.slug}
+                  shortDescription={product.short_description || undefined}
+                />
+              ))}
+            </div>
+          )}
 
-          {filteredProducts.length === 0 && (
+          {filteredProducts.length === 0 && !isLoadingProducts && (
             <div className="text-center py-12">
               <p className="text-gray-500">Nenhum produto encontrado com os filtros selecionados.</p>
             </div>

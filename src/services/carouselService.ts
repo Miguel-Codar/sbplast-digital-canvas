@@ -177,6 +177,7 @@ export async function uploadCarouselImage(file: File): Promise<string> {
     const bucketExists = buckets?.some(bucket => bucket.name === "carousel_images");
 
     if (!bucketExists) {
+      console.log("Creating bucket 'carousel_images'");
       const { data, error } = await supabase.storage.createBucket("carousel_images", {
         public: true
       });
