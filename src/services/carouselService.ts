@@ -12,7 +12,7 @@ export interface CarouselSlide {
 }
 
 // Get all carousel slides
-export async function getCarouselSlides() {
+export async function getCarouselSlides(): Promise<CarouselSlide[]> {
   const { data, error } = await supabase
     .from("carousel_slides")
     .select("*")
@@ -23,11 +23,11 @@ export async function getCarouselSlides() {
     throw error;
   }
 
-  return data;
+  return data || [];
 }
 
 // Create a new carousel slide
-export async function createCarouselSlide(slide: Partial<CarouselSlide>) {
+export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promise<CarouselSlide> {
   if (!slide.image_url) {
     throw new Error("Image URL is required for carousel slides");
   }
@@ -75,7 +75,7 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>) {
 }
 
 // Update an existing carousel slide
-export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: string }) {
+export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: string }): Promise<CarouselSlide> {
   if (!slide.id) {
     throw new Error("Slide ID is required for updating");
   }
@@ -109,7 +109,7 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
 }
 
 // Update display order of multiple slides
-export async function updateCarouselOrder(slides: { id: string; display_order: number }[]) {
+export async function updateCarouselOrder(slides: { id: string; display_order: number }[]): Promise<CarouselSlide[]> {
   try {
     console.log("Updating carousel slide order:", slides);
     
@@ -139,7 +139,7 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
       throw error;
     }
     
-    return data;
+    return data || [];
   } catch (error) {
     console.error("Error updating carousel order:", error);
     throw error;
@@ -147,7 +147,7 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
 }
 
 // Delete a carousel slide
-export async function deleteCarouselSlide(id: string) {
+export async function deleteCarouselSlide(id: string): Promise<boolean> {
   try {
     const { error } = await supabase.from("carousel_slides").delete().eq("id", id);
 
@@ -165,13 +165,30 @@ export async function deleteCarouselSlide(id: string) {
 }
 
 // Upload a carousel image to Supabase Storage
-export async function uploadCarouselImage(file: File) {
+export async function uploadCarouselImage(file: File): Promise<string> {
   // Create a unique file path
   const fileExt = file.name.split(".").pop();
   const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
   const filePath = `${fileName}`;
 
   try {
+    // First, check if the bucket exists, if not create it
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const bucketExists = buckets?.some(bucket => bucket.name === "carousel_images");
+
+    if (!bucketExists) {
+      const { data, error } = await supabase.storage.createBucket("carousel_images", {
+        public: true
+      });
+      
+      if (error) {
+        console.error("Error creating bucket:", error);
+        throw error;
+      }
+      console.log("Bucket created successfully:", data);
+    }
+
+    // Now upload the file
     const { data, error } = await supabase.storage
       .from("carousel_images")
       .upload(filePath, file);

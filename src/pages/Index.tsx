@@ -1,133 +1,160 @@
-import { useState, useEffect } from "react";
-import Carousel from "../components/Carousel";
-import CategoryCard from "../components/CategoryCard";
-import BlogCard from "../components/BlogCard";
-import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
 
-// Mock data - This would be fetched from an API in a real application
-const mockCarouselItems = [
-  {
-    id: "1",
-    imageUrl: "/lovable-uploads/41731074-1f24-4281-88c1-f6ab149e9a60.png",
-    title: "Conheça agora a SBPlast, referência no seguimento de embalagens plásticas para o seu negócio.",
-    link: "/about"
-  },
-  {
-    id: "2",
-    imageUrl: "/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png",
-    title: "Produtos de qualidade para atender suas necessidades",
-    link: "/produtos"
-  }
-];
-
-// Updated categories with icon URLs pointing to the uploaded images
-const mockCategories = [
-  { id: "1", name: "Camisetas", iconUrl: "/lovable-uploads/0ff84c18-89ac-4f41-b384-f6db164ffe99.png", slug: "camisetas" },
-  { id: "2", name: "Cadeado", iconUrl: "/lovable-uploads/e18be978-f6a6-4c66-9c8e-298c343931fa.png", slug: "cadeado" },
-  { id: "3", name: "Boca de Palhaço", iconUrl: "/lovable-uploads/29d793e3-09e9-42f3-9e87-f3e5d5ef2867.png", slug: "boca-de-palhaco" },
-  { id: "4", name: "Alças Prensadas", iconUrl: "/lovable-uploads/e6211444-3846-41fe-8844-004682018f4b.png", slug: "alcas-prensadas" },
-  { id: "5", name: "Autocapas", iconUrl: "/lovable-uploads/b27e4176-5400-4fc7-a96b-bac51cbe83d7.png", slug: "autocapas" },
-  { id: "6", name: "Biodegradável", iconUrl: "/lovable-uploads/7fbb85fc-0948-404b-8a4f-8a8e37ea8569.png", slug: "biodegradavel" }
-];
-
-const mockBlogPosts = [
-  {
-    id: "1",
-    title: "SBPlast entra no mercado de irrigação e avança no agronegócio",
-    imageUrl: "https://via.placeholder.com/400x300",
-    excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    category: "Notícias",
-    slug: "sbplast-entra-no-mercado-de-irrigacao",
-    date: "2025-05-01"
-  },
-  {
-    id: "2",
-    title: "Rainwater Brasil 2024",
-    imageUrl: "https://via.placeholder.com/400x300",
-    excerpt: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    category: "Eventos",
-    slug: "rainwater-brasil-2024",
-    date: "2025-04-15"
-  },
-  {
-    id: "3",
-    title: "Evento marca a transição oficial na gestão da Spezzio",
-    imageUrl: "https://via.placeholder.com/400x300",
-    excerpt: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    category: "Vídeos",
-    slug: "evento-marca-transicao-spezzio",
-    date: "2025-04-10"
-  }
-];
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getCarouselSlides } from "@/services/carouselService";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import HomeCarousel from "@/components/HomeCarousel";
 
 const Index = () => {
-  const [carouselItems, setCarouselItems] = useState(mockCarouselItems);
-  const [categories, setCategories] = useState(mockCategories);
-  const [blogPosts, setBlogPosts] = useState(mockBlogPosts);
+  const { data: slides = [], isLoading: slidesLoading } = useQuery({
+    queryKey: ["carouselSlides"],
+    queryFn: getCarouselSlides,
+  });
 
-  // In a real application, you would fetch data from your API here
-  useEffect(() => {
-    // Fetch carousel items
-    // Fetch categories
-    // Fetch blog posts
-  }, []);
+  // Transform slides data to match Carousel component props
+  const carouselItems = slides.map((slide) => ({
+    id: slide.id,
+    imageUrl: slide.image_url,
+    title: slide.title || undefined,
+    link: slide.link || undefined,
+  }));
 
   return (
-    <div>
+    <div className="container mx-auto px-4 py-8">
       {/* Hero Carousel */}
       <section className="mb-12">
-        <Carousel items={carouselItems} />
+        {slidesLoading ? (
+          <div className="w-full h-64 bg-gray-200 animate-pulse rounded-md" />
+        ) : (
+          <HomeCarousel items={carouselItems} />
+        )}
       </section>
 
-      {/* Solutions Section */}
-      <section className="sbplast-container mb-16">
-        <h2 className="sbplast-heading text-center mb-8">Soluções SBPlast</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              id={category.id}
-              name={category.name}
-              iconUrl={category.iconUrl}
-              slug={category.slug}
-            />
-          ))}
+      {/* Main Content */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Bem-vindo à SBPlast</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <p className="text-gray-700 mb-4">
+              A SBPlast é uma empresa especializada na fabricação de produtos
+              plásticos de alta qualidade para diversos setores industriais.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Com mais de 20 anos de experiência no mercado, oferecemos soluções
+              inovadoras e sustentáveis que atendem às necessidades dos nossos
+              clientes com excelência.
+            </p>
+          </div>
+          <div className="bg-gray-100 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-3">Nossos Diferenciais</h3>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <li>Produtos de alta durabilidade</li>
+              <li>Compromisso com a sustentabilidade</li>
+              <li>Tecnologia de ponta</li>
+              <li>Equipe altamente qualificada</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* Simulators Section */}
-      <section className="sbplast-container mb-16">
-        <h2 className="sbplast-heading text-center mb-4">Simuladores SBPlast</h2>
-        <p className="text-center text-gray-600 mb-8">
-          Está em dúvida de qual produto melhor atende às suas necessidades?<br />
-          Então utilize nossos simuladores e encontre o produto ideal.
-        </p>
-        <div className="flex justify-center">
-          <Link to="/simulador">
-            <Button className="bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-cyan/80">
-              Preencha o formulário
-            </Button>
-          </Link>
+      {/* Featured Products Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Produtos em Destaque</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Sample product cards - these would be replaced with real data */}
+          {Array(3)
+            .fill(0)
+            .map((_, idx) => (
+              <div
+                key={idx}
+                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">
+                    Produto exemplo {idx + 1}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Descrição breve do produto exemplo com detalhes relevantes.
+                  </p>
+                  <a
+                    href={`/produto/exemplo-${idx + 1}`}
+                    className="text-sbplast-cyan hover:text-sbplast-cyan-dark font-medium text-sm"
+                  >
+                    Ver detalhes →
+                  </a>
+                </div>
+              </div>
+            ))}
+        </div>
+        <div className="text-center mt-6">
+          <a
+            href="/produtos"
+            className="inline-block bg-sbplast-cyan hover:bg-sbplast-cyan-dark text-white py-2 px-6 rounded-md transition-colors"
+          >
+            Ver todos os produtos
+          </a>
         </div>
       </section>
 
-      {/* Blog/News Section */}
-      <section className="sbplast-container mb-16">
-        <h2 className="sbplast-heading text-center mb-8">Informações</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {blogPosts.map((post) => (
-            <BlogCard
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              imageUrl={post.imageUrl}
-              excerpt={post.excerpt}
-              category={post.category}
-              slug={post.slug}
-              date={post.date}
-            />
-          ))}
+      {/* About Section */}
+      <section className="mb-12">
+        <div className="bg-gray-50 rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-6">Sobre a SBPlast</h2>
+          <ScrollArea className="h-60">
+            <div className="space-y-4 pr-4">
+              <p>
+                Fundada em 2000, a SBPlast nasceu com a missão de oferecer
+                soluções em plásticos que combinam qualidade, inovação e
+                sustentabilidade. Ao longo dos anos, consolidamos nossa posição
+                no mercado como referência em produtos plásticos para os mais
+                diversos setores.
+              </p>
+              <p>
+                Nossa equipe é formada por profissionais altamente qualificados e
+                comprometidos com a excelência. Investimos constantemente em
+                tecnologia e processos que nos permitem entregar produtos que
+                superam as expectativas dos nossos clientes.
+              </p>
+              <p>
+                Na SBPlast, a sustentabilidade não é apenas uma palavra, mas um
+                valor que guia nossas decisões. Trabalhamos com materiais
+                recicláveis e processos que minimizam o impacto ambiental,
+                contribuindo para um futuro mais sustentável.
+              </p>
+              <p>
+                Nosso compromisso com a qualidade é evidenciado pelas
+                certificações que conquistamos e pelo reconhecimento dos nossos
+                clientes, que nos escolhem como parceiros de negócios há mais de
+                duas décadas.
+              </p>
+            </div>
+          </ScrollArea>
+          <div className="text-center mt-6">
+            <a
+              href="/sobre"
+              className="inline-block border border-sbplast-cyan text-sbplast-cyan hover:bg-sbplast-cyan hover:text-white py-2 px-6 rounded-md transition-colors"
+            >
+              Conheça nossa história
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section>
+        <div className="bg-sbplast-cyan text-white rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-bold mb-3">Fale Conosco</h2>
+          <p className="mb-6">
+            Estamos à disposição para atender às suas necessidades e esclarecer
+            suas dúvidas.
+          </p>
+          <a
+            href="/contato"
+            className="inline-block bg-white text-sbplast-cyan hover:bg-gray-100 py-2 px-6 rounded-md transition-colors"
+          >
+            Entre em contato
+          </a>
         </div>
       </section>
     </div>
