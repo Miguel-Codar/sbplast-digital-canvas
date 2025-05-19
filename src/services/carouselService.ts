@@ -169,35 +169,13 @@ export async function uploadCarouselImage(file: File): Promise<string> {
   // Create a unique file path
   const fileExt = file.name.split(".").pop();
   const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
-  const filePath = `carousel/${fileName}`;
+  const filePath = `${fileName}`;
+  const bucketName = "carousel_images";
 
   try {
-    // Create bucket if it doesn't exist
-    const { data: buckets, error: listBucketsError } = await supabase.storage.listBuckets();
+    console.log(`Uploading file to bucket '${bucketName}'...`);
     
-    if (listBucketsError) {
-      console.error("Error listing buckets:", listBucketsError);
-      throw listBucketsError;
-    }
-    
-    const bucketName = "carousel_images";
-    const bucketExists = buckets?.some(bucket => bucket.name === bucketName);
-    
-    if (!bucketExists) {
-      console.log(`Creating bucket '${bucketName}'`);
-      const { error: createBucketError } = await supabase.storage.createBucket(bucketName, {
-        public: true,
-        fileSizeLimit: 10485760, // 10MB
-      });
-      
-      if (createBucketError) {
-        console.error("Error creating bucket:", createBucketError);
-        throw createBucketError;
-      }
-      console.log(`Bucket '${bucketName}' created successfully`);
-    }
-
-    // Upload the file
+    // Upload the file to our public bucket with RLS policies
     const { data, error: uploadError } = await supabase.storage
       .from(bucketName)
       .upload(filePath, file, {
