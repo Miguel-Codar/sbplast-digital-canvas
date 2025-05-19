@@ -1,76 +1,52 @@
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
 import ProductCard from "../components/ProductCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
-
-// Mock data - This would be fetched from an API in a real application
-const mockProduct = {
-  id: "1",
-  name: "Tanque de Polietileno 5.000L - Verde",
-  imageUrl: "https://via.placeholder.com/600x400",
-  slug: "tanque-de-polietileno-5000l-verde",
-  categoryId: "1",
-  categoryName: "Reservatórios",
-  categorySlug: "reservatorios",
-  shortDescription: "Tanque verde com capacidade de 5.000 litros",
-  longDescription: `
-    <p>O Tanque de Polietileno 5.000L na cor verde é fabricado com matéria-prima de alta qualidade, garantindo resistência e durabilidade. Ideal para armazenamento de água potável ou água de reuso.</p>
-    <p>Características:</p>
-    <ul>
-      <li>Capacidade: 5.000 litros</li>
-      <li>Material: Polietileno de alta densidade</li>
-      <li>Cor: Verde</li>
-      <li>Proteção contra raios UV</li>
-      <li>Tampa com sistema de travamento</li>
-      <li>Fácil instalação</li>
-    </ul>
-    <p>Este produto é certificado e atende todas as normas técnicas exigidas.</p>
-  `
-};
-
-const mockRelatedProducts = [
-  {
-    id: "2",
-    name: "Tanque de Polietileno 2.000L - Verde",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "tanque-de-polietileno-2000l-verde",
-    shortDescription: "Tanque verde com capacidade de 2.000 litros"
-  },
-  {
-    id: "3",
-    name: "Tanque de Polietileno 10.000L - Verde",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "tanque-de-polietileno-10000l-verde",
-    shortDescription: "Tanque verde com capacidade de 10.000 litros"
-  },
-  {
-    id: "4",
-    name: "Tanque de Polietileno 5.000L - Azul",
-    imageUrl: "https://via.placeholder.com/300",
-    slug: "tanque-de-polietileno-5000l-azul",
-    shortDescription: "Tanque azul com capacidade de 5.000 litros"
-  }
-];
+import { useQuery } from "@tanstack/react-query";
+import { getProductBySlug, getProducts } from "@/services/productService";
 
 const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [product, setProduct] = useState(mockProduct);
-  const [relatedProducts, setRelatedProducts] = useState(mockRelatedProducts);
   const [loading, setLoading] = useState(true);
 
-  // In a real application, you would fetch data from your API here
-  useEffect(() => {
-    // Fetch product based on slug
-    // Fetch related products
-    setLoading(false);
-  }, [slug]);
+  // Fetch product data based on slug
+  const { data: product, isLoading: isLoadingProduct, error: productError } = useQuery({
+    queryKey: ["product", slug],
+    queryFn: () => getProductBySlug(slug || ''),
+    enabled: !!slug
+  });
 
-  if (loading) {
+  // Fetch related products (products in the same category)
+  const { data: allProducts = [], isLoading: isLoadingRelatedProducts } = useQuery({
+    queryKey: ["relatedProducts", product?.category_id],
+    queryFn: getProducts,
+    enabled: !!product?.category_id
+  });
+
+  // Filter to get related products (same category, excluding current product)
+  const relatedProducts = allProducts
+    .filter(p => p.category_id === product?.category_id && p.id !== product?.id)
+    .slice(0, 3); // Limit to 3 related products
+
+  if (isLoadingProduct) {
     return (
       <div className="sbplast-container py-16 text-center">
-        <p>Carregando...</p>
+        <p>Carregando produto...</p>
+      </div>
+    );
+  }
+
+  if (productError || !product) {
+    return (
+      <div className="sbplast-container py-16 text-center">
+        <p>Produto não encontrado.</p>
+        <div className="mt-4">
+          <Link to="/produtos" className="text-sbplast-blue hover:underline">
+            Voltar para lista de produtos
+          </Link>
+        </div>
       </div>
     );
   }
@@ -80,7 +56,8 @@ const ProductPage = () => {
       <Breadcrumb
         items={[
           { label: "Produtos", url: "/produtos" },
-          { label: product.categoryName, url: `/categoria/${product.categorySlug}` },
+          { label: product.product_categories?.name || "Sem categoria", 
+            url: product.product_categories ? `/categoria/${product.product_categories.slug}` : "/produtos" },
           { label: product.name }
         ]}
       />
@@ -90,7 +67,7 @@ const ProductPage = () => {
           {/* Product Image */}
           <div className="bg-gray-50 p-4 rounded-md">
             <img
-              src={product.imageUrl}
+              src={product.image_url || "https://via.placeholder.com/600x400"}
               alt={product.name}
               className="w-full h-auto object-contain"
             />
@@ -99,12 +76,14 @@ const ProductPage = () => {
           {/* Product Details */}
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-sbplast-blue mb-4">{product.name}</h1>
-            <p className="text-gray-600 mb-6">{product.shortDescription}</p>
+            <p className="text-gray-600 mb-6">{product.short_description || "Sem descrição curta"}</p>
             
             <div className="mb-6">
-              <span className="inline-block bg-sbplast-lightBlue text-white text-sm px-3 py-1 rounded">
-                {product.categoryName}
-              </span>
+              {product.product_categories && (
+                <span className="inline-block bg-sbplast-lightBlue text-white text-sm px-3 py-1 rounded">
+                  {product.product_categories.name}
+                </span>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -112,7 +91,8 @@ const ProductPage = () => {
                 <span className="font-medium mr-2">Código:</span> {product.id}
               </p>
               <p className="flex items-center">
-                <span className="font-medium mr-2">Categoria:</span> {product.categoryName}
+                <span className="font-medium mr-2">Categoria:</span> 
+                {product.product_categories?.name || "Sem categoria"}
               </p>
             </div>
           </div>
@@ -129,75 +109,30 @@ const ProductPage = () => {
           </TabsList>
           
           <TabsContent value="description" className="prose max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: product.longDescription }} />
+            {product.long_description ? (
+              <div dangerouslySetInnerHTML={{ __html: product.long_description }} />
+            ) : (
+              <p>Nenhuma descrição detalhada disponível para este produto.</p>
+            )}
           </TabsContent>
           
           <TabsContent value="specifications">
             <div className="py-4">
               <h3 className="font-bold mb-4">Especificações do Produto</h3>
-              <table className="w-full border-collapse">
-                <tbody>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Material</td>
-                    <td className="py-3">Polietileno de alta densidade</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Capacidade</td>
-                    <td className="py-3">5.000 litros</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Cor</td>
-                    <td className="py-3">Verde</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Dimensões (L x A x P)</td>
-                    <td className="py-3">2.35m x 1.63m x 2.35m</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Peso</td>
-                    <td className="py-3">112 kg</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 font-medium">Garantia</td>
-                    <td className="py-3">5 anos</td>
-                  </tr>
-                </tbody>
-              </table>
+              <p className="text-gray-600">
+                As especificações detalhadas deste produto estão disponíveis mediante solicitação.
+                Entre em contato com nosso departamento comercial para mais informações.
+              </p>
             </div>
           </TabsContent>
           
           <TabsContent value="documents">
             <div className="py-4">
               <h3 className="font-bold mb-4">Documentos para Download</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a 
-                    href="#" 
-                    className="flex items-center text-sbplast-blue hover:underline"
-                    download
-                  >
-                    Manual de Instalação (PDF, 2.3MB)
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#" 
-                    className="flex items-center text-sbplast-blue hover:underline"
-                    download
-                  >
-                    Ficha Técnica (PDF, 1.5MB)
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#" 
-                    className="flex items-center text-sbplast-blue hover:underline"
-                    download
-                  >
-                    Certificado de Garantia (PDF, 0.9MB)
-                  </a>
-                </li>
-              </ul>
+              <p className="text-gray-600">
+                Documentação técnica e outros materiais estão disponíveis mediante solicitação.
+                Entre em contato com nosso departamento técnico para mais informações.
+              </p>
             </div>
           </TabsContent>
         </Tabs>
@@ -213,9 +148,9 @@ const ProductPage = () => {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                imageUrl={product.imageUrl}
+                imageUrl={product.image_url || "https://via.placeholder.com/300"}
                 slug={product.slug}
-                shortDescription={product.shortDescription}
+                shortDescription={product.short_description || undefined}
               />
             ))}
           </div>
