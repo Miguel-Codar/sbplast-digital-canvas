@@ -91,16 +91,40 @@ const SolutionsSection = () => {
         <div className="mt-16">
           <h3 className="text-2xl font-semibold text-center mb-8 text-sbplast-blue">Nossa Produção</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-100 rounded-lg overflow-hidden aspect-video flex items-center justify-center">
-              <div className="text-center p-8">
-                <h4 className="text-xl font-medium text-sbplast-blue mb-2">Tecnologia Avançada</h4>
-                <p className="text-gray-600">Imagens de nossas máquinas de produção estarão disponíveis em breve</p>
+            <div className="bg-gray-100 rounded-lg overflow-hidden aspect-video">
+              <div className="w-full h-full">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/6G5-J9_BdXw" 
+                  title="Tecnologia Avançada SBPlast" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                  className="w-full h-full object-cover"
+                ></iframe>
+              </div>
+              <div className="p-4">
+                <h4 className="text-xl font-medium text-sbplast-blue">Tecnologia Avançada</h4>
+                <p className="text-gray-600">Conheça nossa tecnologia de ponta para fabricação de embalagens plásticas</p>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg overflow-hidden aspect-video flex items-center justify-center">
-              <div className="text-center p-8">
-                <h4 className="text-xl font-medium text-sbplast-blue mb-2">Vídeo Institucional</h4>
-                <p className="text-gray-600">Nosso vídeo institucional estará disponível em breve</p>
+            <div className="bg-gray-100 rounded-lg overflow-hidden aspect-video">
+              <div className="w-full h-full">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/H_Su5zB8-V4" 
+                  title="Vídeo Institucional SBPlast" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                  className="w-full h-full object-cover"
+                ></iframe>
+              </div>
+              <div className="p-4">
+                <h4 className="text-xl font-medium text-sbplast-blue">Vídeo Institucional</h4>
+                <p className="text-gray-600">Conheça mais sobre a SBPlast e nossa história</p>
               </div>
             </div>
           </div>
