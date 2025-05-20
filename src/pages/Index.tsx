@@ -27,13 +27,34 @@ const Index = () => {
     queryFn: getBlogPosts,
   });
 
-  // Transform slides data to match Carousel component props
-  const carouselItems = slides.map((slide) => ({
-    id: slide.id,
-    imageUrl: slide.image_url,
-    title: slide.title || undefined,
-    link: slide.link || undefined,
-  }));
+  // If no slides are available, create placeholder slides
+  const placeholderSlides = [
+    {
+      id: "placeholder-1",
+      imageUrl: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
+      title: "Capa SBPlast",
+    },
+    {
+      id: "placeholder-2",
+      imageUrl: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
+      title: "Capa SBPlast",
+    },
+    {
+      id: "placeholder-3",
+      imageUrl: "https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
+      title: "Capa SBPlast",
+    }
+  ];
+
+  // Transform slides data to match Carousel component props or use placeholder slides if none available
+  const carouselItems = slides && slides.length > 0 
+    ? slides.map((slide) => ({
+        id: slide.id,
+        imageUrl: slide.image_url,
+        title: slide.title || undefined,
+        link: slide.link || undefined,
+      }))
+    : placeholderSlides;
 
   // Group blog posts by category for display in different sections
   const blogPosts = {
@@ -87,7 +108,10 @@ const Index = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500">Nenhuma notícia disponível no momento.</p>
+                  <div className="text-center py-8 bg-gray-50 rounded-lg">
+                    <p className="text-gray-500">Novas notícias em breve.</p>
+                    <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SBPlast</p>
+                  </div>
                 )}
               </div>
             </div>
@@ -107,7 +131,10 @@ const Index = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500">Nenhum evento disponível no momento.</p>
+                  <div className="text-center py-8 bg-gray-50 rounded-lg">
+                    <p className="text-gray-500">Novos eventos em breve.</p>
+                    <p className="text-gray-400 text-sm mt-2">Aguarde a agenda de eventos da SBPlast</p>
+                  </div>
                 )}
               </div>
             </div>
@@ -127,7 +154,10 @@ const Index = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500">Nenhum vídeo disponível no momento.</p>
+                  <div className="text-center py-8 bg-gray-50 rounded-lg">
+                    <p className="text-gray-500">Novos vídeos em breve.</p>
+                    <p className="text-gray-400 text-sm mt-2">Confira em breve nossos vídeos institucionais</p>
+                  </div>
                 )}
               </div>
             </div>

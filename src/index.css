@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,7 +84,11 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-montserrat;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins;
   }
 }
 
@@ -101,4 +107,47 @@
 .breadcrumb-item:not(:last-child)::after {
   content: '/';
   @apply mx-2 text-gray-400;
+}
+
+/* Card styles */
+.sbplast-card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+}
+
+/* Button styles */
+.sbplast-button-primary {
+  @apply bg-sbplast-blue text-white hover:bg-sbplast-darkBlue transition-colors duration-300;
+}
+
+.sbplast-button-secondary {
+  @apply bg-sbplast-cyan text-sbplast-blue hover:bg-sbplast-darkCyan transition-colors duration-300;
+}
+
+/* Animation utilities */
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.hover-lift {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Image styles */
+.sbplast-image-rounded {
+  @apply rounded-lg overflow-hidden;
+}
+
+/* Layout utilities */
+.section-padding {
+  @apply py-12 md:py-16 lg:py-20;
+}
+
+/* Glass effect for overlays */
+.glass {
+  @apply backdrop-blur-sm bg-white/30 border border-white/10;
+}
+
+/* Input styles */
+.sbplast-input {
+  @apply bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sbplast-blue focus:border-transparent;
 }
