@@ -24,7 +24,7 @@ export async function getCarouselSlides(): Promise<CarouselSlide[]> {
     throw error;
   }
 
-  // Ensure all entries have youtube_url property to satisfy the type
+  // Add youtube_url as null if it doesn't exist in the database results
   return (data || []).map(slide => ({
     ...slide,
     youtube_url: slide.youtube_url || null
@@ -73,7 +73,8 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
     }
     
     console.log("Carousel slide created successfully:", data);
-    // Ensure returned data includes youtube_url to satisfy the type
+    
+    // Ensure youtube_url is included in the returned data
     return {
       ...data[0],
       youtube_url: data[0].youtube_url || null
@@ -112,7 +113,8 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
     }
     
     console.log("Carousel slide updated successfully:", data);
-    // Ensure returned data includes youtube_url to satisfy the type
+    
+    // Ensure youtube_url is included in the returned data
     return {
       ...data[0],
       youtube_url: data[0].youtube_url || null
@@ -154,7 +156,7 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
       throw error;
     }
     
-    // Ensure all entries have youtube_url property to satisfy the type
+    // Ensure youtube_url is included in all returned data
     return (data || []).map(slide => ({
       ...slide,
       youtube_url: slide.youtube_url || null
