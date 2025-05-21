@@ -6,6 +6,7 @@ import { getBlogPosts } from "@/services/blogService";
 import HomeCarousel from "@/components/HomeCarousel";
 import SolutionsSection from "@/components/SolutionsSection";
 import SimulatorsSection from "@/components/SimulatorsSection";
+import CompanySection from "@/components/CompanySection";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,9 @@ const Index = () => {
 
       {/* Solutions Section */}
       <SolutionsSection />
+      
+      {/* Company Images Section */}
+      <CompanySection />
 
       {/* Simulators Section */}
       <SimulatorsSection />

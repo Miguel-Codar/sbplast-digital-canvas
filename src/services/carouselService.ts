@@ -24,7 +24,11 @@ export async function getCarouselSlides(): Promise<CarouselSlide[]> {
     throw error;
   }
 
-  return data || [];
+  // Ensure all entries have youtube_url property to satisfy the type
+  return (data || []).map(slide => ({
+    ...slide,
+    youtube_url: slide.youtube_url || null
+  }));
 }
 
 // Create a new carousel slide
@@ -69,7 +73,11 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
     }
     
     console.log("Carousel slide created successfully:", data);
-    return data?.[0];
+    // Ensure returned data includes youtube_url to satisfy the type
+    return {
+      ...data[0],
+      youtube_url: data[0].youtube_url || null
+    };
   } catch (error) {
     console.error("Error saving carousel slide:", error);
     throw error;
@@ -104,7 +112,11 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
     }
     
     console.log("Carousel slide updated successfully:", data);
-    return data?.[0];
+    // Ensure returned data includes youtube_url to satisfy the type
+    return {
+      ...data[0],
+      youtube_url: data[0].youtube_url || null
+    };
   } catch (error) {
     console.error("Error updating carousel slide:", error);
     throw error;
@@ -142,7 +154,11 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
       throw error;
     }
     
-    return data || [];
+    // Ensure all entries have youtube_url property to satisfy the type
+    return (data || []).map(slide => ({
+      ...slide,
+      youtube_url: slide.youtube_url || null
+    }));
   } catch (error) {
     console.error("Error updating carousel order:", error);
     throw error;
