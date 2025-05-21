@@ -28,7 +28,7 @@ export async function getCarouselSlides(): Promise<CarouselSlide[]> {
   return (data || []).map(slide => ({
     ...slide,
     youtube_url: slide.youtube_url || null
-  }));
+  })) as CarouselSlide[];
 }
 
 // Create a new carousel slide
@@ -78,7 +78,7 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
     return {
       ...data[0],
       youtube_url: data[0].youtube_url || null
-    };
+    } as CarouselSlide;
   } catch (error) {
     console.error("Error saving carousel slide:", error);
     throw error;
@@ -118,7 +118,7 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
     return {
       ...data[0],
       youtube_url: data[0].youtube_url || null
-    };
+    } as CarouselSlide;
   } catch (error) {
     console.error("Error updating carousel slide:", error);
     throw error;
@@ -160,7 +160,7 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
     return (data || []).map(slide => ({
       ...slide,
       youtube_url: slide.youtube_url || null
-    }));
+    })) as CarouselSlide[];
   } catch (error) {
     console.error("Error updating carousel order:", error);
     throw error;
