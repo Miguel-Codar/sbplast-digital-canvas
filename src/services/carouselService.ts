@@ -24,9 +24,11 @@ export async function getCarouselSlides(): Promise<CarouselSlide[]> {
     throw error;
   }
 
-  // Add youtube_url as null if it doesn't exist in the database results
+  // Transform the data to ensure it matches the CarouselSlide interface
   return (data || []).map(slide => ({
     ...slide,
+    title: slide.title || null,
+    link: slide.link || null,
     youtube_url: slide.youtube_url || null
   })) as CarouselSlide[];
 }
@@ -74,9 +76,11 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
     
     console.log("Carousel slide created successfully:", data);
     
-    // Ensure youtube_url is included in the returned data
+    // Transform the data to ensure it matches the CarouselSlide interface
     return {
       ...data[0],
+      title: data[0].title || null,
+      link: data[0].link || null,
       youtube_url: data[0].youtube_url || null
     } as CarouselSlide;
   } catch (error) {
@@ -114,9 +118,11 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
     
     console.log("Carousel slide updated successfully:", data);
     
-    // Ensure youtube_url is included in the returned data
+    // Transform the data to ensure it matches the CarouselSlide interface
     return {
       ...data[0],
+      title: data[0].title || null,
+      link: data[0].link || null,
       youtube_url: data[0].youtube_url || null
     } as CarouselSlide;
   } catch (error) {
@@ -156,9 +162,11 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
       throw error;
     }
     
-    // Ensure youtube_url is included in all returned data
+    // Transform the data to ensure it matches the CarouselSlide interface
     return (data || []).map(slide => ({
       ...slide,
+      title: slide.title || null,
+      link: slide.link || null,
       youtube_url: slide.youtube_url || null
     })) as CarouselSlide[];
   } catch (error) {
