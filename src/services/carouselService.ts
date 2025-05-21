@@ -6,6 +6,7 @@ export interface CarouselSlide {
   image_url: string;
   title: string | null;
   link: string | null;
+  youtube_url: string | null;
   display_order: number;
   created_at: string;
   updated_at: string;
