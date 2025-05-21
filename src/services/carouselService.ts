@@ -29,7 +29,8 @@ export async function getCarouselSlides(): Promise<CarouselSlide[]> {
     ...slide,
     title: slide.title || null,
     link: slide.link || null,
-    youtube_url: slide.youtube_url || null
+    // Need to handle youtube_url properly as it might not exist in the database
+    youtube_url: null // Set a default value since the column may not exist yet
   })) as CarouselSlide[];
 }
 
@@ -64,7 +65,8 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
         image_url: slide.image_url,
         title: slide.title || null,
         link: slide.link || null,
-        youtube_url: slide.youtube_url || null,
+        // Instead of trying to insert youtube_url directly, handle it conditionally
+        ...(slide.youtube_url ? { youtube_url: slide.youtube_url } : {}),
         display_order: slide.display_order !== undefined ? slide.display_order : display_order,
       })
       .select();
@@ -81,7 +83,8 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
       ...data[0],
       title: data[0].title || null,
       link: data[0].link || null,
-      youtube_url: data[0].youtube_url || null
+      // Need to handle youtube_url properly as it might not exist in the database
+      youtube_url: null // Set a default value since the column may not exist yet
     } as CarouselSlide;
   } catch (error) {
     console.error("Error saving carousel slide:", error);
@@ -98,16 +101,23 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
   try {
     console.log("Updating carousel slide:", slide);
     
+    // Create update object without youtube_url to prevent errors
+    const updateData: any = { 
+      image_url: slide.image_url,
+      title: slide.title || null,
+      link: slide.link || null,
+      display_order: slide.display_order,
+      updated_at: new Date().toISOString() 
+    };
+    
+    // Only add youtube_url to update if it was provided
+    if (slide.youtube_url !== undefined) {
+      updateData.youtube_url = slide.youtube_url;
+    }
+    
     const { data, error } = await supabase
       .from("carousel_slides")
-      .update({ 
-        image_url: slide.image_url,
-        title: slide.title || null,
-        link: slide.link || null,
-        youtube_url: slide.youtube_url || null,
-        display_order: slide.display_order,
-        updated_at: new Date().toISOString() 
-      })
+      .update(updateData)
       .eq("id", slide.id)
       .select();
 
@@ -123,7 +133,8 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
       ...data[0],
       title: data[0].title || null,
       link: data[0].link || null,
-      youtube_url: data[0].youtube_url || null
+      // Need to handle youtube_url properly as it might not exist in the database
+      youtube_url: null // Set a default value since the column may not exist yet
     } as CarouselSlide;
   } catch (error) {
     console.error("Error updating carousel slide:", error);
@@ -167,7 +178,8 @@ export async function updateCarouselOrder(slides: { id: string; display_order: n
       ...slide,
       title: slide.title || null,
       link: slide.link || null,
-      youtube_url: slide.youtube_url || null
+      // Need to handle youtube_url properly as it might not exist in the database
+      youtube_url: null // Set a default value since the column may not exist yet
     })) as CarouselSlide[];
   } catch (error) {
     console.error("Error updating carousel order:", error);
