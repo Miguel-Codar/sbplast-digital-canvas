@@ -58,6 +58,7 @@ export async function createCarouselSlide(slide: Partial<CarouselSlide>): Promis
         image_url: slide.image_url,
         title: slide.title || null,
         link: slide.link || null,
+        youtube_url: slide.youtube_url || null,
         display_order: slide.display_order !== undefined ? slide.display_order : display_order,
       })
       .select();
@@ -90,6 +91,7 @@ export async function updateCarouselSlide(slide: Partial<CarouselSlide> & { id: 
         image_url: slide.image_url,
         title: slide.title || null,
         link: slide.link || null,
+        youtube_url: slide.youtube_url || null,
         display_order: slide.display_order,
         updated_at: new Date().toISOString() 
       })
