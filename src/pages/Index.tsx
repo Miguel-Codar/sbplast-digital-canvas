@@ -53,6 +53,7 @@ const Index = () => {
         imageUrl: slide.image_url,
         title: slide.title || undefined,
         link: slide.link || undefined,
+        youtubeUrl: slide.youtube_url || undefined,
       }))
     : placeholderSlides;
 
@@ -70,12 +71,12 @@ const Index = () => {
 
   return (
     <div className="w-full">
-      {/* Hero Section with Carousel - 90vh height */}
-      <section className="relative h-[90vh]">
+      {/* Hero Section with Carousel - 100vh height */}
+      <section className="relative min-h-screen w-full overflow-hidden">
         {slidesLoading ? (
           <div className="w-full h-full bg-gray-200 animate-pulse" />
         ) : (
-          <div className="h-full">
+          <div className="w-full h-full">
             <HomeCarousel items={carouselItems} />
           </div>
         )}

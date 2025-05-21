@@ -9,6 +9,7 @@ type CarouselItem = {
   imageUrl: string;
   title?: string;
   link?: string;
+  youtubeUrl?: string;
 };
 
 interface CarouselProps {
@@ -19,16 +20,26 @@ interface CarouselProps {
 
 const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
 
   useEffect(() => {
-    if (!autoPlay || items.length <= 1) return;
+    if (!isPlaying || items.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      // Only auto-advance if current item isn't a video
+      const currentItem = items[currentIndex];
+      if (!currentItem.youtubeUrl) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      }
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoPlay, interval, items.length]);
+  }, [isPlaying, interval, items.length, currentIndex, items]);
+
+  useEffect(() => {
+    // Reset auto-play when changing slides
+    setIsPlaying(autoPlay);
+  }, [currentIndex, autoPlay]);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
@@ -46,34 +57,68 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
     return null;
   }
 
+  // Extract YouTube video ID from URL
+  const getYoutubeVideoId = (url?: string): string | null => {
+    if (!url) return null;
+    
+    const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
+
   return (
-    <div className="relative overflow-hidden w-full h-full rounded-none">
+    <div className="absolute inset-0 w-full h-screen overflow-hidden">
       <div
-        className="transition-transform duration-500 flex h-full"
+        className="transition-transform duration-500 flex h-full w-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className="min-w-full h-full relative"
-          >
-            {item.link ? (
-              <Link to={item.link} className="block h-full">
+        {items.map((item) => {
+          const youtubeVideoId = getYoutubeVideoId(item.youtubeUrl);
+          
+          return (
+            <div
+              key={item.id}
+              className="min-w-full h-full relative"
+            >
+              {youtubeVideoId ? (
+                <div className="w-full h-full">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0`}
+                    title={item.title || "YouTube video"}
+                    className="w-full h-full object-cover"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    frameBorder="0"
+                    onLoad={() => setIsPlaying(false)}
+                  ></iframe>
+                </div>
+              ) : item.link ? (
+                <Link to={item.link} className="block h-full w-full">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title || "Carousel image"}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </Link>
+              ) : (
                 <img
                   src={item.imageUrl}
                   alt={item.title || "Carousel image"}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
-              </Link>
-            ) : (
-              <img
-                src={item.imageUrl}
-                alt={item.title || "Carousel image"}
-                className="w-full h-full object-cover"
-              />
-            )}
-          </div>
-        ))}
+              )}
+              
+              {/* Caption/Title overlay */}
+              {item.title && (
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 text-white">
+                  <div className="container mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-bold">{item.title}</h2>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Navigation Arrows */}
