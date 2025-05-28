@@ -67,7 +67,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
   };
 
   return (
-    <div className="absolute inset-0 w-full h-screen overflow-hidden">
+    <div className="relative w-full" style={{ aspectRatio: '1600/583' }}>
       <div
         className="transition-transform duration-500 flex h-full w-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}

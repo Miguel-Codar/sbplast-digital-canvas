@@ -72,12 +72,12 @@ const Index = () => {
 
   return (
     <div className="w-full">
-      {/* Hero Section with Carousel - 100vh height */}
-      <section className="relative min-h-screen w-full overflow-hidden">
+      {/* Hero Section with Carousel - aspect ratio 1600:583 */}
+      <section className="relative w-full overflow-hidden bg-gray-100">
         {slidesLoading ? (
-          <div className="w-full h-full bg-gray-200 animate-pulse" />
+          <div className="w-full bg-gray-200 animate-pulse" style={{ aspectRatio: '1600/583' }} />
         ) : (
-          <div className="w-full h-full">
+          <div className="w-full">
             <HomeCarousel items={carouselItems} />
           </div>
         )}
