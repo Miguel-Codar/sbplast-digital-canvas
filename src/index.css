@@ -132,6 +132,76 @@
   @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 }
 
+/* New hover effects for cards */
+.card-hover {
+  @apply transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 hover:border-sbplast-cyan hover:-translate-y-2;
+}
+
+.card-tilt {
+  @apply transition-all duration-300 ease-in-out hover:transform hover:rotate-1 hover:scale-105 hover:shadow-xl;
+}
+
+/* Scroll reveal animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Floating label animation */
+.floating-label {
+  @apply relative;
+}
+
+.floating-label input:focus + .floating-label-text,
+.floating-label input:not(:placeholder-shown) + .floating-label-text,
+.floating-label textarea:focus + .floating-label-text,
+.floating-label textarea:not(:placeholder-shown) + .floating-label-text {
+  @apply transform -translate-y-6 scale-75 text-sbplast-blue bg-white px-2;
+  top: 0;
+}
+
+.floating-label-text {
+  @apply absolute left-3 top-3 text-gray-500 transition-all duration-300 pointer-events-none origin-left;
+}
+
+/* Quote styles */
+.quote-block {
+  @apply relative pl-8 border-l-4 border-sbplast-cyan bg-gray-50 p-6 italic text-lg;
+}
+
+.quote-block::before {
+  content: '"';
+  @apply absolute -left-2 -top-2 text-6xl text-sbplast-cyan font-serif;
+}
+
 /* Image styles */
 .sbplast-image-rounded {
   @apply rounded-lg overflow-hidden;
@@ -151,3 +221,21 @@
 .sbplast-input {
   @apply bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sbplast-blue focus:border-transparent;
 }
+
+/* Animated icons */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.icon-bounce {
+  animation: bounce-subtle 2s infinite;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
