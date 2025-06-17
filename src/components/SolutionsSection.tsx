@@ -14,10 +14,10 @@ const SolutionsSection = () => {
   const categories: SolutionCategory[] = [
     {
       id: "1",
-      name: "Segurança e Fechamento",
+      name: "Indústria Alimentícia",
       icon: "/lovable-uploads/745796f5-50e0-440b-8c0e-d859b1903b47.png",
-      slug: "seguranca-fechamento",
-      description: "Soluções completas para segurança e fechamento de embalagens"
+      slug: "industria-alimenticia",
+      description: "Embalagens que atendem todas as normas da Vig. San. e BPF"
     },
     {
       id: "2",
@@ -35,10 +35,10 @@ const SolutionsSection = () => {
     },
     {
       id: "4",
-      name: "Alças e Suportes",
+      name: "Lojistas",
       icon: "/lovable-uploads/e2434e72-bf5f-4bc3-ba0b-b56c06183ce4.png",
-      slug: "alcas-suportes",
-      description: "Soluções ergonômicas para manuseio e transporte"
+      slug: "lojistas",
+      description: "Várias alças e espessuras para suas necessidades"
     },
     {
       id: "5",

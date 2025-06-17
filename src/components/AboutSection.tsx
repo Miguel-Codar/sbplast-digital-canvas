@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckCircle, Award, Users, Zap } from "lucide-react";
+import { CheckCircle, Award, Users, Zap, Truck } from "lucide-react";
 
 const AboutSection = () => {
   const differentials = [
@@ -23,6 +23,11 @@ const AboutSection = () => {
       icon: <Zap className="w-6 h-6" />,
       title: "Inovação constante",
       description: "Sempre buscando as melhores tecnologias e materiais"
+    },
+    {
+      icon: <Truck className="w-6 h-6" />,
+      title: "Compromisso com Entrega",
+      description: "Rigoroso controle de prazos e qualidade, garantindo que cada produto chegue no tempo certo"
     }
   ];
 
@@ -34,8 +39,8 @@ const AboutSection = () => {
           <div className="scroll-reveal-left">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Fábrica SBPlast"
+                src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Gama de produtos SBPlast"
                 className="rounded-2xl shadow-2xl w-full"
               />
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
