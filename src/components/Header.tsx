@@ -22,7 +22,6 @@ const Header = () => {
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
     if (!isSearchOpen) {
-      // Fechar menu se estiver aberto
       if (isMenuOpen) setIsMenuOpen(false);
     }
   };
@@ -62,14 +61,11 @@ const Header = () => {
             
             <div className="flex items-center space-x-10">
               <Link to="/produtos" className="text-base hover:text-[#18ffff] transition-colors">
-                Todos Produtos
+                Produtos
               </Link>
-              <button 
-                className="text-base hover:text-[#18ffff] transition-colors"
-                onClick={() => openContactForm("contato")}
-              >
+              <Link to="/atendimento" className="text-base hover:text-[#18ffff] transition-colors">
                 Atendimento
-              </button>
+              </Link>
               <Link to="/a-sbplast" className="text-base hover:text-[#18ffff] transition-colors">
                 A SBPlast
               </Link>
@@ -78,15 +74,15 @@ const Header = () => {
 
           {/* User Links - Desktop */}
           <div className="hidden md:flex items-center space-x-8">
-            {/* Lojista Block */}
+            {/* Solicitar Orçamento Block */}
             <button
               className="flex items-center hover:text-[#18ffff] transition-colors"
               onClick={() => openContactForm("orcamento")}
             >
               <User className="h-6 w-6 text-[#18ffff] mr-2" />
               <div className="flex flex-col">
-                <span className="font-bold text-sm leading-tight">Lojista</span>
-                <span className="text-sm leading-tight">Solicitar Orçamento</span>
+                <span className="font-bold text-sm leading-tight">Solicitar</span>
+                <span className="text-sm leading-tight">Orçamento</span>
               </div>
             </button>
             
@@ -139,17 +135,15 @@ const Header = () => {
                   className="block py-2 hover:text-[#18ffff]"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Todos Produtos
+                  Produtos
                 </Link>
-                <button 
-                  className="block py-2 hover:text-[#18ffff] w-full text-left"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    openContactForm("contato");
-                  }}
+                <Link 
+                  to="/atendimento" 
+                  className="block py-2 hover:text-[#18ffff]"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Atendimento
-                </button>
+                </Link>
                 <Link 
                   to="/a-sbplast" 
                   className="block py-2 hover:text-[#18ffff]"
@@ -159,7 +153,7 @@ const Header = () => {
                 </Link>
               </div>
               
-              {/* Lojista Mobile */}
+              {/* Solicitar Orçamento Mobile */}
               <button
                 className="flex items-center py-2 w-full text-left"
                 onClick={() => {
@@ -169,8 +163,8 @@ const Header = () => {
               >
                 <User className="h-5 w-5 text-[#18ffff] mr-2" />
                 <div className="flex flex-col">
-                  <span className="font-bold text-sm">Lojista</span>
-                  <span className="text-sm">Solicitar Orçamento</span>
+                  <span className="font-bold text-sm">Solicitar</span>
+                  <span className="text-sm">Orçamento</span>
                 </div>
               </button>
               

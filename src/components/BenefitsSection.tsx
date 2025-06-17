@@ -1,44 +1,38 @@
 
 import React from "react";
-import { Shield, Recycle, Clock, ThumbsUp, Truck, HeartHandshake } from "lucide-react";
+import { Shield, Clock, Award, Zap, Users } from "lucide-react";
 
 const BenefitsSection = () => {
   const benefits = [
     {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Produtos Seguros",
-      description: "Embalagens que garantem a proteção e conservação dos seus produtos com total segurança alimentar.",
+      icon: <Award className="w-8 h-8" />,
+      title: "32 Anos de Confiança",
+      description: "Escolha quem tem tradição e experiência no mercado de embalagens plásticas personalizadas, com mais de três décadas de atuação no Nordeste brasileiro.",
       bgColor: "bg-white"
     },
     {
-      icon: <Recycle className="w-8 h-8" />,
-      title: "Sustentabilidade",
-      description: "Comprometidos com o meio ambiente, oferecemos soluções eco-friendly e materiais recicláveis.",
+      icon: <Shield className="w-8 h-8" />,
+      title: "Embalagens Personalizadas para Diversos Setores",
+      description: "Soluções sob medida para alimentos, bebidas, cosméticos, farmacêuticos e muito mais, adaptadas exatamente às necessidades do seu negócio.",
       bgColor: "bg-gray-50"
     },
     {
       icon: <Clock className="w-8 h-8" />,
-      title: "Entrega Rápida",
-      description: "Logística eficiente para atender seus prazos com agilidade e pontualidade em todo Brasil.",
+      title: "Qualidade Certificada e Garantida",
+      description: "Rigorosos padrões de produção e controle asseguram embalagens duráveis, seguras e aprovadas em qualidade no mercado.",
       bgColor: "bg-white"
     },
     {
-      icon: <ThumbsUp className="w-8 h-8" />,
-      title: "Qualidade Garantida",
-      description: "Controle rigoroso de qualidade em todas as etapas de produção para sua total satisfação.",
+      icon: <Zap className="w-8 h-8" />,
+      title: "Tecnologia e Inovação de Ponta",
+      description: "Invista em embalagens desenvolvidas com máquinas de última geração e processos inovadores, que garantem acabamento impecável e máxima eficiência.",
       bgColor: "bg-gray-50"
     },
     {
-      icon: <Truck className="w-8 h-8" />,
-      title: "Logística Nacional",
-      description: "Rede de distribuição presente em todo território nacional para melhor atendimento.",
+      icon: <Users className="w-8 h-8" />,
+      title: "Atendimento Rápido e Próximo ao Cliente",
+      description: "Conte com uma equipe especializada, pronta para entender e resolver suas demandas, oferecendo suporte ágil em toda a região Nordeste.",
       bgColor: "bg-white"
-    },
-    {
-      icon: <HeartHandshake className="w-8 h-8" />,
-      title: "Suporte Dedicado",
-      description: "Equipe especializada para apoiar você desde o projeto até o pós-venda.",
-      bgColor: "bg-gray-50"
     }
   ];
 

@@ -17,6 +17,7 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
     name: "",
     email: "",
     phone: "",
+    document: "",
     company: type === "orcamento" ? "" : undefined,
     message: "",
     products: type === "orcamento" ? "" : undefined,
@@ -37,13 +38,14 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
       
       toast({
         title: "Mensagem enviada com sucesso!",
-        description: "Em breve entraremos em contato.",
+        description: "Nossos consultores retornarão seu contato em breve.",
       });
       
       setFormData({
         name: "",
         email: "",
         phone: "",
+        document: "",
         company: type === "orcamento" ? "" : undefined,
         message: "",
         products: type === "orcamento" ? "" : undefined,
@@ -106,6 +108,22 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
               Nome completo
             </label>
           </div>
+
+          {/* CNPJ ou CPF */}
+          <div className="floating-label">
+            <input
+              id="document"
+              name="document"
+              placeholder=" "
+              value={formData.document}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-sbplast-blue focus:outline-none transition-colors duration-300"
+            />
+            <label htmlFor="document" className="floating-label-text">
+              CNPJ ou CPF
+            </label>
+          </div>
           
           {/* Email */}
           <div className="floating-label">
@@ -116,11 +134,10 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
               placeholder=" "
               value={formData.email}
               onChange={handleChange}
-              required
               className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-sbplast-blue focus:outline-none transition-colors duration-300"
             />
             <label htmlFor="email" className="floating-label-text">
-              E-mail
+              E-mail (opcional)
             </label>
           </div>
           
@@ -132,10 +149,11 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
               placeholder=" "
               value={formData.phone}
               onChange={handleChange}
+              required
               className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-sbplast-blue focus:outline-none transition-colors duration-300"
             />
             <label htmlFor="phone" className="floating-label-text">
-              Telefone (opcional)
+              Telefone
             </label>
           </div>
 
@@ -188,7 +206,10 @@ const ContactForm = ({ open, onOpenChange, type = "contato" }: ContactFormProps)
               className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-sbplast-blue focus:outline-none transition-colors duration-300 resize-none"
             />
             <label htmlFor="message" className="floating-label-text">
-              Como podemos ajudar?
+              {type === "orcamento" 
+                ? "Descreva as embalagens que você utiliza, tamanhos e material."
+                : "Como podemos ajudar?"
+              }
             </label>
           </div>
           

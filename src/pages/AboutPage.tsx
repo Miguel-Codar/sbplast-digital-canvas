@@ -5,7 +5,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
 import { useState } from "react";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Truck } from "lucide-react";
 
 const AboutPage = () => {
   const [contactFormOpen, setContactFormOpen] = useState(false);
@@ -16,15 +16,15 @@ const AboutPage = () => {
       <div 
         className="relative mb-6 py-16 bg-sbplast-blue text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80)",
+          backgroundImage: "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         <div className="relative z-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold">A SBPlast</h1>
-          <p className="mt-4 text-lg max-w-3xl mx-auto">Referência no segmento de embalagens plásticas</p>
+          <h1 className="text-3xl md:text-4xl font-bold">SBPlast: 32 anos de liderança em embalagens plásticas personalizadas no Nordeste</h1>
+          <p className="mt-4 text-lg max-w-3xl mx-auto">Há mais de três décadas, a SBPlast é referência em embalagens plásticas personalizadas</p>
         </div>
       </div>
 
@@ -38,22 +38,36 @@ const AboutPage = () => {
           <div className="md:w-1/2">
             <h2 className="text-2xl font-semibold text-sbplast-blue mb-4">Nossa História</h2>
             <p className="text-gray-700 mb-4">
-              A SBPlast é uma empresa brasileira especializada no segmento de embalagens plásticas, com mais de 20 anos de experiência no mercado. 
-              Nossa trajetória começou em uma pequena fábrica e hoje contamos com instalações modernas e tecnologia de ponta.
+              Há mais de três décadas, a SBPlast é referência em embalagens plásticas personalizadas, 
+              atendendo com excelência empresas de todo o Nordeste do Brasil. Nossa história, que começou 
+              em uma pequena fábrica movida por espírito empreendedor, evoluiu para um parque industrial 
+              moderno, equipado com tecnologia de ponta e processos inovadores.
             </p>
+            <h3 className="text-xl font-semibold text-sbplast-blue mb-3">Inovação sob medida para valorizar o seu produto</h3>
             <p className="text-gray-700 mb-4">
-              Nosso compromisso com a qualidade e inovação nos posicionou como referência no setor, 
-              desenvolvendo soluções que atendem às necessidades específicas de nossos clientes e parceiros.
+              Entendemos que cada cliente tem demandas únicas. Por isso, desenvolvemos soluções de embalagens 
+              plásticas personalizadas que agregam valor ao seu produto, elevando a imagem da sua marca e 
+              otimizando sua logística. Nossa equipe atua de ponta a ponta no processo – da concepção ao 
+              acabamento – garantindo funcionalidade, estética diferenciada e máxima proteção.
             </p>
-            <p className="text-gray-700">
-              Trabalhamos constantemente para oferecer produtos que combinam praticidade, durabilidade e 
-              respeito ao meio ambiente, seguindo rigorosos padrões de produção e controle de qualidade.
+            <h3 className="text-xl font-semibold text-sbplast-blue mb-3">Qualidade, durabilidade e sustentabilidade em cada detalhe</h3>
+            <p className="text-gray-700 mb-4">
+              Na SBPlast, qualidade é prioridade absoluta. Seguimos os mais rígidos padrões de produção e 
+              controle, entregando produtos duráveis, práticos e que atendem às exigências do mercado moderno. 
+              Temos compromisso com o futuro, adotando práticas sustentáveis, o uso de materiais recicláveis 
+              e processos ecoeficientes que minimizam nosso impacto ambiental.
             </p>
+            <div className="quote-block mb-4">
+              Escolha quem entende do seu mercado e inove com a SBPlast. Se você procura embalagens que unem 
+              alta performance, personalização e responsabilidade ambiental, conte com a experiência e o 
+              know-how de quem está há 32 anos transformando ideias em soluções eficientes para empresas de 
+              todos os portes. Escolha a SBPlast e leve o melhor para o seu produto – e para o planeta.
+            </div>
           </div>
           <div className="md:w-1/2">
             <img 
-              src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
-              alt="Fábrica SBPlast" 
+              src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Gama de produtos SBPlast" 
               className="rounded-lg shadow-md w-full h-auto"
             />
           </div>
@@ -91,27 +105,25 @@ const AboutPage = () => {
               <li>• Responsabilidade ambiental</li>
               <li>• Ética nas relações</li>
               <li>• Valorização das pessoas</li>
-              <li>• Foco no cliente</li>
+              <li>• Compromisso com entrega</li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* Linha do Tempo */}
+      {/* Nossa Trajetória - Timeline atualizada */}
       <section className="py-12 bg-white rounded-lg p-8">
         <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossa Trajetória</h2>
         
         <div className="relative">
-          {/* Linha vertical central */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-sbplast-cyan"></div>
           
-          {/* Marcos históricos */}
           <div className="space-y-12">
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2000</h3>
-                  <p className="text-gray-700">Fundação da empresa com foco em embalagens para o setor de alimentos.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">1992</h3>
+                  <p className="text-gray-700">Fundação da SBPlast em Jaboatão dos Guararapes-PE, iniciando com foco em embalagens plásticas para o mercado nordestino.</p>
                 </div>
               </div>
               <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
@@ -120,18 +132,18 @@ const AboutPage = () => {
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
               <div className="md:w-1/2 md:pl-8">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-medium text-sbplast-blue">1998</h3>
+                  <p className="text-gray-700">Primeira expansão da fábrica e implementação de novas linhas de produção para atender a crescente demanda.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center md:items-start">
+              <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-xl font-medium text-sbplast-blue">2005</h3>
-                  <p className="text-gray-700">Expansão da planta fabril e aumento da capacidade produtiva.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center md:items-start">
-              <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2010</h3>
-                  <p className="text-gray-700">Certificação ISO 9001 e investimento em novas tecnologias.</p>
+                  <p className="text-gray-700">Modernização do parque fabril com equipamentos de última geração e certificação de qualidade.</p>
                 </div>
               </div>
               <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
@@ -141,8 +153,8 @@ const AboutPage = () => {
               <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
               <div className="md:w-1/2 md:pl-8">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2015</h3>
-                  <p className="text-gray-700">Lançamento da linha de produtos sustentáveis e biodegradáveis.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">2012</h3>
+                  <p className="text-gray-700">Lançamento da linha de embalagens personalizadas e início do foco em soluções sustentáveis.</p>
                 </div>
               </div>
             </div>
@@ -150,8 +162,8 @@ const AboutPage = () => {
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2020</h3>
-                  <p className="text-gray-700">Modernização completa do parque industrial com automação e eficiência energética.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">2018</h3>
+                  <p className="text-gray-700">Expansão para novos segmentos de mercado e desenvolvimento da linha P-Life com materiais biodegradáveis.</p>
                 </div>
               </div>
               <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
@@ -161,8 +173,8 @@ const AboutPage = () => {
               <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
               <div className="md:w-1/2 md:pl-8">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2023</h3>
-                  <p className="text-gray-700">Expansão para o mercado internacional e diversificação do portfólio de produtos.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">2024</h3>
+                  <p className="text-gray-700">Consolidação como líder regional em embalagens personalizadas, com 32 anos de tradição e inovação contínua.</p>
                 </div>
               </div>
             </div>
@@ -176,17 +188,17 @@ const AboutPage = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <img 
-            src="https://images.unsplash.com/photo-1531758565361-ce8534eb0d7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
-            alt="Fábrica SBPlast" 
+            src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+            alt="Parque industrial SBPlast" 
             className="rounded-lg shadow-md w-full h-auto"
           />
           <img 
-            src="https://images.unsplash.com/photo-1612473741370-74bf94887efa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
-            alt="Linha de produção" 
+            src="https://images.unsplash.com/photo-1612473741370-74bf94887efa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+            alt="Equipamentos modernos" 
             className="rounded-lg shadow-md w-full h-auto"
           />
           <img 
-            src="https://images.unsplash.com/photo-1673191889046-5fb4b92e5601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
+            src="https://images.unsplash.com/photo-1673191889046-5fb4b92e5601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
             alt="Controle de qualidade" 
             className="rounded-lg shadow-md w-full h-auto"
           />
@@ -202,56 +214,17 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="md:w-1/2">
-            <h3 className="text-xl font-medium text-sbplast-blue mb-3">Sustentabilidade</h3>
+            <h3 className="text-xl font-medium text-sbplast-blue mb-3">Compromisso com Entrega</h3>
             <p className="text-gray-700 mb-4">
-              Comprometidos com o meio ambiente, implementamos processos de produção mais sustentáveis, 
-              incluindo o uso de energia renovável, reaproveitamento de água e desenvolvimento de 
-              produtos biodegradáveis e de menor impacto ambiental.
+              Mantemos rigoroso controle de prazos e qualidade, garantindo que cada produto chegue 
+              ao cliente no tempo certo e com a excelência esperada. Nosso compromisso vai além da 
+              produção, estendendo-se ao atendimento personalizado e suporte contínuo.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Diferenciais */}
-      <section className="py-12 bg-gray-50 rounded-lg p-8">
-        <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossos Diferenciais</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-medium text-sbplast-blue mb-3">Frota Própria</h3>
-            <p className="text-gray-700">
-              Contamos com frota própria para garantir entregas pontuais e preservar a 
-              integridade dos nossos produtos até o destino final.
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-medium text-sbplast-blue mb-3">Atendimento Especializado</h3>
-            <p className="text-gray-700">
-              Nossa equipe de atendimento está preparada para oferecer suporte técnico 
-              e comercial personalizado para cada cliente.
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-medium text-sbplast-blue mb-3">Equipamentos Modernos</h3>
-            <p className="text-gray-700">
-              Utilizamos máquinas e equipamentos de última geração para garantir 
-              produtos com alta qualidade e precisão.
-            </p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-medium text-sbplast-blue mb-3">Experiência no Setor</h3>
-            <p className="text-gray-700">
-              Com mais de 20 anos no mercado, acumulamos know-how para desenvolver 
-              soluções eficientes para diversos segmentos.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Localização */}
+      {/* Nossa Localização */}
       <section className="py-12 bg-white rounded-lg p-8">
         <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossa Localização</h2>
         
@@ -261,27 +234,46 @@ const AboutPage = () => {
               <MapPin className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
               <div>
                 <h3 className="text-xl font-medium text-sbplast-blue mb-2">Endereço</h3>
-                <p className="text-gray-700 mb-1">Rua São Paulo, s/n</p>
-                <p className="text-gray-700 mb-1">Distrito Industrial</p>
-                <p className="text-gray-700 mb-4">São Paulo - SP, 00000-000</p>
+                <p className="text-gray-700 mb-1">Rua Arabé, 112</p>
+                <p className="text-gray-700 mb-1">Comportas</p>
+                <p className="text-gray-700 mb-4">Jaboatão dos Guararapes-PE</p>
               </div>
             </div>
             
             <div className="flex items-start mb-6">
               <Phone className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
               <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">Telefone</h3>
-                <p className="text-gray-700 mb-1">(11) 5555-5555</p>
-                <p className="text-gray-700 mb-1">(11) 9999-9999 (WhatsApp)</p>
+                <h3 className="text-xl font-medium text-sbplast-blue mb-2">Telefones</h3>
+                <p className="text-gray-700 mb-1">
+                  <a href="tel:+558134761227" className="hover:text-sbplast-cyan">(81) 3476-1227</a>
+                </p>
+                <p className="text-gray-700 mb-1">
+                  <a 
+                    href="https://wa.me/5581995015223" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-sbplast-cyan"
+                  >
+                    (81) 99501-5223 (WhatsApp)
+                  </a>
+                </p>
               </div>
             </div>
             
             <div className="flex items-start mb-6">
               <Mail className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
               <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">E-mail</h3>
-                <p className="text-gray-700 mb-1">contato@sbplast.com.br</p>
-                <p className="text-gray-700 mb-1">vendas@sbplast.com.br</p>
+                <h3 className="text-xl font-medium text-sbplast-blue mb-2">E-mails</h3>
+                <p className="text-gray-700 mb-1">
+                  <a href="mailto:vendas@sbplasticos.com.br" className="hover:text-sbplast-cyan">
+                    vendas@sbplasticos.com.br
+                  </a>
+                </p>
+                <p className="text-gray-700 mb-1">
+                  <a href="mailto:sac@sbplasticos.com.br" className="hover:text-sbplast-cyan">
+                    sac@sbplasticos.com.br
+                  </a>
+                </p>
               </div>
             </div>
             
@@ -295,7 +287,7 @@ const AboutPage = () => {
           <div className="md:w-1/2 h-64 md:h-auto">
             <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14628.328173732997!2d-46.6394192!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5f8c61020205%3A0x9ae474c606fef4!2sSP%2C%20Brasil!5e0!3m2!1spt-BR!2sbr!4v1621436342161!5m2!1spt-BR!2sbr" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.8857765631996!2d-34.9468!3d-8.1137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7aae1c5e6e6e6e6e%3A0x6e6e6e6e6e6e6e6e!2sRua%20Arab%C3%A9%2C%20112%20-%20Comportas%2C%20Jaboat%C3%A3o%20dos%20Guararapes%20-%20PE!5e0!3m2!1spt-BR!2sbr!4v1621436342161!5m2!1spt-BR!2sbr" 
                 width="100%" 
                 height="100%" 
                 style={{border: 0}} 

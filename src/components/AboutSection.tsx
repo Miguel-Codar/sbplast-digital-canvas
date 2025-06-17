@@ -34,12 +34,12 @@ const AboutSection = () => {
           <div className="scroll-reveal-left">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Fábrica SBPlast"
                 className="rounded-2xl shadow-2xl w-full"
               />
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
-                <div className="text-2xl font-bold">30+</div>
+                <div className="text-2xl font-bold">32</div>
                 <div className="text-sm">Anos de</div>
                 <div className="text-sm">Experiência</div>
               </div>
@@ -58,7 +58,7 @@ const AboutSection = () => {
             </div>
 
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              Há mais de três décadas no mercado, a SBPlast se consolidou como referência 
+              Em mais de 30 anos no mercado, a SBPlast se consolidou como referência 
               em embalagens plásticas, oferecendo produtos de alta qualidade e soluções 
               personalizadas para diversos segmentos industriais.
             </p>

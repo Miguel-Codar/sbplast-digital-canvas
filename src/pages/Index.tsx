@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCarouselSlides } from "@/services/carouselService";
@@ -8,6 +9,8 @@ import SimulatorsSection from "@/components/SimulatorsSection";
 import CompanySection from "@/components/CompanySection";
 import AboutSection from "@/components/AboutSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import CookieBanner from "@/components/CookieBanner";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,22 +36,27 @@ const Index = () => {
     queryFn: getBlogPosts,
   });
 
-  // If no slides are available, create placeholder slides
+  // Updated placeholder slides with new content
   const placeholderSlides = [
     {
-      id: "placeholder-1",
-      imageUrl: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
-      title: "Capa SBPlast",
+      id: "banner-1",
+      imageUrl: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      title: "Gama Completa de Produtos - Embalagens Personalizadas para Todos os Segmentos",
     },
     {
-      id: "placeholder-2",
-      imageUrl: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
-      title: "Capa SBPlast",
+      id: "banner-2",
+      imageUrl: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      title: "Principais Segmentos Atendidos - Alimentos, Bebidas, Cosméticos e Farmacêuticos",
     },
     {
-      id: "placeholder-3",
-      imageUrl: "https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
-      title: "Capa SBPlast",
+      id: "banner-3",
+      imageUrl: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      title: "Produção Moderna - Tecnologia de Ponta a Serviço da Qualidade",
+    },
+    {
+      id: "banner-4",
+      imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+      title: "Solução Ecológica P-Life - Embalagens Sustentáveis para o Futuro",
     }
   ];
 
@@ -192,58 +200,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Customer Service Section */}
+      {/* Customer Service Section - Simplified */}
       <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto">
           <div className="text-center mb-16 scroll-reveal">
             <h2 className="text-4xl font-bold text-center text-sbplast-blue mb-4">Atendimento</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Escolha o tipo de atendimento ideal para suas necessidades
+              Solicite seu orçamento personalizado agora mesmo
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg card-tilt flex flex-col items-center text-center border border-gray-100 scroll-reveal stagger-1">
-              <h3 className="text-xl font-bold mb-4 text-sbplast-blue">Lojista</h3>
-              <p className="text-gray-600 mb-6 flex-grow">Solicite um orçamento personalizado para sua loja</p>
+          <div className="flex justify-center">
+            <div className="bg-white p-12 rounded-2xl shadow-lg card-tilt text-center border border-gray-100 scroll-reveal max-w-md">
+              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Peça já seu orçamento</h3>
+              <p className="text-gray-600 mb-8 text-lg">
+                Receba uma proposta personalizada para suas necessidades em embalagens plásticas
+              </p>
               <Button 
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg py-4 text-lg font-semibold"
                 onClick={() => openContactForm("orcamento")}
               >
-                Solicitar orçamento
-              </Button>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-lg card-tilt flex flex-col items-center text-center border border-gray-100 scroll-reveal stagger-2">
-              <h3 className="text-xl font-bold mb-4 text-sbplast-blue">Lojista</h3>
-              <p className="text-gray-600 mb-6 flex-grow">Cadastre-se para vender nossos produtos</p>
-              <Button 
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg"
-                onClick={() => openContactForm("orcamento")}
-              >
-                Cadastrar para vender
-              </Button>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-lg card-tilt flex flex-col items-center text-center border border-gray-100 scroll-reveal stagger-3">
-              <h3 className="text-xl font-bold mb-4 text-sbplast-blue">Consumidor</h3>
-              <p className="text-gray-600 mb-6 flex-grow">Precisa de suporte para algum produto?</p>
-              <Button 
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg"
-                onClick={() => openContactForm("assistencia")}
-              >
-                Assistência técnica
-              </Button>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-lg card-tilt flex flex-col items-center text-center border border-gray-100 scroll-reveal stagger-4">
-              <h3 className="text-xl font-bold mb-4 text-sbplast-blue">Projetista</h3>
-              <p className="text-gray-600 mb-6 flex-grow">Acesse arquivos CAD/BIM dos produtos</p>
-              <Button 
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg"
-                onClick={() => openContactForm("contato")}
-              >
-                Solicitar CAD/BIM
+                Peça já seu orçamento
               </Button>
             </div>
           </div>
@@ -256,6 +233,12 @@ const Index = () => {
         onOpenChange={setContactFormOpen}
         type={contactFormType}
       />
+
+      {/* Cookie Banner */}
+      <CookieBanner />
+
+      {/* WhatsApp Button */}
+      <WhatsAppButton />
     </div>
   );
 };
