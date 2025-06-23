@@ -19,4 +19,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: "dist", // 👈 ESSENCIAL PARA A VERCEL ENCONTRAR O RESULTADO DO BUILD
+  }
 }));
