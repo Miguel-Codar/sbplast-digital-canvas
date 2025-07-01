@@ -35,14 +35,19 @@ const AboutSection = () => {
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Imagem */}
+          {/* Vídeo do YouTube */}
           <div className="scroll-reveal-left">
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Gama de produtos SBPlast"
-                className="rounded-2xl shadow-2xl w-full"
-              />
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                <iframe
+                  src="https://www.youtube.com/embed/x9Qq06RT3z0"
+                  title="Vídeo SBPlast"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">32</div>
                 <div className="text-sm">Anos de</div>
