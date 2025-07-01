@@ -83,7 +83,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
               {youtubeVideoId ? (
                 <div className="w-full h-full">
                   <iframe
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0`}
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&modestbranding=1&showinfo=0&rel=0`}
                     title={item.title || "YouTube video"}
                     className="w-full h-full object-cover"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

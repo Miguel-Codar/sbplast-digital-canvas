@@ -1,12 +1,9 @@
 
 import React, { useState, useEffect } from "react";
-import { X, Search } from "lucide-react";
+import { X, Search, Settings } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
-import { useQuery } from "@tanstack/react-query";
-import { getProducts, getProductCategories } from "@/services/productService";
-import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface ProductsListProps {
   open: boolean;
@@ -14,120 +11,44 @@ interface ProductsListProps {
 }
 
 const ProductsList = ({ open, onOpenChange }: ProductsListProps) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-
-  const { data: products = [] } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-    enabled: open,
-  });
-
-  const { data: categories = [] } = useQuery({
-    queryKey: ["productCategories"],
-    queryFn: getProductCategories,
-    enabled: open,
-  });
-
-  useEffect(() => {
-    if (!products) return;
-
-    let filtered = [...products];
-
-    if (searchTerm) {
-      filtered = filtered.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    if (selectedCategory) {
-      filtered = filtered.filter((product) => product.category_id === selectedCategory);
-    }
-
-    setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, products]);
-
-  const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategory(categoryId === selectedCategory ? null : categoryId);
-  };
-
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
-        <SheetHeader className="mb-4">
+        <SheetHeader className="mb-8">
           <SheetTitle className="text-xl font-semibold text-sbplast-blue">
             Lista SBPlast - Produtos
           </SheetTitle>
         </SheetHeader>
 
-        <div className="flex items-center mb-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
-            <Input
-              type="text"
-              placeholder="Buscar produtos..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
+        <div className="flex flex-col items-center justify-center h-full space-y-6">
+          <div className="flex justify-center">
+            <Settings className="w-16 h-16 text-sbplast-blue animate-spin" style={{ animationDuration: '3s' }} />
           </div>
-        </div>
+          
+          <div className="text-center space-y-4">
+            <h3 className="text-2xl font-bold text-sbplast-blue">
+              Em Desenvolvimento
+            </h3>
+            <p className="text-gray-600 max-w-sm">
+              Nossa lista de produtos está sendo aprimorada. Em breve você terá acesso ao catálogo completo.
+            </p>
+          </div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              variant={selectedCategory === category.id ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleCategoryClick(category.id)}
-              className={selectedCategory === category.id ? "bg-sbplast-blue text-white" : ""}
+          <div className="space-y-3 w-full max-w-xs">
+            <Link to="/atendimento" onClick={() => onOpenChange(false)}>
+              <Button className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue">
+                Solicitar Orçamento
+              </Button>
+            </Link>
+            
+            <Button 
+              variant="outline" 
+              className="w-full border-sbplast-blue text-sbplast-blue hover:bg-sbplast-blue hover:text-white"
+              onClick={() => onOpenChange(false)}
             >
-              {category.name}
+              Fechar
             </Button>
-          ))}
-        </div>
-
-        <div className="space-y-2 mt-6">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/produto/${product.slug}`}
-                onClick={() => onOpenChange(false)}
-                className="flex items-center p-3 border rounded-md hover:bg-gray-50"
-              >
-                {product.image_url && (
-                  <img
-                    src={product.image_url}
-                    alt={product.name}
-                    className="w-12 h-12 object-cover rounded-md mr-3"
-                  />
-                )}
-                <div className="flex-1">
-                  <h3 className="font-medium text-sbplast-blue">{product.name}</h3>
-                  {product.product_categories && (
-                    <p className="text-xs text-gray-500">
-                      {product.product_categories.name}
-                    </p>
-                  )}
-                  {product.short_description && (
-                    <p className="text-sm line-clamp-1 text-gray-600">
-                      {product.short_description}
-                    </p>
-                  )}
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="text-center py-8 text-gray-500">
-              {searchTerm || selectedCategory ? (
-                <p>Nenhum produto encontrado com os filtros selecionados.</p>
-              ) : (
-                <p>Carregando produtos...</p>
-              )}
-            </div>
-          )}
+          </div>
         </div>
 
         <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-sbplast-blue focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">

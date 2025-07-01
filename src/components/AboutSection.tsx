@@ -40,7 +40,7 @@ const AboutSection = () => {
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
-                  src="https://www.youtube.com/embed/x9Qq06RT3z0"
+                  src="https://www.youtube.com/embed/x9Qq06RT3z0?modestbranding=1&showinfo=0&rel=0&controls=1"
                   title="Vídeo SBPlast"
                   className="w-full h-full"
                   frameBorder="0"

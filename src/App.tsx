@@ -15,6 +15,7 @@ import BlogPostPage from "./pages/BlogPostPage";
 import NotFound from "./pages/NotFound";
 import AboutPage from "./pages/AboutPage";
 import AtendimentoPage from "./pages/AtendimentoPage";
+import EmDesenvolvimento from "./pages/EmDesenvolvimento";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
@@ -57,7 +58,7 @@ const App = () => (
             path="/produtos"
             element={
               <MainLayout>
-                <ProductsPage />
+                <EmDesenvolvimento />
               </MainLayout>
             }
           />
@@ -65,7 +66,7 @@ const App = () => (
             path="/produto/:slug"
             element={
               <MainLayout>
-                <ProductPage />
+                <EmDesenvolvimento />
               </MainLayout>
             }
           />
@@ -73,7 +74,7 @@ const App = () => (
             path="/categoria/:slug"
             element={
               <MainLayout>
-                <CategoryPage />
+                <EmDesenvolvimento />
               </MainLayout>
             }
           />
