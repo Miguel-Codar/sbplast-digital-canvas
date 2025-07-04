@@ -18,31 +18,28 @@ import ContactForm from "@/components/ContactForm";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const Index = () => {
-  console.log("Index component rendering");
-  
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [contactFormType, setContactFormType] = useState<"contato" | "orcamento" | "assistencia">("contato");
 
   // Initialize scroll reveal animations
   useScrollReveal();
 
-  // Fetch real carousel slides
-  const { data: slides = [], isLoading: slidesLoading, error: slidesError } = useQuery({
+  // Simplified queries without console logs to prevent loops
+  const { data: slides = [], isLoading: slidesLoading } = useQuery({
     queryKey: ["carouselSlides"],
     queryFn: getCarouselSlides,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 10 * 60 * 1000, // 10 minutes
   });
 
-  console.log("Slides data:", slides, "Loading:", slidesLoading, "Error:", slidesError);
-
-  // Fetch real blog posts
-  const { data: blogPostsData = [], isLoading: blogLoading, error: blogError } = useQuery({
+  const { data: blogPostsData = [], isLoading: blogLoading } = useQuery({
     queryKey: ["blogPosts"],
     queryFn: getBlogPosts,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 10 * 60 * 1000, // 10 minutes
   });
 
-  console.log("Blog posts data:", blogPostsData, "Loading:", blogLoading, "Error:", blogError);
-
-  // Updated placeholder slides with new content
+  // Placeholder slides with stable data
   const placeholderSlides = [
     {
       id: "banner-1",
@@ -66,8 +63,8 @@ const Index = () => {
     }
   ];
 
-  // Transform slides data to match Carousel component props or use placeholder slides if none available
-  const carouselItems = slides && slides.length > 0 
+  // Use real slides if available, otherwise use placeholders
+  const carouselItems = slides.length > 0 
     ? slides.map((slide) => ({
         id: slide.id,
         imageUrl: slide.image_url,
@@ -77,9 +74,7 @@ const Index = () => {
       }))
     : placeholderSlides;
 
-  console.log("Carousel items:", carouselItems);
-
-  // Group blog posts by category for display in different sections
+  // Group blog posts by category
   const blogPosts = {
     news: blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [],
     events: blogPostsData.filter(post => post.blog_categories?.name === "Eventos") || [],
@@ -91,18 +86,16 @@ const Index = () => {
     setContactFormOpen(true);
   };
 
-  console.log("Index component about to render JSX");
-
   return (
     <div className="w-full">
-      {/* Hero Section with Carousel - aspect ratio 1600:583 */}
+      {/* Hero Section with Carousel */}
       <section className="relative w-full overflow-hidden bg-gray-100">
         {slidesLoading ? (
-          <div className="w-full bg-gray-200 animate-pulse" style={{ aspectRatio: '1600/583' }} />
-        ) : (
-          <div className="w-full">
-            <HomeCarousel items={carouselItems} />
+          <div className="w-full bg-gray-200 animate-pulse flex items-center justify-center" style={{ aspectRatio: '1600/583' }}>
+            <p className="text-gray-500">Carregando...</p>
           </div>
+        ) : (
+          <HomeCarousel items={carouselItems} />
         )}
       </section>
 

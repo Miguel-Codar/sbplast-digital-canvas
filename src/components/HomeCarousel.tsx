@@ -19,39 +19,36 @@ interface CarouselProps {
 }
 
 const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps) => {
-  console.log("HomeCarousel rendering with items:", items);
-  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
 
+  // Simplified useEffect for auto-play
   useEffect(() => {
-    console.log("HomeCarousel useEffect triggered", { isPlaying, itemsLength: items.length, currentIndex });
-    
-    if (!isPlaying || items.length <= 1) {
-      console.log("Auto-play disabled or single item");
+    if (!isPlaying || !items || items.length <= 1) {
       return;
     }
 
     const timer = setInterval(() => {
-      // Only auto-advance if current item isn't a video
-      const currentItem = items[currentIndex];
-      if (!currentItem?.youtubeUrl) {
-        console.log("Auto-advancing to next slide");
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-      }
+      setCurrentIndex((prevIndex) => {
+        const currentItem = items[prevIndex];
+        // Only auto-advance if current item isn't a video
+        if (!currentItem?.youtubeUrl) {
+          return (prevIndex + 1) % items.length;
+        }
+        return prevIndex;
+      });
     }, interval);
 
-    return () => {
-      console.log("Clearing carousel timer");
-      clearInterval(timer);
-    }
-  }, [isPlaying, interval, items.length, currentIndex]);
+    return () => clearInterval(timer);
+  }, [isPlaying, interval, items?.length]);
 
+  // Reset to first slide when items change
   useEffect(() => {
-    // Reset auto-play when changing slides
-    setIsPlaying(autoPlay);
-    console.log("Resetting auto-play to:", autoPlay);
-  }, [currentIndex, autoPlay]);
+    if (items && items.length > 0) {
+      setCurrentIndex(0);
+      setIsPlaying(autoPlay);
+    }
+  }, [items, autoPlay]);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
@@ -66,7 +63,6 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
   };
 
   if (!items || items.length === 0) {
-    console.log("No carousel items available");
     return (
       <div className="w-full bg-gray-200 flex items-center justify-center" style={{ aspectRatio: '1600/583' }}>
         <p className="text-gray-500">Carregando carousel...</p>
@@ -82,8 +78,6 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
     const match = url.match(regex);
     return match ? match[1] : null;
   };
-
-  console.log("HomeCarousel rendering JSX");
 
   return (
     <div className="relative w-full" style={{ aspectRatio: '1600/583' }}>
@@ -108,10 +102,7 @@ const HomeCarousel = ({ items, autoPlay = true, interval = 5000 }: CarouselProps
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     frameBorder="0"
-                    onLoad={() => {
-                      console.log("YouTube video loaded, stopping auto-play");
-                      setIsPlaying(false);
-                    }}
+                    onLoad={() => setIsPlaying(false)}
                   ></iframe>
                 </div>
               ) : item.link ? (
