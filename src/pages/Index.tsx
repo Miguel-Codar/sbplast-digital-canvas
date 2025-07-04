@@ -18,6 +18,8 @@ import ContactForm from "@/components/ContactForm";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const Index = () => {
+  console.log("Index component rendering");
+  
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [contactFormType, setContactFormType] = useState<"contato" | "orcamento" | "assistencia">("contato");
 
@@ -25,16 +27,20 @@ const Index = () => {
   useScrollReveal();
 
   // Fetch real carousel slides
-  const { data: slides = [], isLoading: slidesLoading } = useQuery({
+  const { data: slides = [], isLoading: slidesLoading, error: slidesError } = useQuery({
     queryKey: ["carouselSlides"],
     queryFn: getCarouselSlides,
   });
 
+  console.log("Slides data:", slides, "Loading:", slidesLoading, "Error:", slidesError);
+
   // Fetch real blog posts
-  const { data: blogPostsData = [], isLoading: blogLoading } = useQuery({
+  const { data: blogPostsData = [], isLoading: blogLoading, error: blogError } = useQuery({
     queryKey: ["blogPosts"],
     queryFn: getBlogPosts,
   });
+
+  console.log("Blog posts data:", blogPostsData, "Loading:", blogLoading, "Error:", blogError);
 
   // Updated placeholder slides with new content
   const placeholderSlides = [
@@ -71,6 +77,8 @@ const Index = () => {
       }))
     : placeholderSlides;
 
+  console.log("Carousel items:", carouselItems);
+
   // Group blog posts by category for display in different sections
   const blogPosts = {
     news: blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [],
@@ -82,6 +90,8 @@ const Index = () => {
     setContactFormType(type);
     setContactFormOpen(true);
   };
+
+  console.log("Index component about to render JSX");
 
   return (
     <div className="w-full">
