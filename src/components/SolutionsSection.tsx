@@ -112,7 +112,7 @@ const SolutionsSection = () => {
                 <iframe 
                   width="100%" 
                   height="100%" 
-                  src="youtube.com/watch?v=upW3R8ZguZ4&feature=youtu.be" 
+                  src="https://www.youtube.com/embed/6G5-J9_BdXw" 
                   title="Tecnologia Avançada SBPlast" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -130,7 +130,7 @@ const SolutionsSection = () => {
                 <iframe 
                   width="100%" 
                   height="100%" 
-                  src="youtube.com/watch?v=PpyCi05kSzQ&feature=youtu.be" 
+                  src="https://www.youtube.com/embed/upW3R8ZguZ4?si=UDcQDnIoE6s7spGT" 
                   title="Vídeo Institucional SBPlast" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
