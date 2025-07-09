@@ -111,8 +111,58 @@ const Index = () => {
       {/* Company Images Section */}
       <CompanySection />
 
-      {/* Simulators Section */}
-      <SimulatorsSection />
+      {/* Simulators Section - Updated text */}
+      <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 scroll-reveal">
+            <h2 className="text-4xl font-bold text-center text-sbplast-blue mb-4">Fale com Nossos Consultores</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Nossa equipe especializada está pronta para ajudar você a encontrar a solução ideal em embalagens plásticas
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 scroll-reveal stagger-1">
+              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Orçamento Personalizado</h3>
+              <p className="text-gray-600 mb-8">
+                Receba uma proposta sob medida para suas necessidades específicas
+              </p>
+              <Button 
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300"
+                onClick={() => openContactForm("orcamento")}
+              >
+                Solicitar Orçamento
+              </Button>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 scroll-reveal stagger-2">
+              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Consultoria Técnica</h3>
+              <p className="text-gray-600 mb-8">
+                Tire suas dúvidas com nossos especialistas em embalagens
+              </p>
+              <Button 
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300"
+                onClick={() => openContactForm("contato")}
+              >
+                Falar com Consultor
+              </Button>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100 scroll-reveal stagger-3">
+              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Suporte Técnico</h3>
+              <p className="text-gray-600 mb-8">
+                Assistência técnica especializada para seus produtos
+              </p>
+              <Button 
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300"
+                onClick={() => openContactForm("assistencia")}
+              >
+                Solicitar Suporte
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Content Section: News, Events, Videos */}
       <section className="py-16 px-4 bg-white">
@@ -120,7 +170,7 @@ const Index = () => {
           <div className="text-center mb-12 scroll-reveal">
             <h2 className="text-4xl font-bold text-center text-sbplast-blue mb-4">Informações</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Fique por dentro das últimas novidades, eventos e conteúdos da SBPlast
+              Fique por dentro das últimas novidades, eventos e conteúdos da SB Plast
             </p>
           </div>
           
@@ -144,7 +194,7 @@ const Index = () => {
                 ) : (
                   <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
                     <p className="text-gray-500 font-medium">Novas notícias em breve.</p>
-                    <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SBPlast</p>
+                    <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SB Plast</p>
                   </div>
                 )}
               </div>
@@ -169,7 +219,7 @@ const Index = () => {
                 ) : (
                   <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
                     <p className="text-gray-500 font-medium">Novos eventos em breve.</p>
-                    <p className="text-gray-400 text-sm mt-2">Aguarde a agenda de eventos da SBPlast</p>
+                    <p className="text-gray-400 text-sm mt-2">Aguarde a agenda de eventos da SB Plast</p>
                   </div>
                 )}
               </div>
@@ -198,33 +248,6 @@ const Index = () => {
                   </div>
                 )}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Customer Service Section - Simplified */}
-      <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 scroll-reveal">
-            <h2 className="text-4xl font-bold text-center text-sbplast-blue mb-4">Atendimento</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Solicite seu orçamento personalizado agora mesmo
-            </p>
-          </div>
-          
-          <div className="flex justify-center">
-            <div className="bg-white p-12 rounded-2xl shadow-lg card-tilt text-center border border-gray-100 scroll-reveal max-w-md">
-              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Peça já seu orçamento</h3>
-              <p className="text-gray-600 mb-8 text-lg">
-                Receba uma proposta personalizada para suas necessidades em embalagens plásticas
-              </p>
-              <Button 
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue transition-all duration-300 transform hover:scale-105 shadow-lg py-4 text-lg font-semibold"
-                onClick={() => openContactForm("orcamento")}
-              >
-                Peça já seu orçamento
-              </Button>
             </div>
           </div>
         </div>
