@@ -103,17 +103,16 @@ const SolutionsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-left">
               <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                <video 
-                  width="100%" 
-                  height="100%" 
-                  controls 
-                  className="w-full h-full object-cover"
-                  preload="metadata"
-                  poster="/lovable-uploads/c2ed9252-9b1e-4e13-823f-02dcd9a24400.png"
-                >
-                  <source src="/lovable-uploads/maquinas.mp4" type="video/mp4" />
-                  Seu navegador não suporta a reprodução de vídeo.
-                </video>
+                <iframe
+                  src="https://player.vimeo.com/video/1100323341?byline=0&portrait=0&title=0"
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title="Nossa Tecnologia"
+                ></iframe>
               </div>
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Nossa Tecnologia</h4>
@@ -122,17 +121,16 @@ const SolutionsSection = () => {
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-right">
               <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                <video 
-                  width="100%" 
-                  height="100%" 
-                  controls 
-                  className="w-full h-full object-cover"
-                  preload="metadata"
-                  poster="/lovable-uploads/745796f5-50e0-440b-8c0e-d859b1903b47.png"
-                >
-                  <source src="/lovable-uploads/colaboradores.mp4" type="video/mp4" />
-                  Seu navegador não suporta a reprodução de vídeo.
-                </video>
+                <iframe
+                  src="https://player.vimeo.com/video/1100322818?byline=0&portrait=0&title=0"
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title="Colaboradores"
+                ></iframe>
               </div>
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Colaboradores</h4>

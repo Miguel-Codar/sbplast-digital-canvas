@@ -39,17 +39,16 @@ const AboutSection = () => {
           <div className="scroll-reveal-left">
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                <video 
-                  width="100%" 
-                  height="100%" 
-                  controls 
-                  className="w-full h-full object-cover"
-                  preload="metadata"
-                  poster="/lovable-uploads/b2c135c0-f483-4eae-9d9e-535fcd44a593.png"
-                >
-                  <source src="/lovable-uploads/sb.mp4" type="video/mp4" />
-                  Seu navegador não suporta a reprodução de vídeo.
-                </video>
+                <iframe
+                  src="https://player.vimeo.com/video/1100323006?byline=0&portrait=0&title=0"
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title="Sobre a SB Plast"
+                ></iframe>
               </div>
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">32</div>
