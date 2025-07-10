@@ -26,15 +26,15 @@ const Footer = () => {
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Cadastre-se para vender</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Consumidor - Assistência técnica</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Fornecedores - Cadastro</Link></li>
-              <li><Link to="/blog" className="hover:text-sbplast-cyan">Blog SBPlast</Link></li>
+              <li><Link to="/blog" className="hover:text-sbplast-cyan">Blog SB Plast</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Contato Institucional</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Downloads</Link></li>
-              <li><Link to="/etica" className="hover:text-sbplast-cyan">Canal de Ética</Link></li>
+              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Canal de Ética</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4">A SBPlast</h3>
+            <h3 className="text-lg font-bold mb-4">A SB Plast</h3>
             <ul className="space-y-2">
               <li><Link to="/certificacoes" className="hover:text-sbplast-cyan">Certificações</Link></li>
               <li><Link to="/noticias" className="hover:text-sbplast-cyan">Notícias</Link></li>
@@ -86,7 +86,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="text-sm text-sbplast-cyan">
-            SBPlast - 32 anos de referência no segmento de embalagens plásticas
+            SB Plast - 32 anos de referência no segmento de embalagens plásticas
           </p>
         </div>
       </div>

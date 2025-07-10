@@ -42,7 +42,7 @@ const Header = () => {
       <div className="sbplast-container h-full">
         <div className="flex items-center justify-between h-full">
           <Link to="/" className="flex-shrink-0">
-            <img src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" alt="SBPlast Logo" className="h-10" />
+            <img src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" alt="SB Plast Logo" className="h-10" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -67,7 +67,7 @@ const Header = () => {
                 Atendimento
               </Link>
               <Link to="/a-sbplast" className="text-base hover:text-[#18ffff] transition-colors">
-                A SBPlast
+                A SB Plast
               </Link>
             </div>
           </nav>
@@ -86,7 +86,7 @@ const Header = () => {
               </div>
             </button>
             
-            {/* Lista SBPlast Block */}
+            {/* Lista SB Plast Block */}
             <button
               className="flex items-center hover:text-[#18ffff] transition-colors"
               onClick={openProductsList}
@@ -94,7 +94,7 @@ const Header = () => {
               <List className="h-6 w-6 text-[#18ffff] mr-2" />
               <div className="flex flex-col">
                 <span className="font-bold text-sm leading-tight">Lista</span>
-                <span className="text-sm leading-tight">SBPlast</span>
+                <span className="text-sm leading-tight">SB Plast</span>
               </div>
             </button>
             
@@ -150,7 +150,7 @@ const Header = () => {
                     className="block py-3 hover:text-[#18ffff] text-white text-base"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    A SBPlast
+                    A SB Plast
                   </Link>
                 </div>
                 
@@ -169,7 +169,7 @@ const Header = () => {
                   </div>
                 </button>
                 
-                {/* Lista SBPlast Mobile */}
+                {/* Lista SB Plast Mobile */}
                 <button
                   className="flex items-center py-3 w-full text-left text-white hover:text-[#18ffff]"
                   onClick={() => {
@@ -180,7 +180,7 @@ const Header = () => {
                   <List className="h-5 w-5 text-[#18ffff] mr-3" />
                   <div className="flex flex-col">
                     <span className="font-bold text-base">Lista</span>
-                    <span className="text-sm">SBPlast</span>
+                    <span className="text-sm">SB Plast</span>
                   </div>
                 </button>
                 
