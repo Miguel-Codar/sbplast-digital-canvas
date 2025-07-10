@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Phone } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 const WhatsAppButton = () => {
   const whatsappNumber = "5581995015223";
@@ -16,7 +16,7 @@ const WhatsAppButton = () => {
       className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center animate-pulse"
       aria-label="WhatsApp"
     >
-      <Phone className="h-8 w-8" />
+      <MessageCircle className="h-8 w-8" />
     </button>
   );
 };
