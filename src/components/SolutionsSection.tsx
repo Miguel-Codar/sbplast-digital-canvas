@@ -108,16 +108,16 @@ const SolutionsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-left">
               <div className="aspect-video">
-                <iframe 
+                <video 
                   width="100%" 
                   height="100%" 
-                  src="https://www.youtube.com/embed/upW3R8ZguZ4?si=UDcQDnIoE6s7spGT" 
-                  title="Nossa Tecnologia SB Plast" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen 
+                  controls 
                   className="w-full h-full object-cover"
-                />
+                  preload="metadata"
+                >
+                  <source src="/lovable-uploads/maquinas.mp4" type="video/mp4" />
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Nossa Tecnologia</h4>
@@ -126,16 +126,16 @@ const SolutionsSection = () => {
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-right">
               <div className="aspect-video">
-                <iframe 
+                <video 
                   width="100%" 
                   height="100%" 
-                  src="https://www.youtube.com/embed/PpyCi05kSzQ?si=xTR_7XjsrUGKj2ro" 
-                  title="Colaboradores SB Plast" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen 
+                  controls 
                   className="w-full h-full object-cover"
-                />
+                  preload="metadata"
+                >
+                  <source src="/lovable-uploads/colaboradores.mp4" type="video/mp4" />
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
               <div className="p-6">
                 <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Colaboradores</h4>
