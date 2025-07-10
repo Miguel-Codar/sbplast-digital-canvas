@@ -35,18 +35,20 @@ const AboutSection = () => {
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Vídeo do YouTube */}
+          {/* Vídeo Local */}
           <div className="scroll-reveal-left">
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                <iframe
-                  src="https://www.youtube.com/embed/x9Qq06RT3z0?modestbranding=1&showinfo=0&rel=0&controls=1"
-                  title="Vídeo SBPlast"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <video
+                  width="100%"
+                  height="100%"
+                  controls
+                  className="w-full h-full object-cover"
+                  preload="metadata"
+                >
+                  <source src="/lovable-uploads/sb.mp4" type="video/mp4" />
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">32</div>
