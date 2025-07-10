@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -16,28 +15,28 @@ const SolutionsSection = () => {
     {
       id: "1",
       name: "Indústria Alimentícia",
-      image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/b2c135c0-f483-4eae-9d9e-535fcd44a593.png",
       slug: "industria-alimenticia",
       description: "Embalagens que atendem todas as normas da Vig. San. e BPF"
     },
     {
       id: "2",
       name: "Lojistas",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/ffd3e3ee-27a5-4fbf-956a-5bbe8e1e9048.png",
       slug: "lojistas",
       description: "Várias alças e espessuras para suas necessidades"
     },
     {
       id: "3",
       name: "Embalagens Personalizadas",
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/7b4a5264-ad63-486b-b7a9-e86f5e024153.png",
       slug: "embalagens-personalizadas",
       description: "Desenvolvemos embalagens sob medida para seus produtos"
     },
     {
       id: "4",
       name: "Soluções Sustentáveis",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/d0df0ac5-a4e2-4903-be89-e10e820532a4.png",
       slug: "solucoes-sustentaveis",
       description: "Embalagens biodegradáveis e ecologicamente responsáveis"
     }
