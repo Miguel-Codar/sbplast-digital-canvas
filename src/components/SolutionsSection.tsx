@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -70,11 +71,6 @@ const SolutionsSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                <div className="absolute top-4 left-4">
-                  <span className="bg-sbplast-cyan text-sbplast-blue px-3 py-1 rounded-full text-sm font-semibold">
-                    {category.name}
-                  </span>
-                </div>
                 <div className="absolute bottom-4 right-4">
                   <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 group-hover:bg-sbplast-cyan/20 transition-colors duration-300">
                     <ArrowRight className="h-5 w-5 text-white group-hover:text-sbplast-blue transition-colors duration-300" />
@@ -106,13 +102,14 @@ const SolutionsSection = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-left">
-              <div className="aspect-video">
+              <div className="aspect-video bg-gray-200 flex items-center justify-center">
                 <video 
                   width="100%" 
                   height="100%" 
                   controls 
                   className="w-full h-full object-cover"
-                  preload="metadata"
+                  preload="none"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
                 >
                   <source src="/lovable-uploads/maquinas.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.
@@ -124,13 +121,14 @@ const SolutionsSection = () => {
               </div>
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-right">
-              <div className="aspect-video">
+              <div className="aspect-video bg-gray-200 flex items-center justify-center">
                 <video 
                   width="100%" 
                   height="100%" 
                   controls 
                   className="w-full h-full object-cover"
-                  preload="metadata"
+                  preload="none"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
                 >
                   <source src="/lovable-uploads/colaboradores.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.
