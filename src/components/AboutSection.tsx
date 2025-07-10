@@ -40,13 +40,13 @@ const AboutSection = () => {
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
-                  src="public/lovable-uploads/sb.mp4"
-                  title="Vídeo SBPlast"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+  src="/lovable-uploads/sb.mp4"
+  title="Vídeo SB Plast"
+  className="w-full h-full"
+  frameBorder="0"
+  allow="autoplay; encrypted-media"
+  allowFullScreen
+></iframe>
               </div>
               <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
                 <div className="text-2xl font-bold">32</div>
