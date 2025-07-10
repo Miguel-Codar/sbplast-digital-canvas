@@ -38,15 +38,18 @@ const AboutSection = () => {
           {/* Vídeo Local */}
           <div className="scroll-reveal-left">
             <div className="relative">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
                 <video
                   width="100%"
                   height="100%"
                   controls
                   className="w-full h-full object-cover"
-                  preload="metadata"
+                  preload="none"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
                 >
                   <source src="/lovable-uploads/sb.mp4" type="video/mp4" />
+                  <source src="./lovable-uploads/sb.mp4" type="video/mp4" />
+                  <source src="lovable-uploads/sb.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
               </div>
@@ -61,7 +64,7 @@ const AboutSection = () => {
           {/* Conteúdo */}
           <div className="scroll-reveal-right">
             <h2 className="text-4xl font-bold text-sbplast-blue mb-6">
-              Sobre a SBPlast
+              Sobre a SB Plast
             </h2>
             
             <div className="quote-block mb-8">
@@ -70,7 +73,7 @@ const AboutSection = () => {
             </div>
 
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              Em mais de 30 anos no mercado, a SBPlast se consolidou como referência 
+              Em mais de 30 anos no mercado, a SB Plast se consolidou como referência 
               em embalagens plásticas, oferecendo produtos de alta qualidade e soluções 
               personalizadas para diversos segmentos industriais.
             </p>
