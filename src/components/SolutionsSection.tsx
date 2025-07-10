@@ -108,8 +108,8 @@ const SolutionsSection = () => {
                   height="100%" 
                   controls 
                   className="w-full h-full object-cover"
-                  preload="none"
-                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
+                  preload="metadata"
+                  poster="/lovable-uploads/c2ed9252-9b1e-4e13-823f-02dcd9a24400.png"
                 >
                   <source src="/lovable-uploads/maquinas.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.
@@ -127,8 +127,8 @@ const SolutionsSection = () => {
                   height="100%" 
                   controls 
                   className="w-full h-full object-cover"
-                  preload="none"
-                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
+                  preload="metadata"
+                  poster="/lovable-uploads/745796f5-50e0-440b-8c0e-d859b1903b47.png"
                 >
                   <source src="/lovable-uploads/colaboradores.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.

@@ -44,12 +44,10 @@ const AboutSection = () => {
                   height="100%" 
                   controls 
                   className="w-full h-full object-cover"
-                  preload="none"
-                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'%3E%3Crect width='400' height='225' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.35em' fill='%236b7280' font-family='Arial, sans-serif' font-size='16'%3ECarregando vídeo...%3C/text%3E%3C/svg%3E"
+                  preload="metadata"
+                  poster="/lovable-uploads/b2c135c0-f483-4eae-9d9e-535fcd44a593.png"
                 >
                   <source src="/lovable-uploads/sb.mp4" type="video/mp4" />
-                  <source src="./lovable-uploads/sb.mp4" type="video/mp4" />
-                  <source src="lovable-uploads/sb.mp4" type="video/mp4" />
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
               </div>
