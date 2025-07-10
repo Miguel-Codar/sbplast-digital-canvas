@@ -29,14 +29,14 @@ const Index = () => {
     queryKey: ["carouselSlides"],
     queryFn: getCarouselSlides,
     staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (updated from cacheTime)
   });
 
   const { data: blogPostsData = [], isLoading: blogLoading } = useQuery({
     queryKey: ["blogPosts"],
     queryFn: getBlogPosts,
     staleTime: 5 * 60 * 1000, // 5 minutes
-    cacheTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (updated from cacheTime)
   });
 
   // Placeholder slides with stable data
@@ -64,7 +64,7 @@ const Index = () => {
   ];
 
   // Use real slides if available, otherwise use placeholders
-  const carouselItems = slides.length > 0 
+  const carouselItems = Array.isArray(slides) && slides.length > 0 
     ? slides.map((slide) => ({
         id: slide.id,
         imageUrl: slide.image_url,
@@ -74,11 +74,11 @@ const Index = () => {
       }))
     : placeholderSlides;
 
-  // Group blog posts by category
+  // Group blog posts by category - ensure blogPostsData is an array
   const blogPosts = {
-    news: blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [],
-    events: blogPostsData.filter(post => post.blog_categories?.name === "Eventos") || [],
-    videos: blogPostsData.filter(post => post.blog_categories?.name === "Videos" || post.blog_categories?.name === "Vídeos") || [],
+    news: Array.isArray(blogPostsData) ? blogPostsData.filter(post => post.blog_categories?.name === "Notícias" || post.blog_categories?.name === "Noticias") || [] : [],
+    events: Array.isArray(blogPostsData) ? blogPostsData.filter(post => post.blog_categories?.name === "Eventos") || [] : [],
+    videos: Array.isArray(blogPostsData) ? blogPostsData.filter(post => post.blog_categories?.name === "Videos" || post.blog_categories?.name === "Vídeos") || [] : [],
   };
 
   const openContactForm = (type: "contato" | "orcamento" | "assistencia") => {
