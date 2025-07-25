@@ -64,9 +64,12 @@ const AboutSection = () => {
               Sobre a SB Plast
             </h2>
             
-            <div className="quote-block mb-8">
-              Somos especialistas em desenvolver soluções inovadoras em embalagens plásticas, 
-              sempre priorizando a qualidade e sustentabilidade em cada produto.
+            <div className="mb-8">
+              <img 
+                src="/lovable-uploads/8a084be6-bda6-44ae-9dac-aed8d47a964a.png" 
+                alt="Produtos SB Plast" 
+                className="w-full h-64 object-cover rounded-xl shadow-lg"
+              />
             </div>
 
             <p className="text-gray-600 text-lg leading-relaxed mb-8">

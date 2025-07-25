@@ -51,8 +51,7 @@ const SolutionsSection = () => {
             Soluções SB Plast
           </h2>
           <p className="text-center text-gray-600 mb-4 max-w-4xl mx-auto text-xl leading-relaxed">
-            Oferecemos uma linha completa de soluções em embalagens plásticas para diversos segmentos do mercado, 
-            atendendo às necessidades específicas de cada cliente com qualidade e inovação.
+            Oferecemos uma linha completa de soluções em embalagens plásticas
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-sbplast-cyan to-sbplast-blue mx-auto rounded-full"></div>
         </div>
@@ -133,7 +132,7 @@ const SolutionsSection = () => {
                 ></iframe>
               </div>
               <div className="p-6">
-                <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Colaboradores</h4>
+                <h4 className="text-2xl font-bold text-sbplast-blue mb-2">Time SB</h4>
                 <p className="text-gray-600 text-lg">Conheça mais sobre a SB Plast e nossa equipe</p>
               </div>
             </div>

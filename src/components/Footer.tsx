@@ -11,11 +11,12 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Produtos</h3>
             <ul className="space-y-2">
               <li><Link to="/categoria/industria-alimenticia" className="hover:text-sbplast-cyan">Indústria Alimentícia</Link></li>
-              <li><Link to="/categoria/embalagens-personalizadas" className="hover:text-sbplast-cyan">Embalagens Personalizadas</Link></li>
-              <li><Link to="/categoria/acessorios-embalagens" className="hover:text-sbplast-cyan">Acessórios para Embalagens</Link></li>
               <li><Link to="/categoria/lojistas" className="hover:text-sbplast-cyan">Lojistas</Link></li>
-              <li><Link to="/categoria/embalagens-industriais" className="hover:text-sbplast-cyan">Embalagens Industriais</Link></li>
+              <li><Link to="/categoria/embalagens-personalizadas" className="hover:text-sbplast-cyan">Embalagens Personalizadas</Link></li>
               <li><Link to="/categoria/solucoes-sustentaveis" className="hover:text-sbplast-cyan">Soluções Sustentáveis</Link></li>
+              <li><Link to="/categoria/acessorios-embalagens" className="hover:text-sbplast-cyan">Acessórios para Embalagens</Link></li>
+              <li><Link to="/categoria/embalagens-industriais" className="hover:text-sbplast-cyan">Embalagens Industriais</Link></li>
+              <li><Link to="/produtos/catalogo" className="hover:text-sbplast-cyan">Catálogo de Produtos</Link></li>
             </ul>
           </div>
 
@@ -23,28 +24,22 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Atendimento</h3>
             <ul className="space-y-2">
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Solicitar orçamento online</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Cadastre-se para vender</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Consumidor - Assistência técnica</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Fornecedores - Cadastro</Link></li>
               <li><Link to="/blog" className="hover:text-sbplast-cyan">Blog SB Plast</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Contato Institucional</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Downloads</Link></li>
               <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Canal de Ética</Link></li>
+              <li><p className="text-sm text-sbplast-cyan">Envie seu currículo: rh@sbplasticos.com.br</p></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-bold mb-4">A SB Plast</h3>
             <ul className="space-y-2">
-              <li><Link to="/certificacoes" className="hover:text-sbplast-cyan">Certificações</Link></li>
-              <li><Link to="/noticias" className="hover:text-sbplast-cyan">Notícias</Link></li>
-              <li><Link to="/videos" className="hover:text-sbplast-cyan">Vídeos</Link></li>
-              <li><Link to="/eventos" className="hover:text-sbplast-cyan">Eventos</Link></li>
-              <li><Link to="/a-sbplast" className="hover:text-sbplast-cyan">Empresa</Link></li>
-              <li><Link to="/trabalhe-conosco" className="hover:text-sbplast-cyan">Trabalhe Conosco</Link></li>
-              <li><Link to="/manual" className="hover:text-sbplast-cyan">Manual de Identidade</Link></li>
-              <li><Link to="/privacidade" className="hover:text-sbplast-cyan">Política de Privacidade</Link></li>
-              <li><Link to="/transparencia" className="hover:text-sbplast-cyan">Transparência</Link></li>
+              <li><Link to="/nossa-historia" className="hover:text-sbplast-cyan">Nossa História</Link></li>
+              <li><Link to="/missao-visao-valores" className="hover:text-sbplast-cyan">Missão Visão e Valores</Link></li>
+              <li><Link to="/localizacao" className="hover:text-sbplast-cyan">Localização</Link></li>
             </ul>
           </div>
 

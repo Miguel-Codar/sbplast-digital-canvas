@@ -4,11 +4,10 @@ import CompanyCarousel from "./CompanyCarousel";
 
 const CompanySection = () => {
   const companyImages = [
-    "/lovable-uploads/b1f0df19-504e-4b45-bc38-a2fd5def32c9.png",
-    "/lovable-uploads/3fd96328-92ad-489a-ab9c-bc2ddcc9dac1.png",
-    "/lovable-uploads/c419d0a9-4176-48ae-a591-3887eb8077b9.png",
-    "/lovable-uploads/c7524110-e322-42ab-9918-b0b4aa4b1aaf.png",
-    "/lovable-uploads/4edf2385-3091-46ab-9c6b-be12f716a6c5.png",
+    "/lovable-uploads/7b49706f-93c2-4f25-a3ab-19766cb08174.png",
+    "/lovable-uploads/4ca6ebe7-41eb-43df-af0c-c7d93b5090b9.png",
+    "/lovable-uploads/0d8de366-80fc-438f-92c3-f3a01d7a166c.png",
+    "/lovable-uploads/8a084be6-bda6-44ae-9dac-aed8d47a964a.png",
   ];
 
   return (
@@ -23,10 +22,6 @@ const CompanySection = () => {
             <CompanyCarousel images={companyImages} speed={25} />
           </div>
           
-          <p className="text-lg text-gray-700 mt-6 max-w-3xl mx-auto">
-            Nossa empresa conta com instalações modernas e equipamentos de última geração para garantir 
-            a qualidade dos nossos produtos e o melhor atendimento aos nossos clientes.
-          </p>
         </div>
       </div>
     </section>
