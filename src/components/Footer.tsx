@@ -1,91 +1,190 @@
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Linkedin, Instagram, Youtube } from "lucide-react";
+import { MapPin, Mail, Phone, User, ExternalLink, Send } from "lucide-react";
+import { Button } from "./ui/button";
+import TrabalheConoscoForm from "./TrabalheConoscoForm";
 
 const Footer = () => {
+  const [trabalheConoscoOpen, setTrabalheConoscoOpen] = useState(false);
+
   return (
-    <footer className="bg-sbplast-blue text-white">
-      <div className="sbplast-container py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-lg font-bold mb-4">Produtos</h3>
-            <ul className="space-y-2">
-              <li><Link to="/categoria/industria-alimenticia" className="hover:text-sbplast-cyan">Indústria Alimentícia</Link></li>
-              <li><Link to="/categoria/lojistas" className="hover:text-sbplast-cyan">Lojistas</Link></li>
-              <li><Link to="/categoria/embalagens-personalizadas" className="hover:text-sbplast-cyan">Embalagens Personalizadas</Link></li>
-              <li><Link to="/categoria/solucoes-sustentaveis" className="hover:text-sbplast-cyan">Soluções Sustentáveis</Link></li>
-              <li><Link to="/categoria/acessorios-embalagens" className="hover:text-sbplast-cyan">Acessórios para Embalagens</Link></li>
-              <li><Link to="/categoria/embalagens-industriais" className="hover:text-sbplast-cyan">Embalagens Industriais</Link></li>
-              <li><Link to="/produtos/catalogo" className="hover:text-sbplast-cyan">Catálogo de Produtos</Link></li>
-            </ul>
-          </div>
+    <>
+      <footer className="bg-[#0e2e61] text-white">
+        <div className="sbplast-container py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Logo e Descrição */}
+            <div className="lg:col-span-1">
+              <Link to="/" className="inline-block mb-4">
+                <img 
+                  src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" 
+                  alt="SB Plast Logo" 
+                  className="h-12"
+                />
+              </Link>
+              <p className="text-gray-300 text-sm mb-6">
+                Há mais de 30 anos no mercado, oferecemos soluções completas 
+                em embalagens plásticas com qualidade e inovação.
+              </p>
+              
+              {/* Botão Trabalhe Conosco em destaque */}
+              <Button
+                onClick={() => setTrabalheConoscoOpen(true)}
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                <User className="mr-2 h-5 w-5" />
+                Envie seu Currículo
+              </Button>
+            </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Atendimento</h3>
-            <ul className="space-y-2">
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Solicitar orçamento online</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Consumidor - Assistência técnica</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Fornecedores - Cadastro</Link></li>
-              <li><Link to="/blog" className="hover:text-sbplast-cyan">Blog SB Plast</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Contato Institucional</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Downloads</Link></li>
-              <li><Link to="/atendimento" className="hover:text-sbplast-cyan">Canal de Ética</Link></li>
-              <li><p className="text-sm text-sbplast-cyan">Envie seu currículo: rh@sbplasticos.com.br</p></li>
-            </ul>
-          </div>
+            {/* Produtos */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Produtos</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/categoria/embalagens-para-alimentos" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Embalagens para Alimentos
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/categoria/embalagens-industriais" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Embalagens Industriais
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/categoria/embalagens-para-cosmeticos" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Embalagens para Cosméticos
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/categoria/embalagens-para-limpeza" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Embalagens para Limpeza
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/categoria/embalagens-personalizadas" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Embalagens Personalizadas
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/em-desenvolvimento" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm flex items-center">
+                    Catálogo de Produtos
+                    <ExternalLink className="ml-1 h-3 w-3" />
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">A SB Plast</h3>
-            <ul className="space-y-2">
-              <li><Link to="/nossa-historia" className="hover:text-sbplast-cyan">Nossa História</Link></li>
-              <li><Link to="/missao-visao-valores" className="hover:text-sbplast-cyan">Missão Visão e Valores</Link></li>
-              <li><Link to="/localizacao" className="hover:text-sbplast-cyan">Localização</Link></li>
-            </ul>
-          </div>
+            {/* A SB Plast */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">A SB Plast</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/a-sbplast#historia" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Nossa História
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/a-sbplast#missao-visao-valores" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Missão, Visão e Valores
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/a-sbplast#localizacao" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                    Localização
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Contato</h3>
-            <div className="space-y-3">
-              <div>
-                <p className="font-medium">Endereço:</p>
-                <p className="text-sm">Rua Arabé, 112, Comportas</p>
-                <p className="text-sm">Jaboatão dos Guararapes-PE</p>
+            {/* Contato e Informações */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Contato</h3>
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <MapPin className="h-4 w-4 text-[#18ffff] mt-0.5 mr-2 flex-shrink-0" />
+                  <div className="text-gray-300 text-sm">
+                    <p>Rua Arabé, 112 - Comportas</p>
+                    <p>Jaboatão dos Guararapes-PE</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <Phone className="h-4 w-4 text-[#18ffff] mr-2 flex-shrink-0" />
+                  <div className="text-gray-300 text-sm">
+                    <a href="tel:+558134761227" className="hover:text-[#18ffff] transition-colors">
+                      (81) 3476-1227
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <Phone className="h-4 w-4 text-[#18ffff] mr-2 flex-shrink-0" />
+                  <div className="text-gray-300 text-sm">
+                    <a 
+                      href="https://wa.me/5581995015223" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:text-[#18ffff] transition-colors"
+                    >
+                      (81) 99501-5223 (WhatsApp)
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <Mail className="h-4 w-4 text-[#18ffff] mt-0.5 mr-2 flex-shrink-0" />
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>
+                      <a href="mailto:vendas@sbplasticos.com.br" className="hover:text-[#18ffff] transition-colors">
+                        vendas@sbplasticos.com.br
+                      </a>
+                    </p>
+                    <p>
+                      <a href="mailto:rh@sbplasticos.com.br" className="hover:text-[#18ffff] transition-colors flex items-center">
+                        rh@sbplasticos.com.br
+                        <Send className="ml-1 h-3 w-3" />
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Telefones:</p>
-                <p className="text-sm">(81) 3476-1227</p>
-                <p className="text-sm">(81) 99501-5223</p>
-              </div>
-              <div>
-                <p className="font-medium">E-mails:</p>
-                <p className="text-sm">vendas@sbplasticos.com.br</p>
-                <p className="text-sm">sac@sbplasticos.com.br</p>
+
+              {/* Informações / Artigos */}
+              <div className="mt-6">
+                <h4 className="text-base font-medium mb-2 text-[#18ffff]">Artigos</h4>
+                <Link to="/blog" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                  Blog e Artigos
+                </Link>
               </div>
             </div>
           </div>
         </div>
-        
-        <div className="border-t border-sbplast-lightBlue mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex space-x-4 mb-4 md:mb-0">
-            <a href="https://wa.me/5581995015223" className="hover:text-sbplast-cyan" aria-label="WhatsApp">
-              <Phone className="h-6 w-6" />
-            </a>
-            <a href="https://www.linkedin.com/company/sbplast" className="hover:text-sbplast-cyan" aria-label="LinkedIn">
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a href="https://www.instagram.com/sbplast" className="hover:text-sbplast-cyan" aria-label="Instagram">
-              <Instagram className="h-6 w-6" />
-            </a>
-            <a href="https://www.youtube.com/sbplast" className="hover:text-sbplast-cyan" aria-label="YouTube">
-              <Youtube className="h-6 w-6" />
-            </a>
+
+        {/* Footer Bottom */}
+        <div className="border-t border-white/20">
+          <div className="sbplast-container py-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-gray-400 text-sm">
+                © 2024 SB Plast. Todos os direitos reservados.
+              </p>
+              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                <span className="text-gray-400 text-sm">PT</span>
+                <div className="w-px h-4 bg-gray-400"></div>
+                <Link to="/atendimento" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
+                  Atendimento
+                </Link>
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-sbplast-cyan">
-            SB Plast - 32 anos de referência no segmento de embalagens plásticas
-          </p>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      {/* Modal Trabalhe Conosco */}
+      <TrabalheConoscoForm
+        open={trabalheConoscoOpen}
+        onOpenChange={setTrabalheConoscoOpen}
+      />
+    </>
   );
 };
 

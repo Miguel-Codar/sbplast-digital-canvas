@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
-import { MapPin, Mail, Phone, FileText, Users } from "lucide-react";
+import TrabalheConoscoForm from "@/components/TrabalheConoscoForm";
+import { MapPin, Mail, Phone, FileText, Users, Briefcase } from "lucide-react";
 
 const AtendimentoPage = () => {
   const [contactFormOpen, setContactFormOpen] = useState(false);
+  const [trabalheConoscoOpen, setTrabalheConoscoOpen] = useState(false);
   const [contactFormType, setContactFormType] = useState<"contato" | "orcamento" | "assistencia">("orcamento");
 
   const openContactForm = (type: "contato" | "orcamento" | "assistencia") => {
@@ -19,17 +21,23 @@ const AtendimentoPage = () => {
     <div className="sbplast-container py-8">
       {/* Background banner with title */}
       <div 
-        className="relative mb-6 py-16 bg-sbplast-blue text-white rounded-lg overflow-hidden"
+        className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)",
+          backgroundImage: "url(/lovable-uploads/1cd73103-ccca-4cbb-8767-933e9b8c3606.png)",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
-        <div className="relative z-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold">Atendimento SBPlast</h1>
-          <p className="mt-4 text-lg max-w-3xl mx-auto">Escolha o canal ideal para suas necessidades</p>
+        <div className="relative z-10 text-center px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">Atendimento SBPlast</h1>
+          <Button
+            onClick={() => setTrabalheConoscoOpen(true)}
+            className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            <Briefcase className="mr-2 h-5 w-5" />
+            Trabalhe Conosco
+          </Button>
         </div>
       </div>
 
@@ -225,6 +233,11 @@ const AtendimentoPage = () => {
         open={contactFormOpen}
         onOpenChange={setContactFormOpen}
         type={contactFormType}
+      />
+      
+      <TrabalheConoscoForm
+        open={trabalheConoscoOpen}
+        onOpenChange={setTrabalheConoscoOpen}
       />
     </div>
   );
