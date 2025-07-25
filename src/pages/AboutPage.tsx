@@ -14,17 +14,16 @@ const AboutPage = () => {
     <div className="sbplast-container py-8">
       {/* Background banner with title */}
       <div 
-        className="relative mb-6 py-16 bg-sbplast-blue text-white rounded-lg overflow-hidden"
+        className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)",
+          backgroundImage: "url(/lovable-uploads/4ed71b0f-a9c9-4b08-9130-8255c10afd3d.png)",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
-        <div className="relative z-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold">SBPlast: 32 anos de liderança em embalagens plásticas personalizadas no Nordeste</h1>
-          <p className="mt-4 text-lg max-w-3xl mx-auto">Há mais de três décadas, a SBPlast é referência em embalagens plásticas personalizadas</p>
+        <div className="relative z-10 text-center px-8">
+          <h1 className="text-3xl md:text-4xl font-bold">SBPlast: 32 anos de tradição e inovação em embalagens plásticas</h1>
         </div>
       </div>
 
@@ -57,17 +56,11 @@ const AboutPage = () => {
               Temos compromisso com o futuro, adotando práticas sustentáveis, o uso de materiais recicláveis 
               e processos ecoeficientes que minimizam nosso impacto ambiental.
             </p>
-            <div className="quote-block mb-4">
-              Escolha quem entende do seu mercado e inove com a SBPlast. Se você procura embalagens que unem 
-              alta performance, personalização e responsabilidade ambiental, conte com a experiência e o 
-              know-how de quem está há 32 anos transformando ideias em soluções eficientes para empresas de 
-              todos os portes. Escolha a SBPlast e leve o melhor para o seu produto – e para o planeta.
-            </div>
           </div>
           <div className="md:w-1/2">
             <img 
-              src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-              alt="Gama de produtos SBPlast" 
+              src="/lovable-uploads/4ed71b0f-a9c9-4b08-9130-8255c10afd3d.png" 
+              alt="Vista aérea da SBPlast" 
               className="rounded-lg shadow-md w-full h-auto"
             />
           </div>
@@ -188,18 +181,18 @@ const AboutPage = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <img 
-            src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-            alt="Parque industrial SBPlast" 
+            src="/lovable-uploads/1cd73103-ccca-4cbb-8767-933e9b8c3606.png" 
+            alt="Equipamentos de produção SBPlast" 
             className="rounded-lg shadow-md w-full h-auto"
           />
           <img 
-            src="https://images.unsplash.com/photo-1612473741370-74bf94887efa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-            alt="Equipamentos modernos" 
+            src="/lovable-uploads/01a39553-7d53-43e5-a047-30b87d9565e7.png" 
+            alt="Máquinas industriais" 
             className="rounded-lg shadow-md w-full h-auto"
           />
           <img 
-            src="https://images.unsplash.com/photo-1673191889046-5fb4b92e5601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-            alt="Controle de qualidade" 
+            src="/lovable-uploads/dd7487f2-6072-4b19-bc21-6d729742f717.png" 
+            alt="Matéria-prima plástica" 
             className="rounded-lg shadow-md w-full h-auto"
           />
         </div>
