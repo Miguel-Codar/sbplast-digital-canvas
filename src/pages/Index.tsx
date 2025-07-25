@@ -200,9 +200,9 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Events Column */}
+            {/* Articles Column */}
             <div className="bg-white rounded-2xl shadow-lg p-8 card-hover border border-gray-100 scroll-reveal stagger-2">
-              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Eventos</h3>
+              <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Artigos</h3>
               <div className="space-y-6">
                 {blogPosts.events.length > 0 ? (
                   blogPosts.events.slice(0, 3).map(post => (
