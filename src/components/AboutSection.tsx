@@ -36,7 +36,7 @@ const AboutSection = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Vídeo */}
-          <div className="scroll-reveal-left">
+          <div className="scroll-reveal-left -mt-8">
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
@@ -63,14 +63,6 @@ const AboutSection = () => {
             <h2 className="text-4xl font-bold text-sbplast-blue mb-6">
               Sobre a SB Plast
             </h2>
-            
-            <div className="mb-8">
-              <img 
-                src="/lovable-uploads/8a084be6-bda6-44ae-9dac-aed8d47a964a.png" 
-                alt="Produtos SB Plast" 
-                className="w-full h-64 object-cover rounded-xl shadow-lg"
-              />
-            </div>
 
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Em mais de 30 anos no mercado, a SB Plast se consolidou como referência 

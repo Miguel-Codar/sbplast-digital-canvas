@@ -16,28 +16,28 @@ const SolutionsSection = () => {
     {
       id: "1",
       name: "Indústria Alimentícia",
-      image: "/lovable-uploads/b2c135c0-f483-4eae-9d9e-535fcd44a593.png",
+      image: "/lovable-uploads/044f0f1a-b38e-4f9f-bc29-5612adfb5fba.png",
       slug: "industria-alimenticia",
       description: "Embalagens que atendem todas as normas da Vig. San. e BPF"
     },
     {
       id: "2",
       name: "Lojistas",
-      image: "/lovable-uploads/ffd3e3ee-27a5-4fbf-956a-5bbe8e1e9048.png",
+      image: "/lovable-uploads/79e31864-d6e8-4b49-8840-417defb92500.png",
       slug: "lojistas",
       description: "Várias alças e espessuras para suas necessidades"
     },
     {
       id: "3",
       name: "Embalagens Personalizadas",
-      image: "/lovable-uploads/7b4a5264-ad63-486b-b7a9-e86f5e024153.png",
+      image: "/lovable-uploads/09f60b6e-fbe7-4ffc-955c-19ae9c027e3f.png",
       slug: "embalagens-personalizadas",
       description: "Desenvolvemos embalagens sob medida para seus produtos"
     },
     {
       id: "4",
       name: "Soluções Sustentáveis",
-      image: "/lovable-uploads/d0df0ac5-a4e2-4903-be89-e10e820532a4.png",
+      image: "/lovable-uploads/e24c57ad-457d-40f3-a733-dd6961946dd7.png",
       slug: "solucoes-sustentaveis",
       description: "Embalagens biodegradáveis e ecologicamente responsáveis"
     }
