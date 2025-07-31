@@ -46,7 +46,7 @@ const BlogPage = () => {
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         <div className="relative z-10 text-center">
           <h1 className="text-3xl md:text-4xl font-bold">Blog</h1>
-          <p className="mt-2">Notícias, eventos e conteúdos da SBPlast</p>
+          <p className="mt-2">Notícias, eventos e conteúdos da SB Plast</p>
         </div>
       </div>
 

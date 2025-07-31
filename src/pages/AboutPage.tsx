@@ -16,19 +16,19 @@ const AboutPage = () => {
       <div 
         className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(/lovable-uploads/4ed71b0f-a9c9-4b08-9130-8255c10afd3d.png)",
+          backgroundImage: "url(/lovable-uploads/17c48107-0c2c-4715-887d-90477ca09214.png)",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         <div className="relative z-10 text-center px-8">
-          <h1 className="text-3xl md:text-4xl font-bold">SBPlast: 32 anos de tradição e inovação em embalagens plásticas</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">SB Plast: 32 anos de tradição e inovação em embalagens plásticas</h1>
         </div>
       </div>
 
       <Breadcrumb
-        items={[{ label: "A SBPlast", url: "/a-sbplast" }]}
+        items={[{ label: "A SB Plast", url: "/a-sbplast" }]}
       />
 
       {/* História da Empresa */}
@@ -37,7 +37,7 @@ const AboutPage = () => {
           <div className="md:w-1/2">
             <h2 className="text-2xl font-semibold text-sbplast-blue mb-4">Nossa História</h2>
             <p className="text-gray-700 mb-4">
-              Há mais de três décadas, a SBPlast é referência em embalagens plásticas personalizadas, 
+              Há mais de três décadas, a SB Plast é referência em embalagens plásticas personalizadas, 
               atendendo com excelência empresas de todo o Nordeste do Brasil. Nossa história, que começou 
               em uma pequena fábrica movida por espírito empreendedor, evoluiu para um parque industrial 
               moderno, equipado com tecnologia de ponta e processos inovadores.
@@ -51,7 +51,7 @@ const AboutPage = () => {
             </p>
             <h3 className="text-xl font-semibold text-sbplast-blue mb-3">Qualidade, durabilidade e sustentabilidade em cada detalhe</h3>
             <p className="text-gray-700 mb-4">
-              Na SBPlast, qualidade é prioridade absoluta. Seguimos os mais rígidos padrões de produção e 
+              Na SB Plast, qualidade é prioridade absoluta. Seguimos os mais rígidos padrões de produção e 
               controle, entregando produtos duráveis, práticos e que atendem às exigências do mercado moderno. 
               Temos compromisso com o futuro, adotando práticas sustentáveis, o uso de materiais recicláveis 
               e processos ecoeficientes que minimizam nosso impacto ambiental.
@@ -59,8 +59,8 @@ const AboutPage = () => {
           </div>
           <div className="md:w-1/2">
             <img 
-              src="/lovable-uploads/4ed71b0f-a9c9-4b08-9130-8255c10afd3d.png" 
-              alt="Vista aérea da SBPlast" 
+              src="/lovable-uploads/0a1f8900-9d2b-405e-9a61-221e48e20da9.png" 
+              alt="Vista aérea da SB Plast" 
               className="rounded-lg shadow-md w-full h-auto"
             />
           </div>
@@ -116,7 +116,7 @@ const AboutPage = () => {
               <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-xl font-medium text-sbplast-blue">1992</h3>
-                  <p className="text-gray-700">Fundação da SBPlast em Jaboatão dos Guararapes-PE, iniciando com foco em embalagens plásticas para o mercado nordestino.</p>
+                  <p className="text-gray-700">Fundação da SB Plast em Jaboatão dos Guararapes-PE, iniciando com foco em embalagens plásticas para o mercado nordestino.</p>
                 </div>
               </div>
               <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
@@ -182,7 +182,7 @@ const AboutPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <img 
             src="/lovable-uploads/1cd73103-ccca-4cbb-8767-933e9b8c3606.png" 
-            alt="Equipamentos de produção SBPlast" 
+            alt="Equipamentos de produção SB Plast" 
             className="rounded-lg shadow-md w-full h-auto"
           />
           <img 
@@ -286,7 +286,7 @@ const AboutPage = () => {
                 style={{border: 0}} 
                 allowFullScreen 
                 loading="lazy"
-                title="Localização SBPlast"
+                title="Localização SB Plast"
               ></iframe>
             </div>
           </div>

@@ -16,7 +16,7 @@ const ProductsList = ({ open, onOpenChange }: ProductsListProps) => {
       <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="mb-8">
           <SheetTitle className="text-xl font-semibold text-sbplast-blue">
-            Lista SBPlast - Produtos
+            Lista SB Plast - Produtos
           </SheetTitle>
         </SheetHeader>
 

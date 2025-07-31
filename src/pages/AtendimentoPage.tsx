@@ -30,7 +30,7 @@ const AtendimentoPage = () => {
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         <div className="relative z-10 text-center px-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Atendimento SBPlast</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">Atendimento SB Plast</h1>
           <Button
             onClick={() => setTrabalheConoscoOpen(true)}
             className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -78,7 +78,7 @@ const AtendimentoPage = () => {
             </p>
             <Button 
               className="w-full bg-green-500 text-white hover:bg-green-600"
-              onClick={() => window.open('https://wa.me/5581995015223?text=Olá! Gostaria de falar com o comercial da SBPlast.', '_blank')}
+              onClick={() => window.open('https://wa.me/5581995015223?text=Olá! Gostaria de falar com o comercial da SB Plast.', '_blank')}
             >
               Abrir WhatsApp
             </Button>
@@ -188,7 +188,7 @@ const AtendimentoPage = () => {
                 style={{border: 0}} 
                 allowFullScreen 
                 loading="lazy"
-                title="Localização SBPlast"
+                title="Localização SB Plast"
               ></iframe>
             </div>
           </div>
