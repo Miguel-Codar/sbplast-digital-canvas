@@ -16,14 +16,14 @@ const SolutionsSection = () => {
     {
       id: "1",
       name: "Indústria Alimentícia",
-      image: "/lovable-uploads/044f0f1a-b38e-4f9f-bc29-5612adfb5fba.png",
+      image: "/lovable-uploads/f8939f55-5ff0-4537-9b39-3eb8ab5fb3a0.png",
       slug: "industria-alimenticia",
       description: "Embalagens que atendem todas as normas da Vig. San. e BPF"
     },
     {
       id: "2",
       name: "Lojistas",
-      image: "/lovable-uploads/79e31864-d6e8-4b49-8840-417defb92500.png",
+      image: "/lovable-uploads/a36e21ae-5cb6-401b-8261-034d1b83d177.png",
       slug: "lojistas",
       description: "Várias alças e espessuras para suas necessidades"
     },
