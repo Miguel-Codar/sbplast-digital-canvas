@@ -8,6 +8,7 @@ export interface BlogPost {
   excerpt: string | null;
   content: string | null;
   featured_image: string | null;
+  video_url: string | null; // Novo campo para vídeos
   category_id: string | null;
   status: string;
   created_at: string;
@@ -95,6 +96,7 @@ export async function createBlogPost(post: Partial<BlogPost>) {
         excerpt: post.excerpt || null,
         content: post.content || null,
         featured_image: post.featured_image || null,
+        video_url: post.video_url || null, // Novo campo
         category_id: post.category_id || null,
         status: post.status || "Rascunho"
       })
@@ -131,6 +133,7 @@ export async function updateBlogPost(post: Partial<BlogPost> & { id: string }) {
         excerpt: post.excerpt || null,
         content: post.content || null,
         featured_image: post.featured_image || null,
+        video_url: post.video_url || null, // Novo campo
         category_id: post.category_id || null,
         status: post.status || "Rascunho",
         updated_at: new Date().toISOString() 
@@ -204,6 +207,36 @@ export async function uploadBlogImage(file: File) {
     return publicUrl;
   } catch (error) {
     console.error("Error uploading image:", error);
+    throw error;
+  }
+}
+
+// Upload a video to Supabase Storage
+export async function uploadBlogVideo(file: File) {
+  // Create a unique file path
+  const fileExt = file.name.split(".").pop();
+  const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+  const filePath = `${fileName}`;
+
+  try {
+    const { data, error } = await supabase.storage
+      .from("blog_videos")
+      .upload(filePath, file);
+
+    if (error) {
+      console.error("Error uploading video:", error);
+      throw error;
+    }
+
+    // Get the public URL for the uploaded video
+    const { data: { publicUrl } } = supabase.storage
+      .from("blog_videos")
+      .getPublicUrl(filePath);
+
+    console.log("Video uploaded successfully:", publicUrl);
+    return publicUrl;
+  } catch (error) {
+    console.error("Error uploading video:", error);
     throw error;
   }
 }

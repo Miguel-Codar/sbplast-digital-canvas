@@ -245,19 +245,34 @@ const Index = () => {
                 {blogPosts.videos.length > 0 ? (
                   blogPosts.videos.slice(0, 3).map(post => (
                     <div key={post.id} className="border-b border-gray-100 pb-4 last:border-b-0">
+                      {/* Thumbnail do vídeo se disponível */}
+                      {post.video_url && (
+                        <div className="relative mb-3 rounded-lg overflow-hidden">
+                          <video
+                            src={post.video_url}
+                            className="w-full h-32 object-cover"
+                            poster={post.featured_image || undefined}
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                            <div className="bg-white bg-opacity-90 rounded-full p-2">
+                              <Play className="h-6 w-6 text-sbplast-blue fill-current" />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
                         {post.title}
                       </h4>
                       <p className="text-gray-600 text-sm mb-3">{post.excerpt || post.title}</p>
                       <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center font-medium hover:underline">
-                        Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                        Assistir vídeo <ArrowRight className="h-4 w-4 ml-1" />
                       </Link>
                     </div>
                   ))
                 ) : (
                   <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
                     <p className="text-gray-500 font-medium">Novos vídeos em breve.</p>
-                    <p className="text-gray-400 text-sm mt-2">Confira em breve nossos vídeos institucionais</p>
+                    <p className="text-gray-400 text-sm mt-2">Aguarde o conteúdo em vídeo da SB Plast</p>
                   </div>
                 )}
               </div>

@@ -86,6 +86,7 @@ const BlogPage = () => {
               category={post.blog_categories?.name || "Sem categoria"}
               slug={post.slug}
               date={post.created_at}
+              videoUrl={post.video_url || undefined} // Novo campo
             />
           ))}
         </div>

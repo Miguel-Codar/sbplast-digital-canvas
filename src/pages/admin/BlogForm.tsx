@@ -24,6 +24,7 @@ import {
   getBlogPostBySlug, 
   saveBlogPost, 
   uploadBlogImage,
+  uploadBlogVideo,
   BlogPost 
 } from "@/services/blogService";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -43,11 +44,14 @@ const BlogForm = () => {
     excerpt: "",
     content: "",
     featured_image: "",
+    video_url: "",
     status: "Rascunho",
   });
 
   const [isUploading, setIsUploading] = useState(false);
+  const [isUploadingVideo, setIsUploadingVideo] = useState(false);
   const [uploadError, setUploadError] = useState("");
+  const [videoUploadError, setVideoUploadError] = useState("");
   const [postId, setPostId] = useState<string | undefined>(undefined);
 
   // Fetch categories
@@ -74,6 +78,7 @@ const BlogForm = () => {
         excerpt: postData.excerpt || "",
         content: postData.content || "",
         featured_image: postData.featured_image || "",
+        video_url: postData.video_url || "",
         status: postData.status || "Rascunho",
       });
       setPostId(postData.id);
@@ -192,6 +197,47 @@ const BlogForm = () => {
       });
     } finally {
       setIsUploading(false);
+    }
+  };
+
+  // Handle video upload
+  const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    setIsUploadingVideo(true);
+    setVideoUploadError("");
+    
+    try {
+      const videoUrl = await uploadBlogVideo(file);
+      setFormData({
+        ...formData,
+        video_url: videoUrl,
+      });
+      
+      toast.success("Vídeo enviado", {
+        description: "O vídeo foi carregado com sucesso."
+      });
+      
+      hookToast({
+        title: "Vídeo enviado",
+        description: "O vídeo foi carregado com sucesso.",
+      });
+    } catch (error: any) {
+      console.error("Error uploading video:", error);
+      setVideoUploadError("Erro ao enviar vídeo. Por favor, tente novamente.");
+      
+      toast.error("Erro de upload", {
+        description: "Não foi possível enviar o vídeo."
+      });
+      
+      hookToast({
+        title: "Erro",
+        description: "Não foi possível enviar o vídeo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploadingVideo(false);
     }
   };
 
@@ -356,6 +402,47 @@ const BlogForm = () => {
                   </p>
                 </div>
 
+                {/* Video Upload */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium">Vídeo</Label>
+                  {formData.video_url && (
+                    <div className="mb-3">
+                      <video
+                        src={formData.video_url}
+                        controls
+                        className="w-full h-40 rounded border"
+                      >
+                        Seu navegador não suporta o elemento de vídeo.
+                      </video>
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-2">
+                    <input
+                      type="file"
+                      id="video-upload"
+                      accept="video/*"
+                      onChange={handleVideoUpload}
+                      className="hidden"
+                      disabled={isUploadingVideo}
+                    />
+                    <label htmlFor="video-upload">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full cursor-pointer"
+                        disabled={isUploadingVideo}
+                        onClick={() => document.getElementById("video-upload")?.click()}
+                      >
+                        {isUploadingVideo ? "Enviando..." : "Enviar vídeo"}
+                      </Button>
+                    </label>
+                    {videoUploadError && <p className="text-red-500 text-sm">{videoUploadError}</p>}
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Formatos aceitos: MP4, MOV, AVI. Tamanho máximo: 50MB.
+                  </p>
+                </div>
+
                 {/* Category */}
                 <div className="space-y-2">
                   <Label htmlFor="category" className="text-sm font-medium">Categoria</Label>
@@ -400,7 +487,7 @@ const BlogForm = () => {
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={saveMutation.isPending || isUploading}
+                disabled={saveMutation.isPending || isUploading || isUploadingVideo}
               >
                 {saveMutation.isPending 
                   ? "Salvando..." 

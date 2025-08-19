@@ -77,8 +77,19 @@ const BlogPostPage = () => {
       />
 
       <article className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-        {/* Featured Image */}
-        {post?.featured_image && (
+        {/* Featured Image ou Video */}
+        {post?.video_url ? (
+          <div className="relative">
+            <video
+              src={post.video_url}
+              controls
+              className="w-full h-64 md:h-96 object-cover"
+              poster={post.featured_image || undefined}
+            >
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
+          </div>
+        ) : post?.featured_image ? (
           <div className="relative h-64 md:h-96">
             <img
               src={post.featured_image}
@@ -87,7 +98,7 @@ const BlogPostPage = () => {
             />
             <div className="absolute top-0 left-0 w-full h-full bg-sbplast-blue opacity-20"></div>
           </div>
-        )}
+        ) : null}
 
         <div className="p-6 md:p-8">
           {/* Meta info */}
