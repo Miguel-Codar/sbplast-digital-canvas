@@ -1,6 +1,5 @@
-
 import React from "react";
-import CompanyCarousel from "./CompanyCarousel";
+import ClientCarousel from "./ClientCarousel";
 
 const BenefitsSection = () => {
   const clientLogos = [
@@ -21,19 +20,19 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gray-50">
+    <section className="py-16 px-4 bg-gray-50">
       <div className="container mx-auto">
-        <div className="text-center mb-16 scroll-reveal">
-          <h2 className="text-4xl font-bold text-sbplast-blue mb-4">
+        <div className="text-center mb-12 scroll-reveal">
+          <h2 className="text-3xl md:text-4xl font-bold text-sbplast-blue mb-4">
             Clientes parceiros que confiam em nós
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Conheça algumas das empresas que confiam na qualidade e excelência da SB Plast
           </p>
         </div>
 
-        <div className="bg-white py-10 px-4 rounded-2xl shadow-lg">
-          <CompanyCarousel images={clientLogos} speed={30} />
+        <div className="bg-white py-6 px-4 rounded-xl shadow-lg">
+          <ClientCarousel images={clientLogos} speed={30} />
         </div>
       </div>
     </section>
