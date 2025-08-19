@@ -12,7 +12,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import CookieBanner from "@/components/CookieBanner";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -193,20 +193,34 @@ const Index = () => {
                   ))
                 ) : (
                   <div className="space-y-4">
+                    {/* Vídeo Institucional */}
                     <div className="border-b border-gray-100 pb-4">
-                      <h4 className="font-semibold text-lg text-sbplast-blue mb-2">
-                        SB Plast lança nova plataforma de e-commerce
+                      <div className="relative mb-3 rounded-lg overflow-hidden">
+                        <video
+                          src="/lovable-uploads/Vídeo institucional para informações.mov"
+                          className="w-full h-48 object-cover"
+                          controls
+                          poster="/lovable-uploads/video-thumbnail.jpg"
+                        />
+                        <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
+                          Institucional
+                        </div>
+                      </div>
+                      <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
+                        Vídeo Institucional - SB Plast
                       </h4>
                       <p className="text-gray-600 text-sm mb-3">
-                        A SB Plast anuncia o lançamento de sua nova plataforma de vendas online, facilitando o acesso aos nossos produtos de embalagens plásticas.
+                        Conheça a SB Plast através do nosso vídeo institucional. Descubra nossa história, valores e compromisso com a qualidade.
                       </p>
-                      <span className="text-sbplast-cyan text-sm font-medium">
-                        Em breve
-                      </span>
+                      <div className="flex items-center text-sbplast-cyan font-medium">
+                        <Play className="h-4 w-4 mr-1" />
+                        Assistir vídeo
+                      </div>
                     </div>
+                    
                     <div className="text-center py-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                      <p className="text-gray-500 font-medium">Mais notícias em breve.</p>
-                      <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SB Plast</p>
+                      <p className="text-gray-500 font-medium">Mais vídeos em breve.</p>
+                      <p className="text-gray-400 text-sm mt-2">Aguarde novos conteúdos da SB Plast</p>
                     </div>
                   </div>
                 )}

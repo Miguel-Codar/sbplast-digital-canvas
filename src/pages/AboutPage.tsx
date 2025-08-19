@@ -1,26 +1,116 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Breadcrumb from "../components/Breadcrumb";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import Breadcrumb from "@/components/Breadcrumb";
 import ContactForm from "@/components/ContactForm";
-import { useState } from "react";
-import { MapPin, Mail, Phone, Truck } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const AboutPage = () => {
   const [contactFormOpen, setContactFormOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentInfraImageIndex, setCurrentInfraImageIndex] = useState(0);
+
+  // Imagens do carrossel principal (fundo do título)
+  const headerImages = [
+    "/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 14 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 15 - SB PLAST_.png",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 18 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 19 - SB PLAST .jpeg"
+  ];
+
+  // Imagens da seção de infraestrutura
+  const infraImages = [
+    "/lovable-uploads/INSTALAÇÕES/FOTO 5 - SB PLAST.jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 8 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 14 - SB PLAST .jpeg"
+  ];
+
+  // Auto-rotação do carrossel principal
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % headerImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [headerImages.length]);
+
+  // Auto-rotação do carrossel de infraestrutura
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentInfraImageIndex((prev) => (prev + 1) % infraImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [infraImages.length]);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % headerImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + headerImages.length) % headerImages.length);
+  };
+
+  const nextInfraImage = () => {
+    setCurrentInfraImageIndex((prev) => (prev + 1) % infraImages.length);
+  };
+
+  const prevInfraImage = () => {
+    setCurrentInfraImageIndex((prev) => (prev - 1 + infraImages.length) % infraImages.length);
+  };
 
   return (
     <div className="sbplast-container py-8">
-      {/* Background banner with title */}
-      <div 
-        className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden"
-        style={{
-          backgroundImage: "url(/lovable-uploads/17c48107-0c2c-4715-887d-90477ca09214.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      >
+      {/* Background banner with carousel */}
+      <div className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden">
+        {/* Carrossel de imagens de fundo */}
+        <div className="absolute inset-0">
+          {headerImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Overlay */}
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
+        
+        {/* Controles do carrossel */}
+        <button
+          onClick={prevImage}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 z-20"
+        >
+          <ChevronLeft className="h-6 w-6 text-white" />
+        </button>
+        
+        <button
+          onClick={nextImage}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 z-20"
+        >
+          <ChevronRight className="h-6 w-6 text-white" />
+        </button>
+        
+        {/* Indicadores */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {headerImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex ? 'bg-white' : 'bg-white bg-opacity-50'
+              }`}
+            />
+          ))}
+        </div>
+        
+        {/* Conteúdo do título */}
         <div className="relative z-10 text-center px-8">
           <h1 className="text-3xl md:text-4xl font-bold">SB Plast: 32 anos de tradição e inovação em embalagens plásticas</h1>
         </div>
@@ -58,7 +148,7 @@ const AboutPage = () => {
           </div>
           <div className="md:w-1/2">
             <img 
-              src="/lovable-uploads/0a1f8900-9d2b-405e-9a61-221e48e20da9.png" 
+              src="/lovable-uploads/17c48107-0c2c-4715-887d-90477ca09214.png" 
               alt="Vista aérea da SB Plast" 
               className="rounded-lg shadow-md w-full h-auto"
             />
@@ -162,17 +252,46 @@ const AboutPage = () => {
       <section className="py-12">
         <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Infraestrutura e Capacidade</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <img 
-            src="/lovable-uploads/01a39553-7d53-43e5-a047-30b87d9565e7.png" 
-            alt="Máquinas industriais" 
-            className="rounded-lg shadow-md w-full h-auto"
-          />
-          <img 
-            src="/lovable-uploads/dd7487f2-6072-4b19-bc21-6d729742f717.png" 
-            alt="Matéria-prima plástica" 
-            className="rounded-lg shadow-md w-full h-auto"
-          />
+        {/* Carrossel de imagens da infraestrutura */}
+        <div className="relative mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative overflow-hidden rounded-lg shadow-md">
+              <img 
+                src={infraImages[currentInfraImageIndex]} 
+                alt={`Instalações SB Plast ${currentInfraImageIndex + 1}`}
+                className="w-full h-64 object-cover transition-all duration-500"
+              />
+              <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
+                {currentInfraImageIndex + 1} / {infraImages.length}
+              </div>
+            </div>
+            
+            <div className="relative overflow-hidden rounded-lg shadow-md">
+              <img 
+                src={infraImages[(currentInfraImageIndex + 1) % infraImages.length]} 
+                alt={`Instalações SB Plast ${((currentInfraImageIndex + 1) % infraImages.length) + 1}`}
+                className="w-full h-64 object-cover transition-all duration-500"
+              />
+              <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
+                {((currentInfraImageIndex + 1) % infraImages.length) + 1} / {infraImages.length}
+              </div>
+            </div>
+          </div>
+          
+          {/* Controles do carrossel de infraestrutura */}
+          <button
+            onClick={prevInfraImage}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-sbplast-blue hover:bg-sbplast-darkBlue rounded-full p-2 transition-all duration-300 text-white"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          
+          <button
+            onClick={nextInfraImage}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-sbplast-blue hover:bg-sbplast-darkBlue rounded-full p-2 transition-all duration-300 text-white"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
         
         <div className="flex flex-col md:flex-row gap-8">
