@@ -67,20 +67,20 @@ const AtendimentoPage = () => {
             </Button>
           </div>
 
-          {/* WhatsApp Comercial */}
+          {/* SAC (corrigido de SACO) */}
           <div className="bg-white p-8 rounded-2xl shadow-lg card-hover border border-gray-100">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white mb-6 mx-auto">
-              <Phone className="w-8 h-8" />
+            <div className="w-16 h-16 bg-gradient-to-br from-sbplast-cyan to-sbplast-blue rounded-full flex items-center justify-center text-white mb-6 mx-auto">
+              <Mail className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-sbplast-blue mb-4 text-center">WhatsApp Comercial</h3>
+            <h3 className="text-xl font-bold text-sbplast-blue mb-4 text-center">SAC - Atendimento ao Cliente</h3>
             <p className="text-gray-600 text-center mb-6">
-              Fale diretamente com nossa equipe comercial pelo WhatsApp
+              Entre em contato com nosso Serviço de Atendimento ao Cliente para dúvidas e suporte
             </p>
             <Button 
-              className="w-full bg-green-500 text-white hover:bg-green-600"
-              onClick={() => window.open('https://wa.me/5581995015223?text=Olá! Gostaria de falar com o comercial da SB Plast.', '_blank')}
+              className="w-full bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue"
+              onClick={() => openContactForm("contato")}
             >
-              Abrir WhatsApp
+              Falar com SAC
             </Button>
           </div>
 
@@ -162,6 +162,8 @@ const AtendimentoPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Seção de Localização removida conforme solicitado */}
 
       {/* Localização */}
       <section className="py-12">

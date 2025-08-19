@@ -14,7 +14,7 @@ const CompanySection = () => {
     <section className="py-16 px-4 bg-white">
       <div className="container mx-auto text-center max-w-6xl">
         <h2 className="font-poppins text-2xl md:text-4xl font-semibold mb-10 text-sbplast-blue">
-          Conheça as nossas instalações
+          A melhor estrutura você encontra aqui!
         </h2>
         
         <div className="bg-gray-50 py-10 px-4 rounded-lg shadow-sm">

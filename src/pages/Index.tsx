@@ -192,9 +192,22 @@ const Index = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                    <p className="text-gray-500 font-medium">Novas notícias em breve.</p>
-                    <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SB Plast</p>
+                  <div className="space-y-4">
+                    <div className="border-b border-gray-100 pb-4">
+                      <h4 className="font-semibold text-lg text-sbplast-blue mb-2">
+                        SB Plast lança nova plataforma de e-commerce
+                      </h4>
+                      <p className="text-gray-600 text-sm mb-3">
+                        A SB Plast anuncia o lançamento de sua nova plataforma de vendas online, facilitando o acesso aos nossos produtos de embalagens plásticas.
+                      </p>
+                      <span className="text-sbplast-cyan text-sm font-medium">
+                        Em breve
+                      </span>
+                    </div>
+                    <div className="text-center py-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                      <p className="text-gray-500 font-medium">Mais notícias em breve.</p>
+                      <p className="text-gray-400 text-sm mt-2">Fique atento às novidades da SB Plast</p>
+                    </div>
                   </div>
                 )}
               </div>

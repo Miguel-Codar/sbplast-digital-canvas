@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Mail, Phone, User, ExternalLink, Send } from "lucide-react";
+import { Mail, Phone, User, ExternalLink, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import TrabalheConoscoForm from "./TrabalheConoscoForm";
 
@@ -26,50 +26,49 @@ const Footer = () => {
                 em embalagens plásticas com qualidade e inovação.
               </p>
               
-              {/* Botão Trabalhe Conosco em destaque */}
+              {/* Botão WhatsApp aumentado */}
               <Button
                 onClick={() => setTrabalheConoscoOpen(true)}
-                className="w-full bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="w-full bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
               >
-                <User className="mr-2 h-5 w-5" />
+                <User className="mr-3 h-6 w-6" />
                 Envie seu Currículo
               </Button>
             </div>
 
-            {/* Produtos */}
+            {/* Segmentos (substituindo Produtos) */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Produtos</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Segmentos Atendidos</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/categoria/embalagens-para-alimentos" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Embalagens para Alimentos
-                  </Link>
+                  <span className="text-gray-300 text-sm">Alimentício</span>
                 </li>
                 <li>
-                  <Link to="/categoria/embalagens-industriais" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Embalagens Industriais
-                  </Link>
+                  <span className="text-gray-300 text-sm">Farmacêutico</span>
                 </li>
                 <li>
-                  <Link to="/categoria/embalagens-para-cosmeticos" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Embalagens para Cosméticos
-                  </Link>
+                  <span className="text-gray-300 text-sm">Cosmético</span>
                 </li>
                 <li>
-                  <Link to="/categoria/embalagens-para-limpeza" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Embalagens para Limpeza
-                  </Link>
+                  <span className="text-gray-300 text-sm">Químico</span>
                 </li>
                 <li>
-                  <Link to="/categoria/embalagens-personalizadas" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Embalagens Personalizadas
-                  </Link>
+                  <span className="text-gray-300 text-sm">Automotivo</span>
                 </li>
                 <li>
-                  <Link to="/em-desenvolvimento" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm flex items-center">
-                    Catálogo de Produtos
-                    <ExternalLink className="ml-1 h-3 w-3" />
-                  </Link>
+                  <span className="text-gray-300 text-sm">Têxtil</span>
+                </li>
+                <li>
+                  <span className="text-gray-300 text-sm">Agrícola</span>
+                </li>
+                <li>
+                  <span className="text-gray-300 text-sm">Industrial</span>
+                </li>
+                <li>
+                  <span className="text-gray-300 text-sm">Hospitalar</span>
+                </li>
+                <li>
+                  <span className="text-gray-300 text-sm">Limpeza</span>
                 </li>
               </ul>
             </div>
@@ -88,26 +87,13 @@ const Footer = () => {
                     Missão, Visão e Valores
                   </Link>
                 </li>
-                <li>
-                  <Link to="/a-sbplast#localizacao" className="text-gray-300 hover:text-[#18ffff] transition-colors text-sm">
-                    Localização
-                  </Link>
-                </li>
               </ul>
             </div>
 
-            {/* Contato e Informações */}
+            {/* Contato (removendo localização) */}
             <div>
               <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Contato</h3>
               <div className="space-y-3">
-                <div className="flex items-start">
-                  <MapPin className="h-4 w-4 text-[#18ffff] mt-0.5 mr-2 flex-shrink-0" />
-                  <div className="text-gray-300 text-sm">
-                    <p>Rua Arabé, 112 - Comportas</p>
-                    <p>Jaboatão dos Guararapes-PE</p>
-                  </div>
-                </div>
-                
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 text-[#18ffff] mr-2 flex-shrink-0" />
                   <div className="text-gray-300 text-sm">
@@ -124,7 +110,7 @@ const Footer = () => {
                       href="https://wa.me/5581995015223" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="hover:text-[#18ffff] transition-colors"
+                      className="hover:text-[#18ffff] transition-colors font-medium"
                     >
                       (81) 99501-5223 (WhatsApp)
                     </a>
