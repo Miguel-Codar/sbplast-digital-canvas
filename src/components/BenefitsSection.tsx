@@ -4,10 +4,20 @@ import CompanyCarousel from "./CompanyCarousel";
 
 const BenefitsSection = () => {
   const clientLogos = [
-    "/lovable-uploads/4f8de077-3faa-44df-9074-a3852e154563.png",
-    "/lovable-uploads/41b2ffd7-38b8-40de-bc98-c13f73f9a72e.png",
-    "/lovable-uploads/c96088ea-58e8-42e3-9f00-e4ed2bfdf3ed.png",
-    "/lovable-uploads/7057e344-acf3-405b-9a92-05841fcfe709.png",
+    "/lovable-uploads/LOGOMARCAS/IMG_1636.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1637.JPG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1638.JPG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1639.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1640.JPG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1641.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1642.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1643.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1644.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1645.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1646.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1647.PNG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1648.JPG",
+    "/lovable-uploads/LOGOMARCAS/IMG_1649.PNG",
   ];
 
   return (

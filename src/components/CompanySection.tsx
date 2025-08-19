@@ -4,10 +4,13 @@ import CompanyCarousel from "./CompanyCarousel";
 
 const CompanySection = () => {
   const companyImages = [
-    "/lovable-uploads/7b49706f-93c2-4f25-a3ab-19766cb08174.png",
-    "/lovable-uploads/4ca6ebe7-41eb-43df-af0c-c7d93b5090b9.png",
-    "/lovable-uploads/0d8de366-80fc-438f-92c3-f3a01d7a166c.png",
-    "/lovable-uploads/8a084be6-bda6-44ae-9dac-aed8d47a964a.png",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 5 - SB PLAST.jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 8 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 14 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 15 - SB PLAST_.png",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 18 - SB PLAST .jpeg",
+    "/lovable-uploads/INSTALAÇÕES/FOTO 19 - SB PLAST .jpeg",
   ];
 
   return (

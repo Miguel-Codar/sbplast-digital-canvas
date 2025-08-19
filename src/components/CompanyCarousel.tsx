@@ -77,7 +77,7 @@ const CompanyCarousel: React.FC<CompanyCarouselProps> = ({
             <img 
               src={src} 
               alt={`Company image ${index % images.length + 1}`}
-              className="h-40 w-64 object-cover rounded-lg shadow-md"
+              className="h-32 w-48 sm:h-40 sm:w-64 md:h-48 md:w-80 object-contain bg-white rounded-lg shadow-md p-2 hover:scale-105 transition-transform duration-300"
             />
           </div>
         ))}

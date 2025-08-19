@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
@@ -119,15 +118,17 @@ const AboutPage = () => {
                   <p className="text-gray-700">Fundação da SB Plast em Jaboatão dos Guararapes-PE, iniciando com foco em embalagens plásticas para o mercado nordestino.</p>
                 </div>
               </div>
-              <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
+              <div className="hidden md:block w-4 h-4 bg-sbplast-cyan rounded-full border-4 border-white shadow-md z-10"></div>
+              <div className="md:w-1/2 md:pl-8"></div>
             </div>
             
             <div className="flex flex-col md:flex-row items-center md:items-start">
-              <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
-              <div className="md:w-1/2 md:pl-8">
+              <div className="md:w-1/2 md:pr-8"></div>
+              <div className="hidden md:block w-4 h-4 bg-sbplast-cyan rounded-full border-4 border-white shadow-md z-10"></div>
+              <div className="md:w-1/2 md:pl-8 mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">1998</h3>
-                  <p className="text-gray-700">Primeira expansão da fábrica e implementação de novas linhas de produção para atender a crescente demanda.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">2000</h3>
+                  <p className="text-gray-700">Expansão da capacidade produtiva e modernização do parque fabril com equipamentos de última geração.</p>
                 </div>
               </div>
             </div>
@@ -135,39 +136,21 @@ const AboutPage = () => {
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2005</h3>
-                  <p className="text-gray-700">Modernização do parque fabril com equipamentos de última geração e certificação de qualidade.</p>
+                  <h3 className="text-xl font-medium text-sbplast-blue">2010</h3>
+                  <p className="text-gray-700">Implementação de processos sustentáveis e certificações de qualidade, consolidando nossa posição no mercado.</p>
                 </div>
               </div>
-              <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
+              <div className="hidden md:block w-4 h-4 bg-sbplast-cyan rounded-full border-4 border-white shadow-md z-10"></div>
+              <div className="md:w-1/2 md:pl-8"></div>
             </div>
             
             <div className="flex flex-col md:flex-row items-center md:items-start">
-              <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
-              <div className="md:w-1/2 md:pl-8">
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2012</h3>
-                  <p className="text-gray-700">Lançamento da linha de embalagens personalizadas e início do foco em soluções sustentáveis.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center md:items-start">
-              <div className="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-medium text-sbplast-blue">2018</h3>
-                  <p className="text-gray-700">Expansão para novos segmentos de mercado e desenvolvimento da linha P-Life com materiais biodegradáveis.</p>
-                </div>
-              </div>
-              <div className="md:w-1/2 md:pl-8 hidden md:block"></div>
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center md:items-start">
-              <div className="md:w-1/2 md:pr-8 hidden md:block"></div>
-              <div className="md:w-1/2 md:pl-8">
+              <div className="md:w-1/2 md:pr-8"></div>
+              <div className="hidden md:block w-4 h-4 bg-sbplast-cyan rounded-full border-4 border-white shadow-md z-10"></div>
+              <div className="md:w-1/2 md:pl-8 mb-4 md:mb-0">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-xl font-medium text-sbplast-blue">2024</h3>
-                  <p className="text-gray-700">Consolidação como líder regional em embalagens personalizadas, com 32 anos de tradição e inovação contínua.</p>
+                  <p className="text-gray-700">Lançamento da nova plataforma digital e expansão para novos mercados, mantendo o compromisso com inovação e qualidade.</p>
                 </div>
               </div>
             </div>
@@ -175,16 +158,11 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Nossa Fábrica */}
+      {/* Infraestrutura e Capacidade */}
       <section className="py-12">
-        <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossa Fábrica</h2>
+        <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Infraestrutura e Capacidade</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <img 
-            src="/lovable-uploads/1cd73103-ccca-4cbb-8767-933e9b8c3606.png" 
-            alt="Equipamentos de produção SB Plast" 
-            className="rounded-lg shadow-md w-full h-auto"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <img 
             src="/lovable-uploads/01a39553-7d53-43e5-a047-30b87d9565e7.png" 
             alt="Máquinas industriais" 
@@ -213,82 +191,6 @@ const AboutPage = () => {
               ao cliente no tempo certo e com a excelência esperada. Nosso compromisso vai além da 
               produção, estendendo-se ao atendimento personalizado e suporte contínuo.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Nossa Localização */}
-      <section className="py-12 bg-white rounded-lg p-8">
-        <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossa Localização</h2>
-        
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="md:w-1/2">
-            <div className="flex items-start mb-6">
-              <MapPin className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
-              <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">Endereço</h3>
-                <p className="text-gray-700 mb-1">Rua Arabé, 112</p>
-                <p className="text-gray-700 mb-1">Comportas</p>
-                <p className="text-gray-700 mb-4">Jaboatão dos Guararapes-PE</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start mb-6">
-              <Phone className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
-              <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">Telefones</h3>
-                <p className="text-gray-700 mb-1">
-                  <a href="tel:+558134761227" className="hover:text-sbplast-cyan">(81) 3476-1227</a>
-                </p>
-                <p className="text-gray-700 mb-1">
-                  <a 
-                    href="https://wa.me/5581995015223" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="hover:text-sbplast-cyan"
-                  >
-                    (81) 99501-5223 (WhatsApp)
-                  </a>
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start mb-6">
-              <Mail className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
-              <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">E-mails</h3>
-                <p className="text-gray-700 mb-1">
-                  <a href="mailto:vendas@sbplasticos.com.br" className="hover:text-sbplast-cyan">
-                    vendas@sbplasticos.com.br
-                  </a>
-                </p>
-                <p className="text-gray-700 mb-1">
-                  <a href="mailto:sac@sbplasticos.com.br" className="hover:text-sbplast-cyan">
-                    sac@sbplasticos.com.br
-                  </a>
-                </p>
-              </div>
-            </div>
-            
-            <Button 
-              className="mt-4 bg-sbplast-blue hover:bg-sbplast-blue/90"
-              onClick={() => setContactFormOpen(true)}
-            >
-              Fale Conosco
-            </Button>
-          </div>
-          <div className="md:w-1/2 h-64 md:h-auto">
-            <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.8857765631996!2d-34.9468!3d-8.1137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7aae1c5e6e6e6e6e%3A0x6e6e6e6e6e6e6e6e!2sRua%20Arab%C3%A9%2C%20112%20-%20Comportas%2C%20Jaboat%C3%A3o%20dos%20Guararapes%20-%20PE!5e0!3m2!1spt-BR!2sbr!4v1621436342161!5m2!1spt-BR!2sbr" 
-                width="100%" 
-                height="100%" 
-                style={{border: 0}} 
-                allowFullScreen 
-                loading="lazy"
-                title="Localização SB Plast"
-              ></iframe>
-            </div>
           </div>
         </div>
       </section>

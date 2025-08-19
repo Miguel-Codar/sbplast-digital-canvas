@@ -5,7 +5,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
 import TrabalheConoscoForm from "@/components/TrabalheConoscoForm";
-import { MapPin, Mail, Phone, FileText, Users, Briefcase } from "lucide-react";
+import { Mail, Phone, FileText, Users, Briefcase } from "lucide-react";
 
 const AtendimentoPage = () => {
   const [contactFormOpen, setContactFormOpen] = useState(false);
@@ -23,20 +23,20 @@ const AtendimentoPage = () => {
       <div 
         className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(/lovable-uploads/1cd73103-ccca-4cbb-8767-933e9b8c3606.png)",
+          backgroundImage: "url(/lovable-uploads/Atendimento SB.png)",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
         <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         <div className="relative z-10 text-center px-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Atendimento SB Plast</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">Fale conosco agora mesmo</h1>
           <Button
             onClick={() => setTrabalheConoscoOpen(true)}
             className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <Briefcase className="mr-2 h-5 w-5" />
-            Trabalhe Conosco
+            Venha trabalhar aqui
           </Button>
         </div>
       </div>
@@ -158,40 +158,6 @@ const AtendimentoPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Seção de Localização removida conforme solicitado */}
-
-      {/* Localização */}
-      <section className="py-12">
-        <h2 className="text-2xl font-semibold text-sbplast-blue mb-8 text-center">Nossa Localização</h2>
-        
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="md:w-1/2">
-            <div className="flex items-start mb-6">
-              <MapPin className="h-6 w-6 text-sbplast-blue mr-3 mt-0.5" />
-              <div>
-                <h3 className="text-xl font-medium text-sbplast-blue mb-2">Endereço</h3>
-                <p className="text-gray-700 mb-1">Rua Arabé, 112</p>
-                <p className="text-gray-700 mb-1">Comportas</p>
-                <p className="text-gray-700 mb-4">Jaboatão dos Guararapes-PE</p>
-              </div>
-            </div>
-          </div>
-          <div className="md:w-1/2 h-64 md:h-auto">
-            <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.8857765631996!2d-34.9468!3d-8.1137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7aae1c5e6e6e6e6e%3A0x6e6e6e6e6e6e6e6e!2sRua%20Arab%C3%A9%2C%20112%20-%20Comportas%2C%20Jaboat%C3%A3o%20dos%20Guararapes%20-%20PE!5e0!3m2!1spt-BR!2sbr!4v1621436342161!5m2!1spt-BR!2sbr" 
-                width="100%" 
-                height="100%" 
-                style={{border: 0}} 
-                allowFullScreen 
-                loading="lazy"
-                title="Localização SB Plast"
-              ></iframe>
             </div>
           </div>
         </div>
