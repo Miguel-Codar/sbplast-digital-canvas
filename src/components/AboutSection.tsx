@@ -120,7 +120,7 @@ const AboutSection = () => {
 
         {/* Segunda parte - Vídeo com 32 anos */}
         <div className="flex justify-center">
-          <div className="scroll-reveal-up max-w-2xl">
+          <div className="scroll-reveal-up max-w-5xl">
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
