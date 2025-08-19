@@ -60,55 +60,20 @@ const AboutPage = () => {
 
   return (
     <div className="sbplast-container py-8">
-      {/* Background banner with carousel */}
+      {/* Background banner with single background image */}
       <div className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden">
-        {/* Carrossel de imagens de fundo */}
-        <div className="absolute inset-0">
-          {headerImages.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{
-                backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}
-            />
-          ))}
-        </div>
+        {/* Imagem de fundo fixa */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        />
         
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
-        
-        {/* Controles do carrossel */}
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 z-20"
-        >
-          <ChevronLeft className="h-6 w-6 text-white" />
-        </button>
-        
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 z-20"
-        >
-          <ChevronRight className="h-6 w-6 text-white" />
-        </button>
-        
-        {/* Indicadores */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-          {headerImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentImageIndex ? 'bg-white' : 'bg-white bg-opacity-50'
-              }`}
-            />
-          ))}
-        </div>
+        {/* Overlay com opacidade */}
+        <div className="absolute inset-0 bg-sbplast-blue opacity-80"></div>
         
         {/* Conteúdo do título */}
         <div className="relative z-10 text-center px-8">

@@ -28,7 +28,7 @@ const AtendimentoPage = () => {
           backgroundPosition: "center"
         }}
       >
-        <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
+        <div className="absolute inset-0 bg-sbplast-blue opacity-80"></div>
         <div className="relative z-10 text-center px-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-6">Fale conosco agora mesmo</h1>
           <Button
