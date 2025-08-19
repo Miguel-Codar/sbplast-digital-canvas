@@ -7,6 +7,7 @@ interface SolutionCategory {
   id: string;
   name: string;
   image: string;
+  mobileImage: string;
   slug: string;
   description?: string;
 }
@@ -16,28 +17,32 @@ const SolutionsSection = () => {
     {
       id: "1",
       name: "Indústria Alimentícia",
-      image: "/lovable-uploads/f8939f55-5ff0-4537-9b39-3eb8ab5fb3a0.png",
+      image: "/lovable-uploads/B1.png",
+      mobileImage: "/lovable-uploads/B1v2.png",
       slug: "industria-alimenticia",
       description: "Embalagens que atendem todas as normas da Vig. San. e BPF"
     },
     {
       id: "2",
       name: "Lojistas",
-      image: "/lovable-uploads/a36e21ae-5cb6-401b-8261-034d1b83d177.png",
+      image: "/lovable-uploads/B2.png",
+      mobileImage: "/lovable-uploads/B2v2.png",
       slug: "lojistas",
       description: "Várias alças e espessuras para suas necessidades"
     },
     {
       id: "3",
       name: "Embalagens Personalizadas",
-      image: "/lovable-uploads/09f60b6e-fbe7-4ffc-955c-19ae9c027e3f.png",
+      image: "/lovable-uploads/B3.png",
+      mobileImage: "/lovable-uploads/B3v2.png",
       slug: "embalagens-personalizadas",
       description: "Desenvolvemos embalagens sob medida para seus produtos"
     },
     {
       id: "4",
       name: "Soluções Sustentáveis",
-      image: "/lovable-uploads/e24c57ad-457d-40f3-a733-dd6961946dd7.png",
+      image: "/lovable-uploads/B4.png",
+      mobileImage: "/lovable-uploads/B4v2.png",
       slug: "solucoes-sustentaveis",
       description: "Embalagens biodegradáveis e ecologicamente responsáveis"
     }
@@ -64,10 +69,17 @@ const SolutionsSection = () => {
               className={`group bg-white rounded-2xl shadow-lg card-hover border border-gray-100 overflow-hidden scroll-reveal stagger-${index + 1}`}
             >
               <div className="relative h-64 overflow-hidden">
+                {/* Desktop Image */}
                 <img 
                   src={category.image} 
                   alt={category.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  className="hidden md:block w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                />
+                {/* Mobile Image */}
+                <img 
+                  src={category.mobileImage} 
+                  alt={category.name} 
+                  className="block md:hidden w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 right-4">
