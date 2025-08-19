@@ -103,7 +103,7 @@ const SolutionsSection = () => {
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-left">
               <div className="aspect-video bg-gray-200 flex items-center justify-center">
                 <iframe
-                  src="https://player.vimeo.com/video/1100323341?byline=0&portrait=0&title=0"
+                  src="https://player.vimeo.com/video/1111474371?byline=0&portrait=0&title=0"
                   width="100%"
                   height="100%"
                   className="w-full h-full"
@@ -121,14 +121,14 @@ const SolutionsSection = () => {
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl card-hover scroll-reveal-right">
               <div className="aspect-video bg-gray-200 flex items-center justify-center">
                 <iframe
-                  src="https://player.vimeo.com/video/1100322818?byline=0&portrait=0&title=0"
+                  src="https://player.vimeo.com/video/1111472533?byline=0&portrait=0&title=0"
                   width="100%"
                   height="100%"
                   className="w-full h-full"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
-                  title="Colaboradores"
+                  title="Time SB"
                 ></iframe>
               </div>
               <div className="p-6">
