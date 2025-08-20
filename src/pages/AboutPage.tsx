@@ -64,16 +64,17 @@ const AboutPage = () => {
       <div 
         className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg)",
+          backgroundImage: "url('/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundColor: "#1e40af"
+          backgroundColor: "#1e40af",
+          backgroundRepeat: "no-repeat"
         }}
       >
-        <div className="absolute inset-0 bg-sbplast-blue bg-opacity-70"></div>
+        <div className="absolute inset-0 z-10"></div>
         
         {/* Conteúdo do título */}
-        <div className="relative z-10 text-center px-8">
+        <div className="relative z-20 text-center px-8">
           <h1 className="text-3xl md:text-4xl font-bold">SB Plast: 32 anos de tradição e inovação em embalagens plásticas</h1>
         </div>
       </div>

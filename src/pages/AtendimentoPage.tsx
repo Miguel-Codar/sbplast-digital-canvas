@@ -23,14 +23,15 @@ const AtendimentoPage = () => {
       <div 
         className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url(/lovable-uploads/Atendimento SB.png)",
+          backgroundImage: "url('/lovable-uploads/Atendimento SB.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundColor: "#1e40af"
+          backgroundColor: "#1e40af",
+          backgroundRepeat: "no-repeat"
         }}
       >
-        <div className="absolute inset-0 bg-sbplast-blue bg-opacity-70"></div>
-        <div className="relative z-10 text-center px-8">
+        <div className="absolute inset-0 z-10"></div>
+        <div className="relative z-20 text-center px-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-6">Fale conosco agora mesmo</h1>
           <Button
             onClick={() => setTrabalheConoscoOpen(true)}
