@@ -197,8 +197,8 @@ const Index = () => {
                     <div className="border-b border-gray-100 pb-4">
                       <div className="relative mb-3 rounded-lg overflow-hidden">
                         <video
-                          src="/lovable-uploads/Vídeo institucional para informações.mov"
-                          className="w-full h-48 object-cover"
+                          src="/lovable-uploads/institucional.mov"
+                          className="w-full h-32 object-cover"
                           controls
                           poster="/lovable-uploads/video-thumbnail.jpg"
                         />
@@ -220,7 +220,7 @@ const Index = () => {
                     
                     <div className="text-center py-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
                       <p className="text-gray-500 font-medium">Mais vídeos em breve.</p>
-                      <p className="text-gray-400 text-sm mt-2">Aguarde novos conteúdos da SB Plast</p>
+                      <p className="text-gray-400 text-sm mt-2">Aguarde o conteúdo em vídeo da SB Plast</p>
                     </div>
                   </div>
                 )}
