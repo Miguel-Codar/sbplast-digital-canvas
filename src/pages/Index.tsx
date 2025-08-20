@@ -198,7 +198,7 @@ const Index = () => {
                       <div className="relative mb-3 rounded-lg overflow-hidden">
                         <video
                           src="/lovable-uploads/institucional.mov"
-                          className="w-full h-32 object-cover"
+                          className="w-full h-48 object-cover"
                           controls
                           poster="/lovable-uploads/video-thumbnail.jpg"
                         />

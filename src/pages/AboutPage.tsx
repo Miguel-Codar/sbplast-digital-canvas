@@ -62,7 +62,6 @@ const AboutPage = () => {
     <div className="sbplast-container py-8">
       {/* Background banner with single background image */}
       <div className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden">
-        {/* Imagem de fundo fixa */}
         <div 
           className="absolute inset-0"
           style={{
@@ -71,9 +70,7 @@ const AboutPage = () => {
             backgroundPosition: "center"
           }}
         />
-        
-        {/* Overlay com opacidade */}
-        <div className="absolute inset-0 bg-sbplast-blue opacity-80"></div>
+        <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
         
         {/* Conteúdo do título */}
         <div className="relative z-10 text-center px-8">
