@@ -61,16 +61,16 @@ const AboutPage = () => {
   return (
     <div className="sbplast-container py-8">
       {/* Background banner with single background image */}
-      <div className="relative mb-6 py-24 bg-sbplast-blue text-white rounded-lg overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url(/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg)",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-        />
-        <div className="absolute inset-0 bg-sbplast-blue opacity-70"></div>
+      <div 
+        className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
+        style={{
+          backgroundImage: "url(/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundColor: "#1e40af"
+        }}
+      >
+        <div className="absolute inset-0 bg-sbplast-blue bg-opacity-70"></div>
         
         {/* Conteúdo do título */}
         <div className="relative z-10 text-center px-8">

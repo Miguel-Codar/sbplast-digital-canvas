@@ -179,26 +179,39 @@ const Index = () => {
             <div className="bg-white rounded-2xl shadow-lg p-8 card-hover border border-gray-100 scroll-reveal stagger-1">
               <h3 className="text-2xl font-bold mb-6 text-sbplast-blue">Notícias</h3>
               <div className="space-y-6">
-                {blogPosts.news.length > 0 ? (
-                  blogPosts.news.slice(0, 3).map(post => (
-                    <div key={post.id} className="border-b border-gray-100 pb-4 last:border-b-0">
-                      <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
-                        {post.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm mb-3">{post.excerpt || post.title}</p>
-                      <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center font-medium hover:underline">
-                        Ver mais <ArrowRight className="h-4 w-4 ml-1" />
-                      </Link>
-                    </div>
-                  ))
-                ) : (
-                  <div className="space-y-4">
+                {/* Sempre mostrar posts de vídeo do blog se existirem */}
+                {blogPosts.videos && blogPosts.videos.length > 0 ? (
+                  <>
+                    {blogPosts.videos.slice(0, 2).map(post => (
+                      <div key={post.id} className="border-b border-gray-100 pb-4 last:border-b-0">
+                        {post.video_url && (
+                          <div className="relative mb-3 rounded-lg overflow-hidden">
+                            <video
+                              src={post.video_url}
+                              className="w-full h-32 object-cover"
+                              controls
+                              poster={post.featured_image || "/lovable-uploads/video-thumbnail.jpg"}
+                            />
+                            <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
+                              Vídeo
+                            </div>
+                          </div>
+                        )}
+                        <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
+                          {post.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm mb-3">{post.excerpt || post.title}</p>
+                        <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center font-medium hover:underline">
+                          Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                        </Link>
+                      </div>
+                    ))}
                     {/* Vídeo Institucional */}
-                    <div className="border-b border-gray-100 pb-4">
+                    <div className="border-b border-gray-100 pb-4 last:border-b-0">
                       <div className="relative mb-3 rounded-lg overflow-hidden">
                         <video
                           src="/lovable-uploads/institucional.mov"
-                          className="w-full h-48 object-cover"
+                          className="w-full h-32 object-cover"
                           controls
                           poster="/lovable-uploads/video-thumbnail.jpg"
                         />
@@ -217,12 +230,48 @@ const Index = () => {
                         Assistir vídeo
                       </div>
                     </div>
-                    
-                    <div className="text-center py-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                      <p className="text-gray-500 font-medium">Mais vídeos em breve.</p>
-                      <p className="text-gray-400 text-sm mt-2">Aguarde o conteúdo em vídeo da SB Plast</p>
+                  </>
+                ) : (
+                  <>
+                    {/* Se não há posts de vídeo, mostrar notícias regulares */}
+                    {blogPosts.news && blogPosts.news.length > 0 ? (
+                      blogPosts.news.slice(0, 2).map(post => (
+                        <div key={post.id} className="border-b border-gray-100 pb-4 last:border-b-0">
+                          <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
+                            {post.title}
+                          </h4>
+                          <p className="text-gray-600 text-sm mb-3">{post.excerpt || post.title}</p>
+                          <Link to={`/blog/${post.slug}`} className="text-sbplast-cyan flex items-center font-medium hover:underline">
+                            Ver mais <ArrowRight className="h-4 w-4 ml-1" />
+                          </Link>
+                        </div>
+                      ))
+                    ) : null}
+                    {/* Vídeo Institucional sempre visível */}
+                    <div className="border-b border-gray-100 pb-4 last:border-b-0">
+                      <div className="relative mb-3 rounded-lg overflow-hidden">
+                        <video
+                          src="/lovable-uploads/institucional.mov"
+                          className="w-full h-32 object-cover"
+                          controls
+                          poster="/lovable-uploads/video-thumbnail.jpg"
+                        />
+                        <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
+                          Institucional
+                        </div>
+                      </div>
+                      <h4 className="font-semibold text-lg text-sbplast-blue hover:text-sbplast-lightBlue transition-colors duration-300 mb-2">
+                        Vídeo Institucional - SB Plast
+                      </h4>
+                      <p className="text-gray-600 text-sm mb-3">
+                        Conheça a SB Plast através do nosso vídeo institucional. Descubra nossa história, valores e compromisso com a qualidade.
+                      </p>
+                      <div className="flex items-center text-sbplast-cyan font-medium">
+                        <Play className="h-4 w-4 mr-1" />
+                        Assistir vídeo
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
             </div>
