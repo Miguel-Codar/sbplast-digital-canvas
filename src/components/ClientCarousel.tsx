@@ -63,7 +63,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({
 
   return (
     <div 
-      className="overflow-hidden relative w-full bg-gradient-to-r from-gray-50 via-white to-gray-50 rounded-xl shadow-lg py-4"
+      className="overflow-hidden relative w-full bg-gradient-to-r from-gray-50 via-white to-gray-50 rounded-xl py-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -77,17 +77,15 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({
             key={`${src}-${index}`} 
             className="flex-shrink-0 px-3 py-2"
           >
-            <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 p-3 border border-gray-100">
-              <img 
-                src={src} 
-                alt={`Cliente ${index % images.length + 1}`}
-                className="h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-48 lg:h-28 lg:w-56 object-contain rounded-md"
-                style={{
-                  objectFit: 'contain',
-                  objectPosition: 'center'
-                }}
-              />
-            </div>
+            <img 
+              src={src} 
+              alt={`Cliente ${index % images.length + 1}`}
+              className="h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-48 lg:h-28 lg:w-56 object-contain rounded-md"
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center'
+              }}
+            />
           </div>
         ))}
       </div>

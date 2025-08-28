@@ -1,31 +1,31 @@
 
 import React from "react";
-import { CheckCircle, Award, Users, Zap, Truck, ShoppingCart, Car, UtensilsCrossed, Factory, Building2, Coffee, Hotel, Heart, Pill } from "lucide-react";
+import { CheckCircle, Award, Users, Zap, Truck, ShoppingCart, Car, UtensilsCrossed, Factory, Building2, Coffee, Hotel, Heart, Pill, Wrench } from "lucide-react";
 
 const AboutSection = () => {
   const differentials = [
     {
-      icon: <Award className="w-6 h-6" />,
+      icon: Award,
       title: "Mais de 30 anos de experiência",
       description: "Tradição e expertise no mercado de embalagens plásticas"
     },
     {
-      icon: <CheckCircle className="w-6 h-6" />,
+      icon: CheckCircle,
       title: "Qualidade certificada",
       description: "Produtos que atendem aos mais rigorosos padrões de qualidade"
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: Users,
       title: "Atendimento personalizado",
       description: "Soluções sob medida para cada necessidade do cliente"
     },
     {
-      icon: <Zap className="w-6 h-6" />,
+      icon: Zap,
       title: "Inovação constante",
       description: "Sempre buscando as melhores tecnologias e materiais"
     },
     {
-      icon: <Truck className="w-6 h-6" />,
+      icon: Truck,
       title: "Compromisso com a entrega",
       description: "Rigoroso controle de prazos e qualidade, garantindo que cada produto chegue no tempo certo"
     }
@@ -33,44 +33,48 @@ const AboutSection = () => {
 
   const segments = [
     {
-      icon: <ShoppingCart className="w-5 h-5" />,
-      title: "Comércio varejista e atacadista"
+      icon: Wrench,
+      title: "Tecnologia SB"
     },
     {
-      icon: <Car className="w-5 h-5" />,
-      title: "Comércio de peças, reparação de veículos e concessionárias"
+      icon: Pill,
+      title: "Farmácias"
     },
     {
-      icon: <UtensilsCrossed className="w-5 h-5" />,
-      title: "Fabricação de produtos alimentícios"
+      icon: Heart,
+      title: "Clínica e hospitais"
     },
     {
-      icon: <Factory className="w-5 h-5" />,
-      title: "Indústria de diversos segmentos"
+      icon: Hotel,
+      title: "Hotel e lavanderias"
     },
     {
-      icon: <Building2 className="w-5 h-5" />,
-      title: "Supermercados"
-    },
-    {
-      icon: <Coffee className="w-5 h-5" />,
-      title: "Padarias e delicatessens"
-    },
-    {
-      icon: <UtensilsCrossed className="w-5 h-5" />,
+      icon: UtensilsCrossed,
       title: "Restaurantes"
     },
     {
-      icon: <Hotel className="w-5 h-5" />,
-      title: "Hotéis e lavanderias"
+      icon: Coffee,
+      title: "Padaria e deli"
     },
     {
-      icon: <Heart className="w-5 h-5" />,
-      title: "Hospitais, clínicas e laboratórios"
+      icon: Building2,
+      title: "Supermercados"
     },
     {
-      icon: <Pill className="w-5 h-5" />,
-      title: "Farmácias"
+      icon: Factory,
+      title: "Indústrias"
+    },
+    {
+      icon: UtensilsCrossed,
+      title: "Alimentícios"
+    },
+    {
+      icon: Car,
+      title: "Autopeças"
+    },
+    {
+      icon: ShoppingCart,
+      title: "Atacado varejo"
     }
   ];
 
@@ -84,18 +88,21 @@ const AboutSection = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
-            {differentials.map((item, index) => (
-              <div 
-                key={index}
-                className={`flex flex-col items-center text-center p-6 rounded-lg hover:bg-gray-50 transition-colors duration-300 scroll-reveal stagger-${index + 1}`}
-              >
-                <div className="flex-shrink-0 w-16 h-16 bg-sbplast-cyan/10 rounded-lg flex items-center justify-center text-sbplast-blue mb-4">
-                  {item.icon}
+            {differentials.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <div 
+                  key={index}
+                  className={`flex flex-col items-center text-center p-6 rounded-lg hover:bg-gray-50 transition-colors duration-300 scroll-reveal stagger-${index + 1}`}
+                >
+                  <div className="flex-shrink-0 w-16 h-16 bg-sbplast-cyan/10 rounded-lg flex items-center justify-center text-sbplast-blue mb-4">
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-semibold text-sbplast-blue mb-2 text-sm">{item.title}</h4>
+                  <p className="text-gray-600 text-xs">{item.description}</p>
                 </div>
-                <h4 className="font-semibold text-sbplast-blue mb-2 text-sm">{item.title}</h4>
-                <p className="text-gray-600 text-xs">{item.description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Atendemos todos os segmentos */}
@@ -103,42 +110,36 @@ const AboutSection = () => {
             Atendemos todos os segmentos
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
-            {segments.map((segment, index) => (
-              <div 
-                key={index}
-                className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-sbplast-cyan/10 transition-colors duration-300"
-              >
-                <div className="flex-shrink-0 w-8 h-8 bg-sbplast-cyan/20 rounded-full flex items-center justify-center text-sbplast-blue">
-                  {segment.icon}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {differentials.map((differential, index) => {
+              const IconComponent = differential.icon;
+              return (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                  <div className="w-16 h-16 bg-gradient-to-br from-sbplast-cyan to-sbplast-blue rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-sbplast-blue mb-2">{differential.title}</h3>
+                  <p className="text-gray-600 text-sm">{differential.description}</p>
                 </div>
-                <span className="text-sm font-medium text-sbplast-blue">{segment.title}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
-        </div>
 
-        {/* Segunda parte - Vídeo com 32 anos */}
-        <div className="flex justify-center">
-          <div className="scroll-reveal-up max-w-5xl">
-            <div className="relative">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                <iframe
-                  src="https://player.vimeo.com/video/1100323006?byline=0&portrait=0&title=0"
-                  width="100%"
-                  height="100%"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  title="32 anos de experiência SB Plast"
-                ></iframe>
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-sbplast-cyan text-sbplast-blue p-4 rounded-xl shadow-lg">
-                <div className="text-2xl font-bold">32</div>
-                <div className="text-sm">Anos de</div>
-                <div className="text-sm">Experiência</div>
-              </div>
+          {/* Segmentos Atendidos */}
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-center text-sbplast-blue mb-12">Segmentos Atendidos</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {segments.map((segment, index) => {
+                const IconComponent = segment.icon;
+                return (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-md text-center card-hover">
+                    <div className="w-12 h-12 bg-gradient-to-br from-sbplast-cyan to-sbplast-blue rounded-full flex items-center justify-center text-white mb-3 mx-auto">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-sm font-medium text-sbplast-blue">{segment.title}</h3>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -60,22 +60,19 @@ const AboutPage = () => {
 
   return (
     <div className="sbplast-container py-8">
-      {/* Background banner with single background image */}
+      {/* Background banner with blue gradient only */}
       <div 
         className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
         style={{
-          backgroundImage: "url('/lovable-uploads/INSTALAÇÕES/FOTO 11 - SB PLAST .jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundColor: "#1e40af",
-          backgroundRepeat: "no-repeat"
+          background: "linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)",
+          backgroundColor: "#1e40af"
         }}
       >
         <div className="absolute inset-0 z-10"></div>
         
         {/* Conteúdo do título */}
         <div className="relative z-20 text-center px-8">
-          <h1 className="text-3xl md:text-4xl font-bold">SB Plast: 32 anos de tradição e inovação em embalagens plásticas</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">32 anos de tradição e inovação em embalagens plásticas</h1>
         </div>
       </div>
 
@@ -111,10 +108,28 @@ const AboutPage = () => {
           </div>
           <div className="md:w-1/2">
             <img 
-              src="/lovable-uploads/17c48107-0c2c-4715-887d-90477ca09214.png" 
+              src="/lovable-uploads/INSTALAÇÕES/FOTO 15 - SB PLAST_.png" 
               alt="Vista aérea da SB Plast" 
               className="rounded-lg shadow-md w-full h-auto"
+              style={{
+                filter: 'brightness(1.1) contrast(1.075) saturate(1.15)'
+              }}
             />
+            
+            {/* Vídeo 32 anos recolocado */}
+            <div className="mt-6 relative">
+              <div className="relative rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://player.vimeo.com/video/1100323006?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
+                  width="100%"
+                  height="300"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  title="32 Anos de Experiência"
+                  className="w-full"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -223,6 +238,9 @@ const AboutPage = () => {
                 src={infraImages[currentInfraImageIndex]} 
                 alt={`Instalações SB Plast ${currentInfraImageIndex + 1}`}
                 className="w-full h-64 object-cover transition-all duration-500"
+                style={{
+                  filter: 'brightness(1.1) contrast(1.075) saturate(1.15)'
+                }}
               />
               <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
                 {currentInfraImageIndex + 1} / {infraImages.length}
@@ -234,6 +252,9 @@ const AboutPage = () => {
                 src={infraImages[(currentInfraImageIndex + 1) % infraImages.length]} 
                 alt={`Instalações SB Plast ${((currentInfraImageIndex + 1) % infraImages.length) + 1}`}
                 className="w-full h-64 object-cover transition-all duration-500"
+                style={{
+                  filter: 'brightness(1.1) contrast(1.075) saturate(1.15)'
+                }}
               />
               <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-xs">
                 {((currentInfraImageIndex + 1) % infraImages.length) + 1} / {infraImages.length}

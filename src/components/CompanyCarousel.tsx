@@ -85,7 +85,8 @@ const CompanyCarousel: React.FC<CompanyCarouselProps> = ({
                 className="h-48 w-80 sm:h-56 sm:w-96 md:h-64 md:w-[28rem] lg:h-72 lg:w-[32rem] xl:h-80 xl:w-[36rem] object-cover rounded-xl shadow-lg"
                 style={{
                   objectFit: 'cover',
-                  objectPosition: 'center'
+                  objectPosition: 'center',
+                  filter: 'brightness(1.1) contrast(1.075) saturate(1.15)'
                 }}
               />
               <div className="mt-3 text-center">

@@ -21,25 +21,28 @@ const AtendimentoPage = () => {
     <div className="sbplast-container py-8">
       {/* Background banner with title */}
       <div 
-        className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
+        className="relative mb-6 py-12 md:py-24 text-white rounded-lg overflow-hidden w-full"
         style={{
-          backgroundImage: "url('/lovable-uploads/Atendimento SB.png')",
+          backgroundImage: "url('/lovable-uploads/Untitled-3.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundColor: "#1e40af",
-          backgroundRepeat: "no-repeat"
+          backgroundRepeat: "no-repeat",
+          minHeight: "300px",
+          filter: "brightness(1.3) contrast(1.1)"
         }}
       >
-        <div className="absolute inset-0 z-10"></div>
-        <div className="relative z-20 text-center px-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Fale conosco agora mesmo</h1>
-          <Button
-            onClick={() => setTrabalheConoscoOpen(true)}
-            className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Briefcase className="mr-2 h-5 w-5" />
-            Venha trabalhar aqui
-          </Button>
+        <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
+        <div className="relative z-20 px-8 h-full flex items-center">
+          <div className="text-left max-w-2xl">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-sbplast-blue">Fale conosco agora mesmo</h1>
+            <Button
+              onClick={() => setTrabalheConoscoOpen(true)}
+              className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-6 md:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <Briefcase className="mr-2 h-4 w-4 md:h-5 md:w-5" />
+              Solicitar o orçamento
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -157,6 +160,16 @@ const AtendimentoPage = () => {
                     >
                       (81) 99501-5223
                     </a>
+                  </div>
+                  <div className="mt-4">
+                    <Button
+                      onClick={() => setTrabalheConoscoOpen(true)}
+                      size="sm"
+                      className="bg-gradient-to-r from-sbplast-cyan to-sbplast-blue text-white hover:from-sbplast-darkCyan hover:to-sbplast-darkBlue"
+                    >
+                      <Briefcase className="mr-2 h-4 w-4" />
+                      Envie seu currículo
+                    </Button>
                   </div>
                 </div>
               </div>

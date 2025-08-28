@@ -32,7 +32,7 @@ const Footer = () => {
                 className="w-full bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
               >
                 <User className="mr-3 h-6 w-6" />
-                Envie seu Currículo
+                Faça seu orçamento
               </Button>
             </div>
 
@@ -41,34 +41,37 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Segmentos Atendidos</h3>
               <ul className="space-y-2">
                 <li>
-                  <span className="text-gray-300 text-sm">Alimentício</span>
+                  <span className="text-gray-300 text-sm">Tecnologia SB</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Farmacêutico</span>
+                  <span className="text-gray-300 text-sm">Farmácias</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Cosmético</span>
+                  <span className="text-gray-300 text-sm">Clínica e hospitais</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Químico</span>
+                  <span className="text-gray-300 text-sm">Hotel e lavanderias</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Automotivo</span>
+                  <span className="text-gray-300 text-sm">Restaurantes</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Têxtil</span>
+                  <span className="text-gray-300 text-sm">Padaria e deli</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Agrícola</span>
+                  <span className="text-gray-300 text-sm">Supermercados</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Industrial</span>
+                  <span className="text-gray-300 text-sm">Indústrias</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Hospitalar</span>
+                  <span className="text-gray-300 text-sm">Alimentícios</span>
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Limpeza</span>
+                  <span className="text-gray-300 text-sm">Autopeças</span>
+                </li>
+                <li>
+                  <span className="text-gray-300 text-sm">Atacado varejo</span>
                 </li>
               </ul>
             </div>
