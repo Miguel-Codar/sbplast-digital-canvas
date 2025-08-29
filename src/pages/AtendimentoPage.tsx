@@ -34,7 +34,9 @@ const AtendimentoPage = () => {
         <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
         <div className="relative z-20 px-8 h-full flex items-center">
           <div className="text-left max-w-2xl">
-            <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-sbplast-blue">Fale conosco agora mesmo</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-sbplast-blue leading-tight">
+              Fale conosco<br />agora mesmo
+            </h1>
             <Button
               onClick={() => setTrabalheConoscoOpen(true)}
               className="bg-gradient-to-r from-sbplast-cyan to-green-500 text-white hover:from-sbplast-darkCyan hover:to-green-600 font-semibold py-3 px-6 md:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"

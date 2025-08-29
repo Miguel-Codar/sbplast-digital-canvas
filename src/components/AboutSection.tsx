@@ -33,10 +33,6 @@ const AboutSection = () => {
 
   const segments = [
     {
-      icon: Wrench,
-      title: "Tecnologia SB"
-    },
-    {
       icon: Pill,
       title: "Farmácias"
     },

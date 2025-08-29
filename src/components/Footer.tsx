@@ -41,13 +41,13 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Segmentos Atendidos</h3>
               <ul className="space-y-2">
                 <li>
-                  <span className="text-gray-300 text-sm">Tecnologia SB</span>
+                  Tecnologia SB
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Farmácias</span>
+                  Farmácias
                 </li>
                 <li>
-                  <span className="text-gray-300 text-sm">Clínica e hospitais</span>
+                  Clínica e hospitais
                 </li>
                 <li>
                   <span className="text-gray-300 text-sm">Hotel e lavanderias</span>

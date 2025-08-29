@@ -64,7 +64,7 @@ const AboutPage = () => {
       <div 
         className="relative mb-6 py-24 text-white rounded-lg overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)",
+          background: "linear-gradient(135deg, #1e40af 0%, #1e40af 70%, #3b82f6 100%)",
           backgroundColor: "#1e40af"
         }}
       >
@@ -112,7 +112,7 @@ const AboutPage = () => {
               alt="Vista aérea da SB Plast" 
               className="rounded-lg shadow-md w-full h-auto"
               style={{
-                filter: 'brightness(1.1) contrast(1.075) saturate(1.15)'
+                filter: 'brightness(1.3) contrast(1.1) saturate(1.2)'
               }}
             />
             
