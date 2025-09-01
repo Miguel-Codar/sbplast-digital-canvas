@@ -18,7 +18,7 @@ const Footer = () => {
                 <img 
                   src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" 
                   alt="SB Plast Logo" 
-                  className="h-12"
+                  className="h-24"
                 />
               </Link>
               <p className="text-gray-300 text-sm mb-6">
@@ -40,9 +40,6 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4 text-[#18ffff]">Segmentos Atendidos</h3>
               <ul className="space-y-2">
-                <li>
-                  Tecnologia SB
-                </li>
                 <li>
                   Farmácias
                 </li>

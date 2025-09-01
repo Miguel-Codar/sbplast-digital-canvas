@@ -42,7 +42,7 @@ const Header = () => {
       <div className="sbplast-container h-full">
         <div className="flex items-center justify-between h-full">
           <Link to="/" className="flex-shrink-0">
-            <img src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" alt="SB Plast Logo" className="h-10" />
+            <img src="/lovable-uploads/b6da674e-7345-45c5-8b6f-9e632d3a1e0c.png" alt="SB Plast Logo" className="h-15" />
           </Link>
 
           {/* Desktop Navigation */}
