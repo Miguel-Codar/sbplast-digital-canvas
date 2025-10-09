@@ -10,7 +10,6 @@ import CompanySection from "@/components/CompanySection";
 import AboutSection from "@/components/AboutSection";
 import BenefitsSection from "@/components/BenefitsSection";
 import CookieBanner from "@/components/CookieBanner";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -276,9 +275,6 @@ const Index = () => {
 
       {/* Cookie Banner */}
       <CookieBanner />
-
-      {/* WhatsApp Button */}
-      <WhatsAppButton />
     </div>
   );
 };
