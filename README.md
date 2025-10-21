@@ -1,73 +1,130 @@
-# Welcome to your Lovable project
+Projeto Web — Vite + React + Supabase
 
-## Project info
+Aplicação web desenvolvida em React + TypeScript, com Vite, Tailwind CSS e shadcn-ui.
+O sistema utiliza o Supabase como banco de dados (PostgreSQL + Auth + Storage) e é publicado na Vercel.
 
-**URL**: https://lovable.dev/projects/4e1eb6c3-4f53-4d91-95fa-fe48ccb630cd
+⚙️ Tecnologias utilizadas
 
-## How can I edit this code?
+Frontend: React + TypeScript
 
-There are several ways of editing your application.
+Estilos: Tailwind CSS + shadcn-ui
 
-**Use Lovable**
+Banco de Dados: Supabase (Postgres + Auth + Storage)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4e1eb6c3-4f53-4d91-95fa-fe48ccb630cd) and start prompting.
+Deploy: Vercel
 
-Changes made via Lovable will be committed automatically to this repo.
+Gerenciador de pacotes: npm
 
-**Use your preferred IDE**
+🚀 Como configurar o projeto do zero
+1. Clonar o repositório
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Crie um novo repositório na sua conta do GitHub e clone este projeto para sua máquina:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+git clone <URL_DO_SEU_REPOSITORIO>
+cd <NOME_DO_PROJETO>
 
-Follow these steps:
+2. Instalar dependências
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Com o Node.js instalado (versão LTS), rode:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. Criar um projeto no Supabase
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Acesse https://supabase.com
+
+Clique em New Project
+
+Escolha um nome e senha para o banco
+
+Aguarde o provisionamento do projeto
+
+Vá até Project Settings → API e copie:
+
+Project URL
+
+anon public key
+
+service_role key (opcional, se for usar funções serverless)
+
+4. Configurar variáveis de ambiente
+
+Crie um arquivo chamado .env na raiz do projeto e adicione as credenciais do seu Supabase:
+
+VITE_SUPABASE_URL=https://seu-projeto.supabase.co
+VITE_SUPABASE_ANON_KEY=sua_chave_publica_anon
+
+
+⚠️ Importante: nunca envie o .env para o GitHub.
+Essas chaves também devem ser adicionadas nas Environment Variables da Vercel (passo 7).
+
+5. Migrar o banco de dados (dump.sql)
+
+O projeto já possui um arquivo chamado dump.sql (ou migration.sql) contendo toda a estrutura e dados necessários do banco.
+
+Passo a passo para importar no Supabase:
+
+Baixe o arquivo dump.sql presente neste repositório
+
+No painel do seu Supabase, vá em SQL Editor
+
+Clique em Upload file (ícone de pasta) e selecione o arquivo dump.sql
+
+Após carregar o conteúdo, clique em Run
+
+Espere até que todas as tabelas e policies sejam criadas
+
+Ao final, o seu banco estará idêntico ao ambiente original — com as tabelas, colunas, relações e permissões configuradas.
+
+6. Rodar o projeto localmente
+
+Com o banco configurado e o .env preenchido, execute:
+
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Abra o navegador em http://localhost:5173
+.
 
-**Use GitHub Codespaces**
+7. Deploy na Vercel
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Crie uma conta em https://vercel.com
 
-## What technologies are used for this project?
+Clique em Add New → Project → Import Git Repository
 
-This project is built with:
+Selecione o repositório do projeto
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Adicione as variáveis de ambiente:
 
-## How can I deploy this project?
+VITE_SUPABASE_URL
 
-Simply open [Lovable](https://lovable.dev/projects/4e1eb6c3-4f53-4d91-95fa-fe48ccb630cd) and click on Share -> Publish.
+VITE_SUPABASE_ANON_KEY
 
-## Can I connect a custom domain to my Lovable project?
+Clique em Deploy
 
-Yes, you can!
+A Vercel detecta automaticamente o Vite e faz o build.
+Após o deploy, o sistema estará acessível no domínio gerado.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+8. (Opcional) Conectar domínio próprio
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Na Vercel:
+
+Vá em Project → Settings → Domains
+
+Clique em Add Domain
+
+Digite o domínio do cliente (ex: meusite.com)
+
+Siga as instruções de DNS exibidas na tela
+
+✅ Checklist final
+
+ Projeto clonado e configurado no GitHub do cliente
+
+ Supabase criado com o dump.sql importado
+
+ Variáveis .env configuradas localmente
+
+ Deploy realizado com sucesso na Vercel
+
+ Sistema funcionando com o banco do cliente
