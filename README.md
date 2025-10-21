@@ -20,8 +20,8 @@ Gerenciador de pacotes: npm
 
 Crie um novo repositório na sua conta do GitHub e clone este projeto para sua máquina:
 
-git clone <URL_DO_SEU_REPOSITORIO>
-cd <NOME_DO_PROJETO>
+git clone sbplast-digital-canvas
+cd sbplast-digital-canvas
 
 2. Instalar dependências
 
